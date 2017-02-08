@@ -1,0 +1,79 @@
+/* Font: Lato
+Font colors:
+Dark grey: 444545
+Grey: 818486
+Dark orange: d26f1b
+Orange: f7923d
+
+Tamaños tipografia:
+User name (esquina superior derecha): 13px
+Buttons: 14px
+Titles: 20px
+Texts/sub-titles: 18px
+Input field names: 16px
+Colored buttons: 18px
+Login form textfield names: 16px
+Title: forgot password: 24px
+Text: forgot password: 16px (Only black text)
+Survey list boxes titles: 18px
+Survey list boxes info: 14px
+Staff lists: 18px
+
+Colores Fondos y objetos
+Naranja: f7923d
+Gris claro: fbfbfb
+Gris oscuro: 989898
+Verde: 106d1b */
+
+
+body, html {
+	font-family: 'Lato', sans-serif;
+	background-color: #fbfbfb;
+	color: #818486;
+}
+
+input.form-control {
+	margin-bottom: 13px;
+	border-radius: 0;
+  	border-radius: 0;
+}
+
+label {
+	color: #818486;
+	margin-bottom: 2px;
+}
+
+.main-logo {
+	display: block;
+	width: 400px;
+	height: 98px;
+	margin: 25px auto 30px;
+	background-image: url("../img/logo.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.btn-orange {
+	background-color: #f7923d;
+	color: #fff;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-weight: bold;
+	font-size: 14px;
+	border-radius: 3px;
+}
+
+.header {
+	width: 100%;
+	height: 15px;
+	background-color: #f7923d;
+}
+.form-signin span {
+	display: block;
+	width: 100%;
+	text-align: center;
+}
+
+.form-signin span a {
+	color: #818486;
+}
