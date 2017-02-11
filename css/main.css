@@ -42,7 +42,12 @@ label {
 	color: #818486;
 	margin-bottom: 2px;
 }
-
+.form-control:focus {
+    border-color: #f7923d;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(247, 146, 61, .6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(247, 146, 61, .6);
+}
 .main-logo {
 	display: block;
 	width: 400px;
@@ -76,4 +81,123 @@ label {
 
 .form-signin span a {
 	color: #818486;
+}
+
+.form-signin {
+	max-width: 480px;
+	padding: 20px 60px;
+	margin: 0 auto;
+	background-color: #fff;
+	border: solid 1px #dfdfdf;
+}
+.form-signin h2 {
+	text-align: center;
+	margin-top: 0;
+	font-size: 24px;
+	color: #818486;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 4px 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.forgot-info {
+	margin-top: -5px;
+	margin-bottom: 15px;
+	font-size: 13px;
+	color: #444545;
+	text-align: center;
+}
+
+/* MAIN NAVBAR */
+
+.navbar-default {
+	background-color: #FFF;
+}
+.navbar-default .primary {
+	padding-right: 20px;
+}
+
+.navbar-default .primary > hr {
+    float: left;
+    width: 5px;
+    border-color: #818486;
+}
+
+.navbar-default .primary li a {
+    color: #f7923d;
+    background-color: #FFF;
+    padding: 7px 7px 0 7px;
+}
+
+.navbar-default .primary li a:hover, 
+.navbar-default .primary:focus {
+    color: #d26f1b;
+    background-color: #FFF;
+}
+.navbar-default .secondary li a {
+    color: #f7923d;
+    background-color: #FFF;
+    padding: 7px 7px 0 7px;
+}
+.navbar-default .secondary li a:hover, 
+.navbar-default .secondary:focus {
+    color: #d26f1b;
+    background-color: #FFF;
+}
+
+/* HELPER CLASS FOR CURRENT PAGE */
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #d26f1b;
+    background-color: #FFF;
+}
+
+a.navbar-brand {
+	display: block;
+	width: 280px;
+	height: 68px;
+	margin-left: 15px;
+	background-image: url("../img/logo.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+section.main-content {
+	margin-top: 90px;
+}
+
+section h1.title {
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+	color: #444545;
+}
+
+section h2.info-title {
+	margin-left: 15px;
+	margin-bottom: 20px;
+	font-size: 18px;
+}
+
+.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-bottom: 15px;
 }
