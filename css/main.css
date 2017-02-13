@@ -32,6 +32,10 @@ body, html {
 	color: #818486;
 }
 
+.btn-default {
+	color: #818486;
+}
+
 input.form-control {
 	margin-bottom: 13px;
 	border-radius: 0;
@@ -41,6 +45,9 @@ input.form-control {
 label {
 	color: #818486;
 	margin-bottom: 2px;
+}
+.required {
+	color: #f7923d;
 }
 .form-control:focus {
     border-color: #f7923d;
@@ -65,6 +72,19 @@ label {
 	padding-bottom: 5px;
 	font-weight: bold;
 	font-size: 14px;
+	border-radius: 3px;
+}
+.btn-orange:hover, .btn-green:hover {
+	color: #fff;
+}
+
+.btn-green {
+	background-color: #106d1b;
+	color: #fff;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-weight: bold;
+	font-size: 16px;
 	border-radius: 3px;
 }
 
@@ -127,6 +147,7 @@ label {
 
 .navbar-default {
 	background-color: #FFF;
+	border-top: 15px solid #f7923d;
 }
 .navbar-default .primary {
 	padding-right: 20px;
@@ -149,17 +170,37 @@ label {
     color: #d26f1b;
     background-color: #FFF;
 }
-.navbar-default .secondary li a {
-    color: #f7923d;
-    background-color: #FFF;
-    padding: 7px 7px 0 7px;
+
+.navbar-default .nav-secondary {
+	margin-top: 20px;
+	padding-right: 0px;
 }
-.navbar-default .secondary li a:hover, 
-.navbar-default .secondary:focus {
-    color: #d26f1b;
+
+.navbar-default .nav-secondary li {
+
+}
+
+.navbar-default .nav-secondary li a {
+    color: #818486;
+    background-color: #FFF;
+    padding: 0px 15px 0 15px;
+    border-right: 1px solid #818486;
+    line-height: 14px;
+}
+
+.navbar-default .nav-secondary li:last-child a {
+    border-right: 0px;
+}
+.navbar-default .nav-secondary li a:hover, 
+.navbar-default .nav-secondary:focus {
+    color: #444545;
     background-color: #FFF;
 }
 
+.myclearfix {
+	clear: both;
+	width: 10px;
+}
 /* HELPER CLASS FOR CURRENT PAGE */
 .navbar-default .navbar-nav > .active > a, 
 .navbar-default .navbar-nav > .active > a:hover, 
@@ -196,8 +237,74 @@ section h2.info-title {
 	font-size: 18px;
 }
 
-.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+.navbar > .container .navbar-brand,
+.navbar > .container-fluid .navbar-brand {
     margin-top: 5px;
     margin-left: 15px;
     margin-bottom: 15px;
 }
+
+form.create-user .btn-green {
+	margin-top: 20px;
+}
+
+.card {
+	display: block;
+	background-color: #fff;
+	border: 1px solid #e7e7e7;
+	width: 100%;
+	min-height: 2px;
+	padding: 15px 10px 10px 10px;
+	margin-bottom: 20px;
+}
+
+.card h3 {
+	margin: 0;
+	margin-bottom: 5px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.card p {
+	margin-bottom: 5px;
+}
+
+.main-content hr {
+	margin-top: 10px;
+}
+.card footer {
+	margin-top: 10px;
+}
+.card footer p {
+	margin-left: 10px;
+	display: inline-block;
+}
+.table-condensed > thead > tr > th,
+.table-condensed > tbody > tr > th,
+.table-condensed > tfoot > tr > th,
+.table-condensed > thead > tr > td,
+.table-condensed > tbody > tr > td,
+.table-condensed > tfoot > tr > td {
+    padding: 10px 15px;
+}
+
+table.table {
+	border: 1px solid #ddd;
+	padding: 10px;
+	background-color: #FFF;
+	font-size: 14px;
+}
+
+.table td.action,
+.table th.action {
+	text-align: center;
+}
+
+.table td.action.off i {
+	color: red;
+}
+
+.table td.action.on i {
+	color: green;
+}
+
