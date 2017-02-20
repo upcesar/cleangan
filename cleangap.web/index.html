@@ -1,32 +1,25 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html data-ng-app="cleangap">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
     <meta name="author" content="">
-    <link rel="icon" href="">
-
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
     <title>Login</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/signin.css" rel="stylesheet">
-    
-    <link href="css/main.css" rel="stylesheet">
-
-	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="content/css/main.css" rel="stylesheet" />
+    <link href="content/css/ie10-viewport-bug-workaround.css" rel="stylesheet" />
+    <link href="content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="content/css/ie-emulation-modes-warning.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="icon" href="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta charset="utf-8">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="js/ie-emulation-modes-warning.js"></script>
+    <script src="content/js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -36,40 +29,48 @@
   </head>
 
   <body>
-	<div class="header">
-		
-	</div>
+  
     <div class="container">
-		<div class="main-logo">
-			
-		</div>	
-      <form class="form-signin" action="/survey.html">
-        <h2 class="form-signin-heading">Login</h2>
-        <hr>
+        <div data-ng-view="">
+        </div>
+    </div>
 
-        <label for="" class="">Email:</label>
-        <input type="text" id="" class="form-control" placeholder="" required autofocus>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="script/ie10-viewport-bug-workaround.js"></script>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="script/bootstrap.min.js"></script>
 
-        <label for="inputPassword" class="">Password:</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="" required>
-        <button class="btn btn-lg btn-orange center-block" type="submit">Login</button>
-        <hr>
+        <!-- 3rd party libraries -->
 
-	    <span class="">
-	        <a class="pull-left" href="/signin.html">Not yet registered?</a>
-	        -
-	        <a class="pull-right" href="/forgot-password.html">Forgot your password?</a>
-        </span>
-      </form>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
+    <script src="scripts/angular-local-storage.min.js"></script>
 
-    </div> <!-- /container -->
+    <script src="scripts/loading-bar.min.js"></script>
 
-    	<script src='https://www.google.com/recaptcha/api.js'></script>
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<script src="js/ie10-viewport-bug-workaround.js"></script>
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="js/bootstrap.min.js"></script>
+    <!-- Load app main script -->
+    <script src="app/app.js?v=2"></script>
+
+    <!-- Load services -->
+    <script src="app/services/authInterceptorService.js?v=2"></script>
+    <script src="app/services/authService.js?v=2"></script>
+    <script src="app/services/ordersService.js?v=2"></script>
+    <script src="app/services/tokensManagerService.js?v=2"></script>
+
+    <!-- Load controllers -->
+    <script src="app/controllers/indexController.js?v=2"></script>
+    <script src="app/controllers/homeController.js?v=2"></script>
+    <script src="app/controllers/loginController.js?v=2"></script>
+    <script src="app/controllers/signupController.js?v=2"></script>
+    <script src="app/controllers/ordersController.js?v=2"></script>
+    <script src="app/controllers/refreshController.js?v=2"></script>
+    
+    <script src="app/controllers/tokensManagerController.js?v=2"></script>
+    <script src="app/controllers/associateController.js?v=2"></script>
+    <!-- Load custom filters -->
+    <!-- Load custom directives -->
 	</body>
 </html>
