@@ -1,7 +1,10 @@
 ﻿
-var app = angular.module('AngularAuthApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar']);
+var app = angular.module('cleangap', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar']);
 
-app.config(function ($routeProvider) {
+//var serviceBase = 'http://localhost:26264/';
+var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
+
+app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
     $routeProvider.when("/home", {
         controller: "homeController",
@@ -15,7 +18,7 @@ app.config(function ($routeProvider) {
 
     $routeProvider.when("/signin", {
         controller: "signinController",
-        templateUrl: "/app/views/signup.html"
+        templateUrl: "/app/views/signin.html"
     });
 
     $routeProvider.when("/dashboard", {
@@ -63,16 +66,27 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/refresh.html"
     });
 
-    $routeProvider.otherwise({ redirectTo: "/home" });
+    $routeProvider.otherwise({ redirectTo: "/login" });
 
-});
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
 
-//var serviceBase = 'http://localhost:26264/';
-var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
+
+
+}]);
+
+
+/*
+$locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'
-});
+});9
 
 app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
@@ -82,4 +96,4 @@ app.run(['authService', function (authService) {
     authService.fillAuthData();
 }]);
 
-
+*/
