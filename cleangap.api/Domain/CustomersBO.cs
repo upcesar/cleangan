@@ -33,13 +33,19 @@ namespace cleangap.api.Domain
 
             StringBuilder sbBody = new StringBuilder();
 
-            sbBody.AppendFormat("<h3>Hello, {0}</h3>", data.name.ToUpper());
+            sbBody.AppendFormat("Dear, {0}", data.name.ToUpper());
             sbBody.AppendLine();
-            sbBody.AppendLine("<p>Welcome to CleanGap. We are glad you are registered.</p>");
+            sbBody.AppendLine("Welcome to RepSpark and thank you for registering on the RepSpark website.");
             sbBody.AppendLine();
-            sbBody.AppendLine("<p>Welcome to CleanGap. We are glad you are registered.</p>");
-            sbBody.AppendLine("<p>Regards.</p>");
-            sbBody.AppendLine("<p>Clean Gap Team</p>");
+            sbBody.AppendLine("RepSpark is the world's leading B2B selling system built for Total Order Life Cycle Management.");
+            sbBody.AppendLine("TOLCM is a seamless end-to-end sales system that effectively enhances and manages every step in an organization’s order life cycle.");
+            sbBody.AppendLine();
+            sbBody.AppendLine("If you need assistance please contact us at helpdesk@repspark.com");
+            sbBody.AppendLine();
+            sbBody.AppendLine("Thank you for your interest in RepSpark. We are glad you have taken the first step in becoming engaged with us.");
+            sbBody.AppendLine();
+            sbBody.AppendLine("Best wishes,");
+            sbBody.AppendLine("RepSpark Customer Care");
 
             m.SendMail(data.email, sbBody.ToString(), "Clean Gap Welcome E-Mail");
         }
@@ -120,7 +126,9 @@ namespace cleangap.api.Domain
                         name = data.name,
                         email = data.email,
                         password = crypto.EncodeMD5(data.password),
-                        creation_date = DateTime.Now,
+                        token_signin = GenerateToken(data.email),
+                        token_expire = DateTime.Now.AddDays(1),
+                        creation_date = DateTime.Now,                        
                     };
 
                     db.customers.Add(dbCustomer);
