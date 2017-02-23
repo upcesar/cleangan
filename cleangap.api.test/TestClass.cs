@@ -40,5 +40,18 @@ namespace cleangap.api.Test
 
             Assert.That(answer.Result, Is.Not.Empty);
         }
+
+        [Test]
+        public void TestNotFoundURI()
+        {
+            string FakeURI = "https://api.spotify2.com/";
+            ApiCommands otherApi = new ApiCommands(FakeURI);
+
+            Task<string> answer = otherApi.ExecuteGet("v1/search?q=kmfdm&type=artist");
+
+            answer.Wait();
+
+            Assert.IsFalse(api.IsSucess, string.Format("HTTP Status:, {0}", api.HttpCode.ToString()));
+        }
     }
 }

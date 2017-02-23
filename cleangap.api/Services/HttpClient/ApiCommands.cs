@@ -13,12 +13,12 @@ namespace cleangap.api.Services.HttpClient
     {
 
         private System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
-        private HttpStatusCode _HttpCode = HttpStatusCode.OK;
+        private HttpStatusCode _HttpCode = HttpStatusCode.NotFound;
         private bool _isSuccess = false;
 
         public HttpStatusCode HttpCode { get { return _HttpCode; } }
         public bool IsSucess { get { return _isSuccess; } }
-        
+
         public ApiCommands(string pURI)
         {
             InitializeHttp(pURI);
@@ -50,24 +50,26 @@ namespace cleangap.api.Services.HttpClient
         public async Task<string> ExecutePost(string action, object param)
         {
             string responseData = string.Empty;
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            _isSuccess = false;
 
-            using (var response = await client.PostAsJsonAsync(action, param))
+            try
             {
-                _isSuccess = false;
-                try
-                {
-                    response.EnsureSuccessStatusCode();
-                    // Handle success
-                    responseData = await response.Content.ReadAsStringAsync();
+                response = await client.PostAsJsonAsync(action, param);
+                response.EnsureSuccessStatusCode();
+                // Handle success
+                responseData = await response.Content.ReadAsStringAsync();
 
-                }
-                catch (HttpRequestException httpEx)
-                {
-                    // Handle failure
-                    responseData = httpEx.Message;
-                }
+            }
+            catch (HttpRequestException httpEx)
+            {
+                // Handle failure
+                responseData = httpEx.Message;
+            }
+            finally
+            {
                 SetStatusHttpResponse(response);
-
+                response.Dispose();
             }
 
             return responseData;
@@ -76,29 +78,28 @@ namespace cleangap.api.Services.HttpClient
         public async Task<string> ExecuteGet(string action)
         {
             string responseData = string.Empty;
-
-            using (var response = await client.GetAsync(action))
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            _isSuccess = false;
+            try
             {
-                _isSuccess = false;
-                try
-                {
-                    response.EnsureSuccessStatusCode();
-                    // Handle success
-                    responseData = await response.Content.ReadAsStringAsync();
-                }
-                catch (HttpRequestException httpEx)
-                {
-                    // Handle failure
-                    responseData = httpEx.Message;
-                }
-
+                response = await client.GetAsync(action);
+                response.EnsureSuccessStatusCode();
+                // Handle success
+                responseData = await response.Content.ReadAsStringAsync();
+            }
+            catch (HttpRequestException httpEx)
+            {
+                // Handle failure
+                responseData = httpEx.Message;
+            }
+            finally
+            {
                 SetStatusHttpResponse(response);
-
+                response.Dispose();
             }
 
             return responseData;
 
-            throw new NotImplementedException();
         }
     }
 }
