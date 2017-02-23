@@ -252,6 +252,8 @@
     <Compile Include="Models\Tables\staff.cs" />
     <Compile Include="Models\Tables\surveys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\HttpClient\ApiCommands.cs" />
+    <Compile Include="Services\HttpClient\IApiCommand.cs" />
     <Compile Include="Services\Mailing\IMailingSetup.cs" />
     <Compile Include="Services\Mailing\MailingService.cs" />
     <Compile Include="Services\Mailing\MailingSetup.cs" />
