@@ -63,7 +63,7 @@ namespace cleangap.api.Domain
         private customers UpdateToken(CleanGapDataContext db, customers c)
         {
             //c.token_expire = DateTime.Now.AddHours(3);
-            c.hash_link = GenerateToken(c.email);
+            c.token_forgot_pass = GenerateToken(c.email);
 
             db.Entry(c).State = EntityState.Modified;
 
@@ -76,7 +76,7 @@ namespace cleangap.api.Domain
 
             var request = HttpContext.Current.Request;
 
-            var baseUrl = string.Format("{0}://{1}/account/password-reset/{2}", request.Url.Scheme, request.Url.Authority, pCust.hash_link);
+            var baseUrl = string.Format("{0}://{1}/account/password-reset/{2}", request.Url.Scheme, request.Url.Authority, pCust.token_forgot_pass);
 
             MailingService m = new MailingService();
 
@@ -96,7 +96,7 @@ namespace cleangap.api.Domain
         {
             db.Entry(pCust).State = EntityState.Modified;
             pCust.password = EncodeMD5(data.NewPassword);
-            pCust.hash_link = null;
+            pCust.token_forgot_pass = null;
             pCust.token_expire = null;
 
             return db.SaveChanges() > 0;
@@ -148,10 +148,10 @@ namespace cleangap.api.Domain
 
                 if (cust != null && cust.id > 0)
                 {
-                    cust.hash_link = null;
+                    cust.token_forgot_pass = null;
                     customers editCust = UpdateToken(db, cust);
 
-                    if (editCust.hash_link != null)
+                    if (editCust.token_forgot_pass != null)
                     {
                         success = true;
                         SendTokenRecoveryMail(editCust);
@@ -169,7 +169,7 @@ namespace cleangap.api.Domain
 
             using (var db = new CleanGapDataContext())
             {
-                customers cust = db.customers.FirstOrDefault(c => c.hash_link == token && c.token_expire >= DateTime.Now);
+                customers cust = db.customers.FirstOrDefault(c => c.token_forgot_pass == token && c.token_expire >= DateTime.Now);
 
                 if (cust != null && cust.id > 0)
                 {
@@ -189,7 +189,7 @@ namespace cleangap.api.Domain
             bool success = false;
             using (var db = new CleanGapDataContext())
             {
-                customers cust = db.customers.FirstOrDefault(c => c.hash_link == data.Token && c.token_expire >= DateTime.Now);
+                customers cust = db.customers.FirstOrDefault(c => c.token_forgot_pass == data.Token && c.token_expire >= DateTime.Now);
 
                 if (cust != null)
                 {

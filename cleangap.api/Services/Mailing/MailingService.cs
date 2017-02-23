@@ -50,7 +50,7 @@ namespace cleangap.api.Services.Mailing
             mail.To.Add(emailto);
             mail.Subject = subject; //
             mail.Body = body; //"Utilize este token em sua operação: " + token
-            mail.IsBodyHtml = true;
+            mail.IsBodyHtml = false;
 
             try
             {

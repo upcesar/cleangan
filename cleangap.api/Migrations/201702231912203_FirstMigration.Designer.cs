@@ -13,7 +13,7 @@ namespace cleangap.api.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201702220056265_FirstMigration"; }
+            get { return "201702231912203_FirstMigration"; }
         }
         
         string IMigrationMetadata.Source

@@ -41,7 +41,7 @@ namespace cleangap.api.DAL
                 .IsUnicode(false);
 
             modelBuilder.Entity<customers>()
-                .Property(e => e.hash_link)
+                .Property(e => e.token_forgot_pass)
                 .IsUnicode(false);
 
             modelBuilder.Entity<customers>()

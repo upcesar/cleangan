@@ -30,11 +30,12 @@ namespace cleangap.api.Migrations
                         name = c.String(maxLength: 100, unicode: false),
                         email = c.String(maxLength: 255, unicode: false),
                         password = c.String(maxLength: 32, unicode: false),
-                        hash_link = c.String(maxLength: 64, unicode: false),
+                        token_signin = c.String(maxLength: 64),
+                        token_forgot_pass = c.String(maxLength: 64, unicode: false),
                         token_expire = c.DateTime(),
                         creation_date = c.DateTime(),
-                        updated_date = c.DateTime(),
-                        confirmated_date = c.DateTime(),
+                        edition_date = c.DateTime(),
+                        confirmation_date = c.DateTime(),
                     })
                 .PrimaryKey(t => t.id);
             
