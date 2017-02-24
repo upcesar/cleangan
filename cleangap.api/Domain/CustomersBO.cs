@@ -35,6 +35,7 @@ namespace cleangap.api.Domain
 
             sbBody.AppendFormat("Dear, {0}", data.name.ToUpper());
             sbBody.AppendLine();
+            sbBody.AppendLine();
             sbBody.AppendLine("Welcome to RepSpark and thank you for registering on the RepSpark website.");
             sbBody.AppendLine();
             sbBody.AppendLine("RepSpark is the world's leading B2B selling system built for Total Order Life Cycle Management.");
@@ -60,9 +61,13 @@ namespace cleangap.api.Domain
         private string GenerateToken(string email)
         {
             Cryptography crypto = new Cryptography();
-            string hashEmail = string.Format("{0}|{1}", email, DateTime.Now.ToString());
 
-            return crypto.EncodeMD5(hashEmail);
+            string md5Email = crypto.EncodeMD5(email);
+            string md5Date = crypto.EncodeMD5(DateTime.Now.ToString());
+
+            string hashEmail = string.Format("{0}{1}", md5Email, md5Date);
+
+            return hashEmail;
 
         }
 
@@ -108,6 +113,18 @@ namespace cleangap.api.Domain
             return db.SaveChanges() > 0;
 
         }
+        private bool SetConfirmedUser(CleanGapDataContext db, customers pCust)
+        {
+            if (pCust.confirmation_date == null)
+            {
+                db.Entry(pCust).State = EntityState.Modified;
+                pCust.confirmation_date = DateTime.Now;
+                pCust.token_signin = null;
+
+                return db.SaveChanges() > 0;
+            }
+            return false;
+        }
         #endregion
         #region Public Methods
         public bool Register(CustomerModel data)
@@ -128,7 +145,7 @@ namespace cleangap.api.Domain
                         password = crypto.EncodeMD5(data.password),
                         token_signin = GenerateToken(data.email),
                         token_expire = DateTime.Now.AddDays(1),
-                        creation_date = DateTime.Now,                        
+                        creation_date = DateTime.Now,
                     };
 
                     db.customers.Add(dbCustomer);
@@ -224,6 +241,9 @@ namespace cleangap.api.Domain
 
                 if (cust != null)
                 {
+                    //Set confirmed date if the user is not yet confirmed
+                    SetConfirmedUser(db, cust);
+
                     response = new LoginResponseModel()
                     {
                         ID = cust.id,
