@@ -56,11 +56,16 @@ namespace cleangap.api.Test
         }
 
         [Test]
-        public void TestGoogleCaptcha()
+        public void TestGoogleCaptchaWithoutErrors()
         {
-            bool valid = GoogleRecaptcha.Validate("03AI-r6f5Gh8E2Vxo8VesV-0UHYXrvGVb4B7lxcxSGeRCiQdc2zIEENj7RyVFWIbgzrljbWlsUSaOpuzkTZ2okKDaodWstkD1__c4NIYPoK-kemGRRwh1bvWod3eXgmSuPSTA6jdj-jDoPNL9nnk3HgVS4qONQwzvZ-iMypsUlp3mi8oYStRS9XldaJm8zxc5G-6Kh1v5_jJi705VSFX5Ao0KrdKKvnSnpttvaumjtSyodvlGEFVWspVXD888o24iyy_y_2rQveXfadHpqVVwy_e5oJmSJVSlCsPH5kuzo5R9Q1rpwk6mU2C5PmanP7jKOF_LrQVm3N7GdXXx3eiQK3uW9oDKKyz_lC4qex4ZWLzGZ5PGC5jHTXGU");
-
-            Assert.IsTrue(valid);
+            GoogleRecaptcha recaptcha = new GoogleRecaptcha("03AI-r6f5Gh8E2Vxo8VesV-0UHYXrvGVb4B7lxcxSGeRCiQdc2zIEENj7RyVFWIbgzrljbWlsUSaOpuzkTZ2okKDaodWstkD1__c4NIYPoK-kemGRRwh1bvWod3eXgmSuPSTA6jdj-jDoPNL9nnk3HgVS4qONQwzvZ-iMypsUlp3mi8oYStRS9XldaJm8zxc5G-6Kh1v5_jJi705VSFX5Ao0KrdKKvnSnpttvaumjtSyodvlGEFVWspVXD888o24iyy_y_2rQveXfadHpqVVwy_e5oJmSJVSlCsPH5kuzo5R9Q1rpwk6mU2C5PmanP7jKOF_LrQVm3N7GdXXx3eiQK3uW9oDKKyz_lC4qex4ZWLzGZ5PGC5jHTXGU");
+            
+            Assert.AreEqual(0, 
+                            recaptcha.ErrorCodes.Count, 
+                            string.Format("Error list: {0}", 
+                                           string.Join(",", recaptcha.ErrorCodes)
+                                          )
+                );
         }
 
 
