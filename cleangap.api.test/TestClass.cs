@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using cleangap.api.Services.HttpClient;
+using cleangap.api.Services.Security;
 
 namespace cleangap.api.Test
 {
@@ -16,13 +17,13 @@ namespace cleangap.api.Test
         #endregion
 
         #region Private Test Objects Declaration
-        private ApiCommands api;
+        private ApiCommand api;
         #endregion
         #region Private Test Object Initialization
         [OneTimeSetUp]
         public void Init()
         {
-            api = new ApiCommands(RestMockURI);
+            api = new ApiCommand(RestMockURI);
         }
         [OneTimeTearDown]
         public void Dispose()
@@ -45,7 +46,7 @@ namespace cleangap.api.Test
         public void TestNotFoundURI()
         {
             string FakeURI = "https://api.spotify2.com/";
-            ApiCommands otherApi = new ApiCommands(FakeURI);
+            ApiCommand otherApi = new ApiCommand(FakeURI);
 
             Task<string> answer = otherApi.ExecuteGet("v1/search?q=kmfdm&type=artist");
 
@@ -53,5 +54,15 @@ namespace cleangap.api.Test
 
             Assert.IsFalse(api.IsSucess, string.Format("HTTP Status:, {0}", api.HttpCode.ToString()));
         }
+
+        [Test]
+        public void TestGoogleCaptcha()
+        {
+            bool valid = GoogleRecaptcha.Validate("03AI-r6f5Gh8E2Vxo8VesV-0UHYXrvGVb4B7lxcxSGeRCiQdc2zIEENj7RyVFWIbgzrljbWlsUSaOpuzkTZ2okKDaodWstkD1__c4NIYPoK-kemGRRwh1bvWod3eXgmSuPSTA6jdj-jDoPNL9nnk3HgVS4qONQwzvZ-iMypsUlp3mi8oYStRS9XldaJm8zxc5G-6Kh1v5_jJi705VSFX5Ao0KrdKKvnSnpttvaumjtSyodvlGEFVWspVXD888o24iyy_y_2rQveXfadHpqVVwy_e5oJmSJVSlCsPH5kuzo5R9Q1rpwk6mU2C5PmanP7jKOF_LrQVm3N7GdXXx3eiQK3uW9oDKKyz_lC4qex4ZWLzGZ5PGC5jHTXGU");
+
+            Assert.IsTrue(valid);
+        }
+
+
     }
 }

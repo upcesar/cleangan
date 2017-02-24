@@ -9,7 +9,7 @@ namespace cleangap.api.Services.HttpClient
 {
 
 
-    public class ApiCommands : IApiCommand
+    public class ApiCommand : IApiCommand
     {
 
         private System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
@@ -19,12 +19,12 @@ namespace cleangap.api.Services.HttpClient
         public HttpStatusCode HttpCode { get { return _HttpCode; } }
         public bool IsSucess { get { return _isSuccess; } }
 
-        public ApiCommands(string pURI)
+        public ApiCommand(string pURI)
         {
             InitializeHttp(pURI);
         }
 
-        public ApiCommands(string pURI, string ApiKey)
+        public ApiCommand(string pURI, string ApiKey)
         {
             InitializeHttp(pURI);
             // Api Key in Base64 format. IE: "dXBjZXNhcnx0ZXN0MTIzNA=="
