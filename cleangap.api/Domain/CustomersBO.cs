@@ -41,7 +41,7 @@ namespace cleangap.api.Domain
             sbBody.AppendLine("RepSpark is the world's leading B2B selling system built for Total Order Life Cycle Management.");
             sbBody.AppendLine("TOLCM is a seamless end-to-end sales system that effectively enhances and manages every step in an organization’s order life cycle.");
             sbBody.AppendLine();
-            sbBody.AppendLine("If you need assistance please contact us at helpdesk@repspark.com");
+            sbBody.AppendLine("If you need assistance, please contact us at helpdesk@repspark.com");
             sbBody.AppendLine();
             sbBody.AppendLine("Thank you for your interest in RepSpark. We are glad you have taken the first step in becoming engaged with us.");
             sbBody.AppendLine();
@@ -73,8 +73,8 @@ namespace cleangap.api.Domain
 
         private customers UpdateToken(CleanGapDataContext db, customers c)
         {
-            //c.token_expire = DateTime.Now.AddHours(3);
             c.token_forgot_pass = GenerateToken(c.email);
+            c.token_expire = DateTime.Now.AddHours(3);
 
             db.Entry(c).State = EntityState.Modified;
 
@@ -93,13 +93,20 @@ namespace cleangap.api.Domain
 
             StringBuilder sbBody = new StringBuilder();
 
-            sbBody.AppendFormat("<h3>Hello, {0}</h3>", pCust.name.ToUpper());
+            sbBody.AppendFormat("Hello, {0}", pCust.name.ToUpper());
             sbBody.AppendLine();
-            sbBody.AppendFormat("<p>Here is the link for password reset: <a href=\"{0}\">{0}</a></p>", baseUrl);
             sbBody.AppendLine();
-            sbBody.AppendLine("<p>The link shown above expires in 3 horas, from this e-mail date</p>");
-            sbBody.AppendLine("<p>Regards.</p>");
-            sbBody.AppendLine("<p>Clean Gap Team</p>");
+            sbBody.AppendLine("You have received this e-mail because you forgot your password and you wish to create a new one.");
+            sbBody.AppendLine();
+            sbBody.AppendFormat("Hence, the password reset URL is {0}. Just click on the link or select it for copying and pasting in your favorite browser's address bar.", baseUrl);
+            sbBody.AppendLine();
+            sbBody.AppendLine();
+            sbBody.AppendLine("The link shown above expires in 3 hour from this e-mail's date.");
+            sbBody.AppendLine();
+            sbBody.AppendLine("If you need assistance, please contact us at helpdesk@repspark.com");
+            sbBody.AppendLine();
+            sbBody.AppendLine("Best wishes,");
+            sbBody.AppendLine("RepSpark Customer Care");
 
             m.SendMail(pCust.email, sbBody.ToString(), "Password reset instructions");
         }
