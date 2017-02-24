@@ -78,7 +78,7 @@ namespace cleangap.api.Services.HttpClient
         public async Task<string> ExecuteGet(string action)
         {
             string responseData = string.Empty;
-            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            HttpResponseMessage response = null;
             _isSuccess = false;
             try
             {
@@ -90,6 +90,7 @@ namespace cleangap.api.Services.HttpClient
             catch (HttpRequestException httpEx)
             {
                 // Handle failure
+                response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
                 responseData = httpEx.Message;
             }
             finally

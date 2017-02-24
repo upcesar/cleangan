@@ -15,10 +15,23 @@ namespace cleangap.api.Services.Security
     {
         private const string RequestUri = "https://www.google.com/recaptcha/api/";
 
+        IApiCommand api = null;
+
         private bool _success = false;
         private IList<string> _errorCodes = new List<string>();
         private DateTime _challengeTS = DateTime.Now;
         private string _hostname = string.Empty;
+        
+        private string _response = string.Empty;
+        private string ActionService
+        {
+            get
+            {
+                string _secret = ConfigurationManager.AppSettings["GoogleRecaptchaSecret"].ToString();
+                return string.Format("siteverify?secret={0}&response={1}", _secret, _response);
+            }
+        }
+
 
         public bool Success { get { return _success; } }
         public DateTime ChallengeTS { get { return _challengeTS; } }
@@ -45,27 +58,26 @@ namespace cleangap.api.Services.Security
 
         public GoogleRecaptcha(string Response)
         {
-            string Secret = ConfigurationManager.AppSettings["GoogleRecaptchaSecret"].ToString();
-            string ActionService = string.Format("siteverify?secret={0}&response={1}", Secret, Response);
+            _response = Response;
 
-            IApiCommand api = new ApiCommand(RequestUri);
+            api = new ApiCommand(RequestUri);
 
-            Task<string> response = api.ExecuteGet(ActionService);
+        }
 
-            response.Wait();
+        public async Task<bool> Validate()
+        {
+            string response = await api.ExecuteGet(ActionService);
 
             if (api.IsSucess)
             {
-                var json = JObject.Parse(response.Result);
+                var json = JObject.Parse(response);
                 MapAttribResponse(json);
+            } else
+            {
+                _errorCodes.Add(response);
             }
-        }
 
-        public static bool Validate(string Response)
-        {
-
-
-            return false;
+            return api.IsSucess;
         }
 
     }

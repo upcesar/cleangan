@@ -7,6 +7,8 @@ using System.Net.Http;
 using System.Web.Http;
 using cleangap.api.Domain;
 using cleangap.api.Models.Domain;
+using cleangap.api.Services.Security;
+using System.Threading.Tasks;
 
 namespace cleangap.api.Controllers
 {
@@ -14,16 +16,28 @@ namespace cleangap.api.Controllers
     public class AccountController : ApiController
     {
         [HttpPost, AllowAnonymous, Route("register")]
-        public ApiResponse Register(CustomerModel data)
+        public async Task<ApiResponse> Register(CustomerModel data)
         {
+            string msg = string.Empty;
+            bool registered = false;
             CustomersBO customerBO = new CustomersBO();
+            GoogleRecaptcha recaptchaSrvc = new GoogleRecaptcha(data.recaptcha);
 
-            bool registered = customerBO.Register(data);
-            string msg = registered ? "Registration successful" : "E-Mail was registered in our database";
+            bool validRecaptcha = await recaptchaSrvc.Validate();
+
+            if (validRecaptcha && recaptchaSrvc.Success)
+            {
+                registered = customerBO.Register(data);
+                msg = registered ? "Registration successful" : "E-Mail was previously registered in our database";
+            }
+            else
+            {
+                msg = "Failure on validating Google Recaptcha";
+            }
 
             return new ApiResponse()
             {
-                HttpCode = Ok().ToString(),
+                HttpCode = validRecaptcha ? Ok().ToString() : InternalServerError().ToString(),
                 IsSuccess = registered,
                 Message = msg
             };

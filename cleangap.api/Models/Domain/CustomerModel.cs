@@ -10,5 +10,6 @@ namespace cleangap.api.Models.Domain
         public string name { get; set; }
         public string email { get; set; }
         public string password { get; set; }
+        public string recaptcha { get; set; }
     }
 }
