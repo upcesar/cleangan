@@ -61,5 +61,21 @@ namespace cleangap.api.Controllers
 
             };
         }
+
+        //POST api/account/send-password-recovery
+        [HttpPost, AllowAnonymous, Route("reset-password")]
+        public ApiResponse ResetPassword(ResetPasswordModel data)
+        {
+            bool passwordResetted = customerBO.ResetPassword(data);
+            string strMsg = passwordResetted ? "New password created successfully" : "Failure on creating a new password";
+
+            return new ApiResponse()
+            {
+                HttpCode = Ok().ToString(),
+                IsSuccess = passwordResetted,
+                Message = strMsg
+
+            };
+        }
     }
 }
