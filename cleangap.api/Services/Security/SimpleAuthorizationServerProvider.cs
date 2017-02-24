@@ -30,7 +30,7 @@ namespace cleangap.api.Services.Security
             
             if (user == null)
             {
-                context.SetError("invalid_grant", "Usuário ou senha não válida.");
+                context.SetError("invalid_grant", "Invalid e-mail or password.");
                 return;
             }
             
