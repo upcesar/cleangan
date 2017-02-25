@@ -1,29 +1,32 @@
 ﻿<div class="header"></div>
 <div class="container">
 	<div class="main-logo">
-		
-	</div>	
+
+	</div>
   <form class="form-signin">
     <h2 class="form-signin-heading">Create User Account</h2>
     <hr>
-
+		<div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+        {{message}}
+    </div>
     <label for="" class="">Full name:</label>
-    <input type="text" id="" class="form-control" placeholder="" required autofocus>
+    <input type="text" id="" class="form-control" placeholder="" required data-ng-model="registration.userName" autofocus>
 
     <label for="inputEmail" class="">e-mail account:</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="" required>
+    <input type="email" id="inputEmail" class="form-control" placeholder=""  data-ng-model="registration.email" required>
 
     <label for="inputPassword" class="">Password:</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="" required>
+    <input type="password" id="" class="form-control" placeholder="" data-ng-model="registration.password" required>
 
     <label for="inputPassword" class="">Repeat Password:</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="" required>
+    <input type="password" id="" class="form-control" placeholder="" data-ng-model="registration.confirmPassword" required>
     <div class="g-recaptcha" data-sitekey="6LcWpRUUAAAAACbBSGWE_6tSKEkHcstmbTdDNklb"></div>
-    <button class="btn btn-lg btn-orange btn-block" type="submit">Create Account</button>
+    <button class="btn btn-lg btn-orange btn-block" type="submit" data-ng-click="signUp()">Create Account</button>
     <hr>
 
     <span class="text-center">
-        <a href="/login">Account created? Login here</a>            
+        <a href="/login">Account created? Login here</a>
     </span>
   </form>
 </div>
+<script src='https://www.google.com/recaptcha/api.js'></script>

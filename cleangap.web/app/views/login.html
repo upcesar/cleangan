@@ -1,27 +1,25 @@
-<div class="header">
-	
-</div>
+<div class="header"></div>
 <div class="container">
-	<div class="main-logo">
-		
-	</div>	
-  <form class="form-signin" action="/survey.html">
+	<div class="main-logo"></div>
+  <form id="formSignin" class="form-signin" name="formSignin" novalidate >
     <h2 class="form-signin-heading">Login</h2>
     <hr>
-
+		<div data-ng-hide="message == ''" class="alert alert-danger">
+    	{{message}}
+    </div>
     <label for="" class="">Email:</label>
-    <input type="text" id="" class="form-control" placeholder="" required autofocus>
-
+    <input type="text" id="" class="form-control" placeholder="" data-ng-model="loginData.userName" required autofocus>
+		<!-- <div ng-show="!login.email && formSignin.$submitted" class="alert alert-warning">
+			Required Field!
+		</div> -->
     <label for="inputPassword" class="">Password:</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="" required>
-    <button class="btn btn-lg btn-orange center-block" type="submit">Login</button>
+    <input type="password" id="inputPassword" class="form-control" placeholder="" data-ng-model="loginData.password" required>
+    <button class="btn btn-lg btn-orange center-block" type="submit" value="" data-ng-click="login()">Login</button>
     <hr>
-
     <span class="">
-        <a class="pull-left" href="/signin">Not yet registered?</a>
+        <a class="pull-left" href="#/signin">Not yet registered?</a>
         -
-        <a class="pull-right" href="/forgot-password">Forgot your password?</a>
+        <a class="pull-right" href="#/forgot-password">Forgot your password?</a>
     </span>
   </form>
-
 </div> <!-- /container -->
