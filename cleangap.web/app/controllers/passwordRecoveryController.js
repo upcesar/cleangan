@@ -3,9 +3,10 @@ app.controller('passwordRecoveryController', ['$scope', '$window', '$timeout', '
 
     
     var qString = $location.search();
+    var path = $location.path();
 
     //Redirect to login when hash isn't passed to the URL querystring.
-    if (qString.q === undefined)
+    if (path === '/password-reset' && qString.q === undefined)
         window.location = '/login';
         
     $scope.email = "";
