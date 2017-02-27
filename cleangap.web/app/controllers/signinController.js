@@ -50,9 +50,16 @@ app.controller('signinController', ['$scope', '$location', '$timeout', 'authServ
     $scope.signIn = function () {
         $scope.registration.recaptcha =  $scope.response;
         authService.saveRegistration($scope.registration).then(function (response) {
-            $scope.savedSuccessfully = true;
-            $scope.message = "User has been registered successfully, you will be redicted to login page in 2 seconds.";
-            startTimer();
+
+            var data = response.data;
+            $scope.savedSuccessfully = data.isSuccess;
+            $scope.message = data.message;
+
+            if (data.isSuccess) {
+                $scope.message += ". Now, you will be redicted to login page in 2 seconds.";
+                startTimer();
+            }
+            
 
         },
          function (response) {
