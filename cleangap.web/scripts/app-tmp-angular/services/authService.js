@@ -108,7 +108,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 _logOut();
                 deferred.reject(err);
             });
-            
+
         } else {
             deferred.reject(null);
         }
@@ -166,7 +166,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
         debugger;
         var deferred = $q.defer();
-        
+
         $http.post(serviceBase + 'account/reset-password', data).success(function (response) {
 
             deferred.resolve(response);

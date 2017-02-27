@@ -1,8 +1,5 @@
 
-var app = angular.module('cleangap', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar']);
-
-//var serviceBase = 'http://localhost:26264/';
-// var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
+var app = angular.module('cleangap', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'vcRecaptcha']);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
@@ -18,57 +15,49 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 
     $routeProvider.when("/forgot-password", {
         templateUrl: "app/views/forgot-password.html",
-        controller: "forgotPasswordController",
+        controller: "passwordRecoveryController",
     });
-    //
-    // $routeProvider.when("/dashboard", {
-    //     controller: "dashboardController",
-    //     templateUrl: "views/dashboard.html"
-    // });
-    //
-    // $routeProvider.when("/create-staff", {
-    //     controller: "createStaffController",
-    //     templateUrl: "views/create-staff.html"
-    // });
-    //
-    // $routeProvider.when("/create-user", {
-    //     controller: "createUserController",
-    //     templateUrl: "views/create-user.html"
-    // });
-    //
-    //
-    //
-    // $routeProvider.when("/password-reset", {
-    //     controller: "passwordResetController",
-    //     templateUrl: "views/password-reset.html"
-    // });
-    //
-    // $routeProvider.when("/staff", {
-    //     controller: "staffController",
-    //     templateUrl: "views/staff.html"
-    // });
-    //
-    // $routeProvider.when("/survey", {
-    //     controller: "surveyController",
-    //     templateUrl: "views/survey.html"
-    // });
-    //
-    // $routeProvider.when("/tokens", {
-    //     controller: "tokensManagerController",
-    //     templateUrl: "views/tokens.html"
-    // });
-    //
-    // $routeProvider.when("/refresh", {
-    //     controller: "refreshController",
-    //     templateUrl: "views/refresh.html"
-    // });
+
+    $routeProvider.when("/account/password-reset", {
+        templateUrl: "app/views/password-reset.html",
+    });
+
+    $routeProvider.when("/dashboard", {
+        templateUrl: "app/views/dashboard.html",
+    });
+
+    $routeProvider.when("/create-staff", {
+        templateUrl: "app/views/create-staff.html",
+    });
+
+    $routeProvider.when("/create-user", {
+        templateUrl: "app/views/create-user.html",
+    });
+
+    $routeProvider.when("/staff", {
+        templateUrl: "app/views/staff.html",
+    });
+
+    $routeProvider.when("/survey", {
+        templateUrl: "app/views/survey.html",
+    });
+
+    $routeProvider.when("/tokens", {
+        templateUrl: "app/views/tokens.html",
+        controller: "tokensManagerController"
+    });
+
+    $routeProvider.when("/refresh", {
+        templateUrl: "app/views/refresh.html",
+        controller: "refreshController"
+    });
 
     $routeProvider.otherwise({ redirectTo: "/" });
-
+    $locationProvider.html5Mode(true);
 }]);
 
-var serviceBase = 'http://localhost:26264/';
-var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
+// var serviceBase = 'http://localhost:26264/';
+var serviceBase = 'http://cleangap.westcentralus.cloudapp.azure.com:8080/';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'

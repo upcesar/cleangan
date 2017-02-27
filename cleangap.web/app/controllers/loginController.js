@@ -1,8 +1,8 @@
-﻿'use strict';
+'use strict';
 app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuthSettings', function ($scope, $location, authService, ngAuthSettings) {
 
     $scope.loginData = {
-        userName: "",
+        username: "",
         password: "",
         useRefreshTokens: false
     };
@@ -13,7 +13,7 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
 
         authService.login($scope.loginData).then(function (response) {
 
-            $location.path('/orders');
+            $location.path('/survey');
 
         },
          function (err) {
@@ -51,11 +51,11 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
 
             }
             else {
-                //Obtain access token and redirect to orders
+                //Obtain access token and redirect to SURVEY
                 var externalData = { provider: fragment.provider, externalAccessToken: fragment.external_access_token };
                 authService.obtainAccessToken(externalData).then(function (response) {
 
-                    $location.path('/orders');
+                    $location.path('/survey');
 
                 },
              function (err) {
