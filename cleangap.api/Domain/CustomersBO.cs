@@ -10,6 +10,7 @@ using cleangap.api.Services.Mailing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Configuration;
 
 namespace cleangap.api.Domain
 {
@@ -87,7 +88,8 @@ namespace cleangap.api.Domain
 
             var request = HttpContext.Current.Request;
 
-            var baseUrl = string.Format("{0}://{1}/account/password-reset/{2}", request.Url.Scheme, request.Url.Authority, pCust.token_forgot_pass);
+            var BaseUrl = ConfigurationManager.AppSettings["WebUrl"].ToString();
+            var UrlPasswordReset = string.Format("{0}/password-reset/{1}", BaseUrl, pCust.token_forgot_pass);
 
             MailingService m = new MailingService();
 
@@ -98,7 +100,7 @@ namespace cleangap.api.Domain
             sbBody.AppendLine();
             sbBody.AppendLine("You have received this e-mail because you forgot your password and you wish to create a new one.");
             sbBody.AppendLine();
-            sbBody.AppendFormat("Hence, the password reset URL is {0}. Just click on the link or select it for copying and pasting in your favorite browser's address bar.", baseUrl);
+            sbBody.AppendFormat("Hence, the password reset URL is {0}. Just click on the link or select it for copying and pasting in your favorite browser's address bar.", UrlPasswordReset);
             sbBody.AppendLine();
             sbBody.AppendLine();
             sbBody.AppendLine("The link shown above expires in 3 hour from this e-mail's date.");
