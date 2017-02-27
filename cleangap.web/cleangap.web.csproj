@@ -111,6 +111,9 @@
     <Content Include="app\controllers\loginController.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="app\controllers\passwordRecoveryController.js" />
+    <Content Include="app\controllers\refreshController.js" />
+    <Content Include="app\controllers\resetPasswordController.js" />
     <Content Include="app\controllers\signinController.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -24,13 +24,10 @@ app.controller('passwordRecoveryController', ['$scope', '$window', '$timeout', '
         authService.sendPasswordRecovery($scope.email).then(function (response) {
 
             $scope.message = response.message;
+            $scope.savedSuccessfully = response.isSuccess;
 
             if (response.isSuccess)
                 $scope.alertType = "alert-success";
-
-            $scope.email = "";
-            $scope.frmRegisterLogin.$setUntouched();
-
 
             $scope.sentData = true;
             $scope.sendingData = false;
