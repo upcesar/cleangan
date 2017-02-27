@@ -2,6 +2,8 @@
 app.controller('signinController', ['$scope', '$location', '$timeout', 'authService', 'vcRecaptchaService'  , function ($scope, $location, $timeout, authService, vcRecaptchaService) {
 
     $scope.savedSuccessfully = false;
+    $scope.sendingData = false;
+
     $scope.message = "";
     $scope.response = null;
     $scope.widgetId = null;
@@ -48,7 +50,8 @@ app.controller('signinController', ['$scope', '$location', '$timeout', 'authServ
     };
 
     $scope.signIn = function () {
-        $scope.registration.recaptcha =  $scope.response;
+        $scope.registration.recaptcha = $scope.response;
+        $scope.sendingData = true;
         authService.saveRegistration($scope.registration).then(function (response) {
 
             var data = response.data;
@@ -58,6 +61,11 @@ app.controller('signinController', ['$scope', '$location', '$timeout', 'authServ
             if (data.isSuccess) {
                 $scope.message += ". Now, you will be redicted to login page in 2 seconds.";
                 startTimer();
+            } else {
+                $scope.sendingData = false;
+                $scope.registration.recaptcha = "";
+                $scope.response = "";
+                vcRecaptchaService.reload($scope.widgetId);
             }
             
 
