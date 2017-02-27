@@ -10,14 +10,14 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
     $scope.message = "";
 
     $scope.login = function () {
-
+        $scope.sendingData = true;
         authService.login($scope.loginData).then(function (response) {
-            $scope.sendingData = true;
             $location.path('/survey');
 
         },
          function (err) {
              $scope.message = err.error_description;
+             $scope.sendingData = false;
          });
     };
 
