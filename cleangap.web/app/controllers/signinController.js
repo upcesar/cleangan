@@ -1,5 +1,5 @@
 'use strict';
-app.controller('signinController', ['$scope', '$location', '$timeout', 'authService'  , function ($scope, $location, $timeout, authService, vcRecaptchaService) {
+app.controller('signinController', ['$scope', '$location', '$timeout', 'authService', 'vcRecaptchaService'  , function ($scope, $location, $timeout, authService, vcRecaptchaService) {
 
     $scope.savedSuccessfully = false;
     $scope.message = "";

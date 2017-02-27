@@ -1,7 +1,7 @@
 <div class="header"></div>
 <div class="container">
 	<div class="main-logo"></div>
-  <form id="formSignin" class="form-signin" name="formSignin" novalidate >
+  <form class="form-signin" id="form" name="form" novalidate >
     <h2 class="form-signin-heading">Login</h2>
     <hr>
 		<div data-ng-hide="message == ''" class="alert alert-danger">{{message}}</div>
@@ -9,7 +9,7 @@
     <input type="text" id="" class="form-control" placeholder="" data-ng-model="loginData.username" required autofocus>
     <label for="inputPassword" class="">Password:</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="" data-ng-model="loginData.password" required>
-    <button class="btn btn-lg btn-orange center-block" type="submit" value="" data-ng-click="login()">Login</button>
+    <input class="btn btn-lg btn-orange center-block" type="submit" value="" ng-disabled="form.$invalid" data-ng-click="login()" value="Login" >
     <hr>
     <span class="">
         <a class="pull-left" href="#/signin">Not yet registered?</a>

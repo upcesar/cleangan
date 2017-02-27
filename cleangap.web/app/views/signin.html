@@ -1,20 +1,25 @@
 <div class="header"></div>
 <div class="container">
 	<div class="main-logo"></div>
-  <form class="form-signin" novalidate >
+  <form class="form-signin" id="form" name="form" novalidate >
     <h2 class="form-signin-heading">Create User Account</h2>
     <hr>
 		<div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">{{message}}</div>
     <label for="" class="">Full name:</label>
     <input type="text" id="" class="form-control" placeholder="" data-ng-model="registration.name" required autofocus>
+		<div ng-show="!registration.name && form.$submitted" class="alert alert-warning">Required field</div>
     <label for="inputEmail" class="">e-mail account:</label>
     <input type="email" id="" class="form-control" data-ng-model="registration.email" placeholder="" required>
+		<div ng-show="!registration.email && form.$submitted" class="alert alert-warning">Required field</div>
     <label for="inputPassword" class="">Password:</label>
     <input type="password" id="" class="form-control" placeholder="" data-ng-model="registration.password" required>
+		<div ng-show="!registration.password && form.$submitted" class="alert alert-warning">Required field</div>
     <label for="inputPassword" class="">Repeat Password:</label>
-    <input type="password" id="" class="form-control" placeholder="" required>
-		<div class="g-recaptcha" vc-recaptcha data-sitekey="6LcWpRUUAAAAACbBSGWE_6tSKEkHcstmbTdDNklb" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()" ></div>
-    <button class="btn btn-lg btn-orange btn-block" type="submit" data-ng-click="signIn()">Create Account</button>
+    <input type="password" id="" class="form-control" placeholder="" data-ng-model="registration.confirmPassword" required>
+		<div ng-show="!registration.confirmPassword && form.$submitted" class="alert alert-warning">Required field</div>
+		<div class="g-recaptcha" vc-recaptcha key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()" ></div>
+		<div vc-recaptcha ng-model="registration.myRecaptchaResponse"></div>
+    <input class="btn btn-lg btn-orange btn-block" type="submit" ng-disabled="form.$invalid" data-ng-click="signIn()" value="Create Account"/>
     <hr>
     <span class="text-center">
         <a href="#/login">Account created? Login here</a>
