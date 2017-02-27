@@ -16,7 +16,7 @@
 		<!-- <div ng-show="!registration.password && form.$submitted" class="alert alert-warning">Required field</div> -->
     <label for="inputPassword" class="">Repeat Password:</label>
 		<input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="" data-password-verify="registration.password" data-ng-model="registration.confirmPassword" required>
-		<div ng-show="form.confirmPassword.$error.passwordVerify">Fields are not equal!</div>
+		<div class="alert alert-danger" ng-show="form.confirmPassword.$error.passwordVerify">Fields are not equal!</div>
 		<!-- <div ng-show="!registration.confirmPassword && form.$submitted" class="alert alert-warning">Required field</div> -->
 		<div class="g-recaptcha" vc-recaptcha data-sitekey="{{model.key}}" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()" ></div>
     <input class="btn btn-lg btn-orange btn-block" type="submit" ng-disabled="form.$invalid" data-ng-click="signIn()" value="Create Account" ng-hide="sendingData ? true : savedSuccessfully"/>
