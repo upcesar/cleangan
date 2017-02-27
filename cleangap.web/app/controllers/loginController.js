@@ -6,13 +6,13 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
         password: "",
         useRefreshTokens: false
     };
-
+    $scope.sendingData = false;
     $scope.message = "";
 
     $scope.login = function () {
 
         authService.login($scope.loginData).then(function (response) {
-
+            $scope.sendingData = true;
             $location.path('/survey');
 
         },
