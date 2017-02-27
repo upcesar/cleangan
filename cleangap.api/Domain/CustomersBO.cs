@@ -89,7 +89,7 @@ namespace cleangap.api.Domain
             var request = HttpContext.Current.Request;
 
             var BaseUrl = ConfigurationManager.AppSettings["WebUrl"].ToString();
-            var UrlPasswordReset = string.Format("{0}/password-reset/{1}", BaseUrl, pCust.token_forgot_pass);
+            var UrlPasswordReset = string.Format("{0}/password-reset?q={1}", BaseUrl, pCust.token_forgot_pass);
 
             MailingService m = new MailingService();
 

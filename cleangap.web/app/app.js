@@ -18,7 +18,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
         controller: "passwordRecoveryController",
     });
 
-    $routeProvider.when("/password-reset/{token}", {
+    $routeProvider.when("/password-reset", {
         templateUrl: "app/views/password-reset.html",
         controller: "passwordRecoveryController",
     });

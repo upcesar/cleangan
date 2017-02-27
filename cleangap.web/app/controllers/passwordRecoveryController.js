@@ -1,6 +1,13 @@
 'use strict';
-app.controller('passwordRecoveryController', ['$scope', '$window', '$timeout', 'authService', 'ngAuthSettings', function ($scope, $window, $timeout, authService, ngAuthSettings) {
+app.controller('passwordRecoveryController', ['$scope', '$window', '$timeout', '$location', 'authService', 'ngAuthSettings', function ($scope, $window, $timeout, $location, authService, ngAuthSettings) {
 
+    
+    var qString = $location.search();
+
+    //Redirect to login when hash isn't passed to the URL querystring.
+    if (qString.q === undefined)
+        window.location = '/login';
+        
     $scope.email = "";
     $scope.message = "";
 
@@ -80,7 +87,7 @@ app.controller('passwordRecoveryController', ['$scope', '$window', '$timeout', '
     var startTimer = function () {
         var timer = $timeout(function () {
             $timeout.cancel(timer);
-            window.location = '/account/login/';
+            window.location = '/login/';
 
         }, 2000);
     }
