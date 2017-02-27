@@ -19,6 +19,7 @@
 		<div ng-show="!registration.confirmPassword && form.$submitted" class="alert alert-warning">Required field</div>
 		<div class="g-recaptcha" vc-recaptcha key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()" ></div>
 		<div vc-recaptcha ng-model="registration.myRecaptchaResponse"></div>
+		<p>{{model.key}}</p>
     <input class="btn btn-lg btn-orange btn-block" type="submit" ng-disabled="form.$invalid" data-ng-click="signIn()" value="Create Account"/>
     <hr>
     <span class="text-center">
@@ -26,4 +27,4 @@
     </span>
   </form>
 </div>
-<script src='https://www.google.com/recaptcha/api.js'></script>
+<!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
