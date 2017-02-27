@@ -13,7 +13,7 @@
     <input type="password" id="" class="form-control" placeholder="" data-ng-model="registration.password" required>
     <label for="inputPassword" class="">Repeat Password:</label>
     <input type="password" id="" class="form-control" placeholder="" required>
-		<div class="g-recaptcha" vc-recaptcha data-sitekey="6LcWpRUUAAAAACbBSGWE_6tSKEkHcstmbTdDNklb" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()" ></div>
+		<div class="g-recaptcha" vc-recaptcha data-sitekey="6LcWpRUUAAAAACbBSGWE_6tSKEkHcstmbTdDNklb" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()" ></div>
     <button class="btn btn-lg btn-orange btn-block" type="submit" data-ng-click="signIn()">Create Account</button>
     <hr>
     <span class="text-center">
