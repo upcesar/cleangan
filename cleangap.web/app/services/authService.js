@@ -181,7 +181,6 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
         _logOut();
 
-        debugger;
         var deferred = $q.defer();
 
         $http.post(serviceBase + 'api/account/reset-password', data).success(function (response) {

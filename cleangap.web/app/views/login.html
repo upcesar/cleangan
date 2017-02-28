@@ -6,7 +6,7 @@
     <hr>
 		<div data-ng-hide="message == ''" class="alert alert-danger">{{message}}</div>
     <label for="" class="">Email:</label>
-    <input type="text" id="" class="form-control" placeholder="" data-ng-model="loginData.username" required autofocus>
+    <input type="text" id="inputEmail" class="form-control" placeholder="" data-ng-model="loginData.username" required autofocus>
     <label for="inputPassword" class="">Password:</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="" data-ng-model="loginData.password" required>
     <input class="btn btn-lg btn-orange center-block" type="submit" ng-hide="sendingData" ng-disabled="form.$invalid" data-ng-click="login()" value="Login">

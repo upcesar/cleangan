@@ -1,5 +1,7 @@
 'use strict';
-app.controller('signinController', ['$scope', '$location', '$timeout', 'authService', 'vcRecaptchaService'  , function ($scope, $location, $timeout, authService, vcRecaptchaService) {
+app.controller('signinController', ['$scope', '$window', '$location', '$timeout', 'authService', 'vcRecaptchaService', function ($scope, $window, $location, $timeout, authService, vcRecaptchaService) {
+
+    $window.document.getElementById("customerName").focus();
 
     $scope.savedSuccessfully = false;
     $scope.sendingData = false;

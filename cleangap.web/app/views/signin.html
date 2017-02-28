@@ -6,10 +6,10 @@
     <hr>
 		<div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">{{message}}</div>
     <label for="" class="">Full name:</label>
-    <input type="text" id="" class="form-control" placeholder="" data-ng-model="registration.name" required autofocus>
+    <input type="text" id="customerName" class="form-control" placeholder="" data-ng-model="registration.name" required autofocus>
 		<!-- <div ng-show="!registration.name && form.$submitted" class="alert alert-warning">Required field</div> -->
     <label for="inputEmail" class="">e-mail account:</label>
-    <input type="email" id="" class="form-control" data-ng-model="registration.email" placeholder="" required>
+    <input type="email" id="customerEmail " class="form-control" data-ng-model="registration.email" placeholder="" required>
 		<!-- <div ng-show="!registration.email && form.$submitted" class="alert alert-warning">Required field</div> -->
     <label for="inputPassword" class="">Password:</label>
 		<input type="password" id="password" name="password"  class="form-control" placeholder=""  data-ng-model="registration.password" required>

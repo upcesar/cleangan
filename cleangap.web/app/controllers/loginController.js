@@ -1,5 +1,7 @@
 'use strict';
-app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuthSettings', function ($scope, $location, authService, ngAuthSettings) {
+app.controller('loginController', ['$scope', '$window', '$location', 'authService', 'ngAuthSettings', function ($scope, $window, $location, authService, ngAuthSettings) {
+    
+    $window.document.getElementById("inputEmail").focus();
 
     $scope.loginData = {
         username: "",
@@ -18,6 +20,8 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
          function (err) {
              $scope.message = err.error_description;
              $scope.sendingData = false;
+             $scope.loginData.password = "";
+             $window.document.getElementById("inputPassword").focus();
          });
     };
 
