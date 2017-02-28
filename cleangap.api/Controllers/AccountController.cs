@@ -49,9 +49,18 @@ namespace cleangap.api.Controllers
         [HttpPost, AllowAnonymous, Route("send-password-recovery")]
         public ApiResponse SendPasswordRecovery(CustomerModel data)
         {
+            string strMsg;
+            bool userFound = false;
 
-            bool userFound = customerBO.SendTokenEmail(data);
-            string strMsg = userFound ? "E-Mail sent" : "E-Mail not found";
+            try
+            {
+                userFound = customerBO.SendTokenEmail(data);
+                strMsg = userFound ? "E-Mail sent" : "E-Mail not found";
+            }
+            catch (Exception ex)
+            {
+                strMsg = ex.Message;                
+            }
 
             return new ApiResponse()
             {

@@ -20,7 +20,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 
     $routeProvider.when("/password-reset", {
         templateUrl: "app/views/password-reset.html",
-        controller: "passwordRecoveryController",
+        controller: "resetPasswordController",
     });
 
     $routeProvider.when("/dashboard", {
