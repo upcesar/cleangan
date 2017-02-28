@@ -4,11 +4,16 @@ app.controller('passwordRecoveryController', ['$scope', '$window', '$timeout', '
     
     var qString = $location.search();
     var path = $location.path();
-
+        
     //Redirect to login when hash isn't passed to the URL querystring.
     if (path === '/password-reset' && qString.q === undefined)
         window.location = '/login';
-        
+    
+    $scope.resetPasswordData = {};
+
+    if (path === '/password-reset' && qString.q !== undefined)
+        $scope.resetPasswordData.token = qString.q;
+
     $scope.email = "";
     $scope.message = "";
 
@@ -53,12 +58,12 @@ app.controller('passwordRecoveryController', ['$scope', '$window', '$timeout', '
 
     $scope.resetPassword = function () {
 
-        var student = this.student;
+        var customer = $scope.resetPasswordData;
 
         $scope.sendingData = true;
         $scope.sentData = false;
 
-        authService.resetPassword(student).then(function (response) {
+        authService.resetPassword(customer).then(function (response) {
 
             $scope.message = response.message;
 
@@ -66,7 +71,7 @@ app.controller('passwordRecoveryController', ['$scope', '$window', '$timeout', '
 
             if (response.isSuccess) {
                 $scope.alertType = "alert-success";
-                $scope.message += ". Em instantes será redirecionado para o Login.";
+                $scope.message += ". Now you are redirecting to Login.";
                 startTimer();
             }
 
