@@ -19,6 +19,8 @@ app.controller('passwordRecoveryController', ['$scope', '$window', '$timeout', '
 
     $scope.sendRecoveryInstruction = function () {
 
+        authService.logOut();
+
         $scope.sendingData = true;
         $scope.sentData = false;
         $scope.alertType = "alert-danger";

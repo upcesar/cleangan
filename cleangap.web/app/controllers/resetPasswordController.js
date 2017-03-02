@@ -32,6 +32,8 @@ app.controller('resetPasswordController', ['$scope', '$window', '$timeout', '$lo
 
         var customer = $scope.resetPasswordData;
 
+        authService.logOut();
+
         $scope.sendingData = true;
         $scope.sentData = false;
 

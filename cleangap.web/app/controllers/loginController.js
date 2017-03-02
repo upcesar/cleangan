@@ -12,13 +12,14 @@ app.controller('loginController', ['$scope', '$window', '$location', 'authServic
     $scope.message = "";
 
     $scope.login = function () {
+        authService.logOut();
         $scope.sendingData = true;
         authService.login($scope.loginData).then(function (response) {
             $location.path('/survey');
 
         },
          function (err) {
-             $scope.message = err.error_description;
+             $scope.message = err !==null ? err.error_description : "System error. Contact support for assistance.";
              $scope.sendingData = false;
              $scope.loginData.password = "";
              $window.document.getElementById("inputPassword").focus();

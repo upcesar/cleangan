@@ -57,7 +57,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
     $locationProvider.html5Mode(true);
 }]);
 
-// var serviceBase = 'http://localhost:51563/';
+ //var serviceBase = 'http://localhost:51563/';
 var serviceBase = 'http://cleangap.westcentralus.cloudapp.azure.com:8080/';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
