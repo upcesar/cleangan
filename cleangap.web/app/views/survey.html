@@ -16,9 +16,9 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<div class="pull-right">
 			<ul class="nav navbar-nav navbar-right primary">
-				<li><a href="#">User name here</a></li>
+				<li><a href="">{{ user.username }}</a></li>
 				<hr>
-				<li><a href="#">Sign out</a></li>
+				<li><a data-ng-click="logOut()" style="cursor:pointer">Sign out</a></li>
 			</ul>
 			<div class="myclearfix"></div>
 			<ul class="nav navbar-nav navbar-right number-survey">
