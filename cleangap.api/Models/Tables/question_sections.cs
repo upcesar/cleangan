@@ -19,6 +19,10 @@ namespace cleangap.api.Models.Tables
 
         [StringLength(150)]
         public string name { get; set; }
+        public string description { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual question_sections parent_section { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<questions> questions { get; set; }

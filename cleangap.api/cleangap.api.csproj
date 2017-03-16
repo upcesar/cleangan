@@ -282,6 +282,10 @@
     <Compile Include="Migrations\201702231912203_FirstMigration.Designer.cs">
       <DependentUpon>201702231912203_FirstMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703162041316_SubSections.cs" />
+    <Compile Include="Migrations\201703162041316_SubSections.Designer.cs">
+      <DependentUpon>201703162041316_SubSections.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApiResponse.cs" />
     <Compile Include="Models\Domain\CustomerModel.cs" />
@@ -394,6 +398,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702231912203_FirstMigration.resx">
       <DependentUpon>201702231912203_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703162041316_SubSections.resx">
+      <DependentUpon>201703162041316_SubSections.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
