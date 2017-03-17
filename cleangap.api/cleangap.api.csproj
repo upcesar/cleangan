@@ -286,7 +286,19 @@
     <Compile Include="Migrations\201703162041316_SubSections.Designer.cs">
       <DependentUpon>201703162041316_SubSections.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703162318388_QuestionsPage.cs" />
+    <Compile Include="Migrations\201703162318388_QuestionsPage.Designer.cs">
+      <DependentUpon>201703162318388_QuestionsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703171310078_QuestionsOptionOrder.cs" />
+    <Compile Include="Migrations\201703171310078_QuestionsOptionOrder.Designer.cs">
+      <DependentUpon>201703171310078_QuestionsOptionOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Seed\SeedQuestionDomain.cs" />
+    <Compile Include="Migrations\Seed\SeedQuestionsERP.cs" />
+    <Compile Include="Migrations\Seed\SeedQuestionBrands.cs" />
+    <Compile Include="Migrations\Seed\SeedSections.cs" />
     <Compile Include="Models\ApiResponse.cs" />
     <Compile Include="Models\Domain\CustomerModel.cs" />
     <Compile Include="Models\Domain\LoginModel.cs" />
@@ -401,6 +413,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703162041316_SubSections.resx">
       <DependentUpon>201703162041316_SubSections.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703162318388_QuestionsPage.resx">
+      <DependentUpon>201703162318388_QuestionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703171310078_QuestionsOptionOrder.resx">
+      <DependentUpon>201703171310078_QuestionsOptionOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
