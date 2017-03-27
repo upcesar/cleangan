@@ -13,18 +13,7 @@ namespace cleangap.api.Migrations
         {
             AutomaticMigrationsEnabled = false;
             ContextKey = "cleangap.api.DAL.CleanGrapDataContext";
-        }
-        private void SeedQuestionOptions(DAL.CleanGapDataContext context)
-        {
-            context.question_options
-                   .AddOrUpdate(qo => qo.id,
-                    new question_options() { id = 1, id_question = 1, input_type = "textarea", order = 1 },
-                    new question_options() { id = 2, id_question = 2, input_type = "textarea", option_text = "Order Entry Data", order = 1 },
-                    new question_options() { id = 3, id_question = 2, input_type = "textarea", option_text = "Order Export to ERP", order = 2 },
-                    new question_options() { id = 4, id_question = 2, input_type = "textarea", option_text = "Order Confirmation from ERP", order = 3 },
-                    new question_options() { id = 5, id_question = 2, input_type = "textarea", option_text = "Images", order = 4 }
-            );
-        }
+        }        
         private void SeedQuestions(DAL.CleanGapDataContext context)
         {
             SeedQuestionsERP(context);
@@ -51,6 +40,8 @@ namespace cleangap.api.Migrations
             SeedSections(context);
             SeedSubSections(context);
             SeedQuestions(context);
+            SeedQuestionOptions(context);
+
 
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_sections OFF");
 

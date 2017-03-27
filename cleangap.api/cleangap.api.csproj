@@ -275,6 +275,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Domain\CustomersBO.cs" />
+    <Compile Include="Domain\QuestionsBO.cs" />
+    <Compile Include="Domain\QuestionSectionsBO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -294,8 +296,13 @@
     <Compile Include="Migrations\201703171310078_QuestionsOptionOrder.Designer.cs">
       <DependentUpon>201703171310078_QuestionsOptionOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703271932027_AddedValueListQuestionOpt.cs" />
+    <Compile Include="Migrations\201703271932027_AddedValueListQuestionOpt.Designer.cs">
+      <DependentUpon>201703271932027_AddedValueListQuestionOpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionDomain.cs" />
+    <Compile Include="Migrations\Seed\SeedQuestionOptions.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionsERP.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionBrands.cs" />
     <Compile Include="Migrations\Seed\SeedSections.cs" />
@@ -303,6 +310,7 @@
     <Compile Include="Models\Domain\CustomerModel.cs" />
     <Compile Include="Models\Domain\LoginModel.cs" />
     <Compile Include="Models\Domain\ResetPasswordModel.cs" />
+    <Compile Include="Models\Domain\SurveyModel.cs" />
     <Compile Include="Models\Tables\answers.cs" />
     <Compile Include="DAL\CleanGapDataContext.cs" />
     <Compile Include="Models\Tables\customers.cs" />
@@ -419,6 +427,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703171310078_QuestionsOptionOrder.resx">
       <DependentUpon>201703171310078_QuestionsOptionOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703271932027_AddedValueListQuestionOpt.resx">
+      <DependentUpon>201703271932027_AddedValueListQuestionOpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

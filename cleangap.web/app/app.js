@@ -1,6 +1,21 @@
 
 var app = angular.module('cleangap', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'vcRecaptcha']);
 
+var serviceBase = 'http://localhost:51563/';
+//var serviceBase = 'http://cleangap.westcentralus.cloudapp.azure.com:8080/';
+app.constant('ngAuthSettings', {
+    apiServiceBaseUri: serviceBase,
+    clientId: 'ngAuthApp'
+});
+
+app.config(function ($httpProvider) {
+    $httpProvider.interceptors.push('authInterceptorService');
+});
+
+app.run(['authService', function (authService) {
+    authService.fillAuthData();
+}]);
+
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
     $routeProvider.when("/", {
@@ -56,19 +71,4 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 
     $routeProvider.otherwise({ redirectTo: "/" });
     $locationProvider.html5Mode(true);
-}]);
-
- //var serviceBase = 'http://localhost:51563/';
-var serviceBase = 'http://cleangap.westcentralus.cloudapp.azure.com:8080/';
-app.constant('ngAuthSettings', {
-    apiServiceBaseUri: serviceBase,
-    clientId: 'ngAuthApp'
-});
-
-app.config(function ($httpProvider) {
-    $httpProvider.interceptors.push('authInterceptorService');
-});
-
-app.run(['authService', function (authService) {
-    authService.fillAuthData();
 }]);

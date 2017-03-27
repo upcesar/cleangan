@@ -25,6 +25,7 @@ namespace cleangap.api.Models.Tables
         public virtual ICollection<question_options> question_options { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual questions dependent_question { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual question_sections question_sections { get; set; }
     }
 }

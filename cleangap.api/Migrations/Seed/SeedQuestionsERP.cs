@@ -20,7 +20,7 @@
                         new questions() { id = 3, name = "erp_responsible", description = "Who is responsible for providing data access?", page = 3, question_sections = qsERP },
                         new questions() { id = 4, name = "erp_resp_worflow", description = "Who is responsible for Point6 specific business logic workflow questions?", page = 4, question_sections = qsERP },
                         new questions() { id = 5, name = "erp_resp_access", description = "Who is responsible for setting up user access to the site?", page = 6, question_sections = qsERP },
-                        new questions() { id = 6, name = "erp_email_notif", description = "What e-mail should receive notifications when a user requests access?", page = 7, question_sections = qsERP }                        
+                        new questions() { id = 6, name = "erp_email_notif", description = "What e-mail should receive notifications when a user requests access?", page = 7, question_sections = qsERP }
             );
         }
         
