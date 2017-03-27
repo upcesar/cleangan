@@ -10,7 +10,7 @@ using cleangap.api.Services.Security;
 namespace cleangap.api.Test
 {
     [TestFixture]
-    public class TestClass
+    public class TestGoogleCaptcha
     {
         #region Constants
         private const string RestMockURI = "https://api.spotify.com/";
