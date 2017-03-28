@@ -10,7 +10,7 @@ namespace cleangap.api.Models.Tables
     {
         public int id { get; set; }
 
-        public int? id_survey { get; set; }
+        public int? id_project { get; set; }
 
         public int? id_staff { get; set; }
 
@@ -25,7 +25,7 @@ namespace cleangap.api.Models.Tables
 
         public DateTime? cust_response_date { get; set; }
 
-        public virtual surveys surveys { get; set; }
+        public virtual projects project { get; set; }
 
         public virtual staff staff { get; set; }
     }

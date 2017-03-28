@@ -8,7 +8,8 @@ namespace cleangap.api.Models.Domain
     public class SurveyModel
     {
         public int id { get; set; }
-        public string description { get; set; }
-        
+        public string description { get; set; }        
+        public int Page { get; set; }
+
     }
 }

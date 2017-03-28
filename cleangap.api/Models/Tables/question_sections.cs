@@ -12,7 +12,6 @@ namespace cleangap.api.Models.Tables
         public question_sections()
         {
             questions = new HashSet<questions>();
-            surveys = new HashSet<surveys>();
         }
 
         public int id { get; set; }
@@ -26,8 +25,6 @@ namespace cleangap.api.Models.Tables
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<questions> questions { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<surveys> surveys { get; set; }
+        
     }
 }

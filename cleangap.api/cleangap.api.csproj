@@ -300,6 +300,10 @@
     <Compile Include="Migrations\201703271932027_AddedValueListQuestionOpt.Designer.cs">
       <DependentUpon>201703271932027_AddedValueListQuestionOpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703272224404_AjustProjectFields.cs" />
+    <Compile Include="Migrations\201703272224404_AjustProjectFields.Designer.cs">
+      <DependentUpon>201703272224404_AjustProjectFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionDomain.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionOptions.cs" />
@@ -319,7 +323,7 @@
     <Compile Include="Models\Tables\question_options.cs" />
     <Compile Include="Models\Tables\question_sections.cs" />
     <Compile Include="Models\Tables\staff.cs" />
-    <Compile Include="Models\Tables\surveys.cs" />
+    <Compile Include="Models\Tables\projects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\HttpClient\ApiCommand.cs" />
     <Compile Include="Services\HttpClient\IApiCommand.cs" />
@@ -430,6 +434,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703271932027_AddedValueListQuestionOpt.resx">
       <DependentUpon>201703271932027_AddedValueListQuestionOpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703272224404_AjustProjectFields.resx">
+      <DependentUpon>201703272224404_AjustProjectFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

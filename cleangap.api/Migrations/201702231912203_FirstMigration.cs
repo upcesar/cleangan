@@ -40,20 +40,17 @@ namespace cleangap.api.Migrations
                 .PrimaryKey(t => t.id);
             
             CreateTable(
-                "dbo.surveys",
+                "dbo.projects",
                 c => new
                     {
                         id = c.Int(nullable: false, identity: true),
-                        id_section = c.Int(),
                         id_customer = c.Int(),
                         is_open = c.Boolean(),
                         project_status = c.Int(),
                         creation_date = c.DateTime(),
                     })
                 .PrimaryKey(t => t.id)
-                .ForeignKey("dbo.question_sections", t => t.id_section)
                 .ForeignKey("dbo.customers", t => t.id_customer)
-                .Index(t => t.id_section)
                 .Index(t => t.id_customer);
             
             CreateTable(
@@ -61,7 +58,7 @@ namespace cleangap.api.Migrations
                 c => new
                     {
                         id = c.Int(nullable: false, identity: true),
-                        id_survey = c.Int(),
+                        id_project = c.Int(),
                         id_staff = c.Int(),
                         staff_comments = c.String(unicode: false),
                         customer_comments = c.String(unicode: false),
@@ -71,8 +68,8 @@ namespace cleangap.api.Migrations
                     })
                 .PrimaryKey(t => t.id)
                 .ForeignKey("dbo.staff", t => t.id_staff)
-                .ForeignKey("dbo.surveys", t => t.id_survey)
-                .Index(t => t.id_survey)
+                .ForeignKey("dbo.projects", t => t.id_project)
+                .Index(t => t.id_project)
                 .Index(t => t.id_staff);
             
             CreateTable(
@@ -130,20 +127,18 @@ namespace cleangap.api.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.surveys", "id_customer", "dbo.customers");
-            DropForeignKey("dbo.surveys", "id_section", "dbo.question_sections");
+            DropForeignKey("dbo.projects", "id_customer", "dbo.customers");
             DropForeignKey("dbo.questions", "id_section", "dbo.question_sections");
             DropForeignKey("dbo.question_options", "id_question", "dbo.questions");
             DropForeignKey("dbo.answers", "id_question_option", "dbo.question_options");
-            DropForeignKey("dbo.project_follow_up", "id_survey", "dbo.surveys");
+            DropForeignKey("dbo.project_follow_up", "id_project", "dbo.projects");
             DropForeignKey("dbo.project_follow_up", "id_staff", "dbo.staff");
             DropForeignKey("dbo.answers", "id_customer", "dbo.customers");
             DropIndex("dbo.question_options", new[] { "id_question" });
             DropIndex("dbo.questions", new[] { "id_section" });
             DropIndex("dbo.project_follow_up", new[] { "id_staff" });
-            DropIndex("dbo.project_follow_up", new[] { "id_survey" });
-            DropIndex("dbo.surveys", new[] { "id_customer" });
-            DropIndex("dbo.surveys", new[] { "id_section" });
+            DropIndex("dbo.project_follow_up", new[] { "id_project" });
+            DropIndex("dbo.projects", new[] { "id_customer" });
             DropIndex("dbo.answers", new[] { "id_customer" });
             DropIndex("dbo.answers", new[] { "id_question_option" });
             DropTable("dbo.question_options");
@@ -151,7 +146,7 @@ namespace cleangap.api.Migrations
             DropTable("dbo.question_sections");
             DropTable("dbo.staff");
             DropTable("dbo.project_follow_up");
-            DropTable("dbo.surveys");
+            DropTable("dbo.projects");
             DropTable("dbo.customers");
             DropTable("dbo.answers");
         }

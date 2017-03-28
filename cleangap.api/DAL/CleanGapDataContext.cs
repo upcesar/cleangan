@@ -20,7 +20,7 @@ namespace cleangap.api.DAL
         public virtual DbSet<question_sections> question_sections { get; set; }
         public virtual DbSet<questions> questions { get; set; }
         public virtual DbSet<staff> staff { get; set; }
-        public virtual DbSet<surveys> surveys { get; set; }
+        public virtual DbSet<projects> projects { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -50,7 +50,7 @@ namespace cleangap.api.DAL
                 .HasForeignKey(e => e.id_customer);
 
             modelBuilder.Entity<customers>()
-                .HasMany(e => e.surveys)
+                .HasMany(e => e.projects)
                 .WithOptional(e => e.customers)
                 .HasForeignKey(e => e.id_customer);
 
@@ -88,11 +88,6 @@ namespace cleangap.api.DAL
                 .WithOptional(e => e.question_sections)
                 .HasForeignKey(e => e.id_section);
 
-            modelBuilder.Entity<question_sections>()
-                .HasMany(e => e.surveys)
-                .WithOptional(e => e.question_sections)
-                .HasForeignKey(e => e.id_section);
-
             modelBuilder.Entity<questions>()
                 .Property(e => e.name)
                 .IsUnicode(false);
@@ -123,10 +118,10 @@ namespace cleangap.api.DAL
                 .WithOptional(e => e.staff)
                 .HasForeignKey(e => e.id_staff);
 
-            modelBuilder.Entity<surveys>()
+            modelBuilder.Entity<projects>()
                 .HasMany(e => e.project_follow_up)
-                .WithOptional(e => e.surveys)
-                .HasForeignKey(e => e.id_survey);
+                .WithOptional(e => e.project)
+                .HasForeignKey(e => e.id_project);
         }
     }
 }

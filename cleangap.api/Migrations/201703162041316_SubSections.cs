@@ -7,7 +7,7 @@ namespace cleangap.api.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.surveys", "edition_date", c => c.DateTime());
+            AddColumn("dbo.projects", "edition_date", c => c.DateTime());
             AddColumn("dbo.question_sections", "description", c => c.String());
             AddColumn("dbo.question_sections", "parent_section_id", c => c.Int());
             AddColumn("dbo.questions", "dependent_answer_value", c => c.String());
@@ -30,7 +30,7 @@ namespace cleangap.api.Migrations
             DropColumn("dbo.questions", "dependent_answer_value");
             DropColumn("dbo.question_sections", "parent_section_id");
             DropColumn("dbo.question_sections", "description");
-            DropColumn("dbo.surveys", "edition_date");
+            DropColumn("dbo.projects", "edition_date");
         }
     }
 }

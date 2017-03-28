@@ -12,7 +12,7 @@ namespace cleangap.api.Models.Tables
         public customers()
         {
             answers = new HashSet<answers>();
-            surveys = new HashSet<surveys>();
+            projects = new HashSet<projects>();
         }
 
         public int id { get; set; }
@@ -44,6 +44,6 @@ namespace cleangap.api.Models.Tables
         public virtual ICollection<answers> answers { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<surveys> surveys { get; set; }
+        public virtual ICollection<projects> projects { get; set; }
     }
 }
