@@ -274,9 +274,10 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Domain\CustomersBO.cs" />
     <Compile Include="Domain\QuestionsBO.cs" />
-    <Compile Include="Domain\QuestionSectionsBO.cs" />
+    <Compile Include="Domain\SurveysBO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -313,6 +314,9 @@
     <Compile Include="Models\ApiResponse.cs" />
     <Compile Include="Models\Domain\CustomerModel.cs" />
     <Compile Include="Models\Domain\LoginModel.cs" />
+    <Compile Include="Models\Domain\QuestionChoicesModel.cs" />
+    <Compile Include="Models\Domain\QuestionOptionModel.cs" />
+    <Compile Include="Models\Domain\QuestionsModel.cs" />
     <Compile Include="Models\Domain\ResetPasswordModel.cs" />
     <Compile Include="Models\Domain\SurveyModel.cs" />
     <Compile Include="Models\Tables\answers.cs" />
