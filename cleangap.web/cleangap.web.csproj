@@ -140,6 +140,7 @@
     <Content Include="app\directives\syncFocusWith.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="app\routes.js" />
     <Content Include="app\services\authInterceptorService.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
