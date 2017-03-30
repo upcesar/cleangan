@@ -13,6 +13,8 @@ namespace cleangap.api.Domain
     public interface ISurveysBO
     {
         SurveyModel ListQuestions(int? pageNum);
+        bool HasAnswer(int pageNum);
+        string GetAnswer(int numQuestion);
     }
 
     public class SurveysBO : ISurveysBO
@@ -34,6 +36,7 @@ namespace cleangap.api.Domain
 
             foreach (var item in tblQuestion)
             {
+                
                 List<QuestionOptionModel> options = AddQuestionOptions(item);
 
                 s.questions.Add(new QuestionsModel()
@@ -76,6 +79,17 @@ namespace cleangap.api.Domain
 
         }
 
+        private string GetAnswer(question_options pQuestionOption)
+        {
+            //System.Diagnostics.Debugger.Break();
+            foreach (var item in pQuestionOption.answers)
+            {
+
+            }
+
+            return null;
+        }
+
         private List<QuestionOptionModel> AddQuestionOptions(questions pQuestions)
         {
             List<QuestionOptionModel> OptionList = new List<QuestionOptionModel>();
@@ -83,6 +97,8 @@ namespace cleangap.api.Domain
             List<question_options> tblOptions = pQuestions.question_options
                                                           .OrderBy(x => x.order)
                                                           .ToList();
+
+
             foreach (var item in tblOptions)
             {
                 OptionList.Add(new QuestionOptionModel()
@@ -90,7 +106,10 @@ namespace cleangap.api.Domain
                     id = item.id,
                     OptionText = item.option_text != null ? item.option_text.Trim() : null,
                     OptionType = item.input_type != null ? item.input_type.Trim() : null,
-                    QuestionChoices = ListChoices(item)
+                    QuestionChoices = ListChoices(item),
+                    HasMultipleAnswer = item.answers.Count > 1,
+                    UniqueAnswer = item.answers.Select(x=>x.answers_value).FirstOrDefault(),
+                    MultipleAnswers = item.answers.Select(x => x.answers_value).ToList<string>()
                 });
             }
 
@@ -121,6 +140,18 @@ namespace cleangap.api.Domain
 
             }
             throw new NullReferenceException("Page Num cannot be empty");
+        }
+
+        public bool HasAnswer(int pageNum)
+        {
+            SurveyModel s = ListQuestions(pageNum);
+
+            return s.questions.Any(x => x.QuestionOption.Any(y => !string.IsNullOrEmpty(y.UniqueAnswer)));
+        }
+
+        public string GetAnswer(int numQuestion)
+        {
+            throw new NotImplementedException();
         }
     }
 }

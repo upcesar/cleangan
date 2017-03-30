@@ -12,7 +12,7 @@ namespace cleangap.api.test
     [TestFixture]
     public class TestSurveys
     {
-        
+
         [Test]
         public void TestListQuestions()
         {
@@ -20,9 +20,28 @@ namespace cleangap.api.test
             //Assert.Pass("Your first passing test");
 
             ISurveysBO qsBO = new SurveysBO();
-            var x = qsBO.ListQuestions(2);
-            
+            var x = qsBO.ListQuestions(1);
+
             Assert.IsInstanceOf<SurveyModel>(x);
+        }
+        [Test]
+        public void TestListAnswers()
+        {
+            ISurveysBO qsBO = new SurveysBO();
+            var x = qsBO.HasAnswer(1);
+
+            Assert.IsTrue(x);
+        }
+
+        [Test]
+        public void TestListFirstAnswers()
+        {
+            ISurveysBO qsBO = new SurveysBO();
+
+            var x = qsBO.ListQuestions(1);
+
+            Assert.AreEqual("My ERP is TOTVS", x.questions.FirstOrDefault().QuestionOption.FirstOrDefault().UniqueAnswer);
+
         }
     }
 }

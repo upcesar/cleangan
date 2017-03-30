@@ -122,6 +122,11 @@ namespace cleangap.api.DAL
                 .HasMany(e => e.project_follow_up)
                 .WithOptional(e => e.project)
                 .HasForeignKey(e => e.id_project);
+
+            modelBuilder.Entity<projects>()
+                .HasMany(e => e.answers)
+                .WithOptional(e => e.projects)
+                .HasForeignKey(e => e.id_project);
         }
     }
 }

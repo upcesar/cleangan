@@ -12,6 +12,7 @@ namespace cleangap.api.Models.Tables
         public projects()
         {
             project_follow_up = new HashSet<project_follow_up>();
+            answers = new HashSet<answers>();
         }
 
         public int id { get; set; }

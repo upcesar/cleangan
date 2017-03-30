@@ -11,5 +11,9 @@ namespace cleangap.api.Models.Domain
         public string OptionText { get; set; }
         public string OptionType { get; set; }
         public List<QuestionChoicesModel> QuestionChoices { get; set; }
+        public bool HasMultipleAnswer { get; set;}
+        public string UniqueAnswer { get; set; }
+        public List<string> MultipleAnswers { get; set; }
+
     }
 }

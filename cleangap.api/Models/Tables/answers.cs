@@ -16,6 +16,6 @@ namespace cleangap.api.Models.Tables
         public int? id_project { get; set; }
         public virtual question_options question_options { get; set; }
         public virtual customers customers { get; set; }        
-        public virtual projects project { get; set; }
+        public virtual projects projects { get; set; }
     }
 }

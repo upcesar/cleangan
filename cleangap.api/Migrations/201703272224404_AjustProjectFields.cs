@@ -9,7 +9,7 @@ namespace cleangap.api.Migrations
         {
             AddColumn("dbo.answers", "id_project", c => c.Int());
             CreateIndex("dbo.answers", "id_project");
-            AddForeignKey("dbo.answers", "id_project", "dbo.projects", "id");
+            AddForeignKey("dbo.answers", "id_project", "dbo.projects", "id");            
         }
         
         public override void Down()
