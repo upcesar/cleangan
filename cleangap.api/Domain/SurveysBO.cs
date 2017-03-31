@@ -14,7 +14,7 @@ namespace cleangap.api.Domain
     {
         SurveyModel ListQuestions(int? pageNum);
         bool HasAnswer(int pageNum);
-        string GetAnswer(int numQuestion);
+        bool SaveAnswer(List<AnswersModel> answer);
     }
 
     public class SurveysBO : ISurveysBO
@@ -25,12 +25,10 @@ namespace cleangap.api.Domain
         {
             intQtySubSection = 1;
         }
-
         public SurveysBO(int qtySubSections)
         {
             intQtySubSection = qtySubSections;
         }
-
         private SurveyModel AddQuestion(SurveyModel s, List<questions> tblQuestion)
         {
 
@@ -49,7 +47,6 @@ namespace cleangap.api.Domain
 
             return s;
         }
-
         private List<QuestionChoicesModel> ListChoices(question_options pQuestionOption)
         {
             List<QuestionChoicesModel> listChoice = new List<QuestionChoicesModel>();
@@ -78,18 +75,6 @@ namespace cleangap.api.Domain
             return listChoice;
 
         }
-
-        private string GetAnswer(question_options pQuestionOption)
-        {
-            //System.Diagnostics.Debugger.Break();
-            foreach (var item in pQuestionOption.answers)
-            {
-
-            }
-
-            return null;
-        }
-
         private List<QuestionOptionModel> AddQuestionOptions(questions pQuestions)
         {
             List<QuestionOptionModel> OptionList = new List<QuestionOptionModel>();
@@ -103,7 +88,7 @@ namespace cleangap.api.Domain
             {
                 OptionList.Add(new QuestionOptionModel()
                 {
-                    id = item.id,
+                    OptionId = item.id,
                     OptionText = item.option_text != null ? item.option_text.Trim() : null,
                     OptionType = item.input_type != null ? item.input_type.Trim() : null,
                     QuestionChoices = ListChoices(item),
@@ -115,7 +100,6 @@ namespace cleangap.api.Domain
 
             return OptionList;
         }
-
         public SurveyModel ListQuestions(int? pageNum)
         {
             if (pageNum != null)
@@ -141,17 +125,15 @@ namespace cleangap.api.Domain
             }
             throw new NullReferenceException("Page Num cannot be empty");
         }
-
         public bool HasAnswer(int pageNum)
         {
             SurveyModel s = ListQuestions(pageNum);
 
             return s.questions.Any(x => x.QuestionOption.Any(y => !string.IsNullOrEmpty(y.UniqueAnswer)));
         }
-
-        public string GetAnswer(int numQuestion)
+        public bool SaveAnswer(List<AnswersModel> answer)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

@@ -312,6 +312,7 @@
     <Compile Include="Migrations\Seed\SeedQuestionBrands.cs" />
     <Compile Include="Migrations\Seed\SeedSections.cs" />
     <Compile Include="Models\ApiResponse.cs" />
+    <Compile Include="Models\Domain\AnswersModel.cs" />
     <Compile Include="Models\Domain\CustomerModel.cs" />
     <Compile Include="Models\Domain\LoginModel.cs" />
     <Compile Include="Models\Domain\QuestionChoicesModel.cs" />
