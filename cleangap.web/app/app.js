@@ -10,7 +10,7 @@ app.constant('ngAuthSettings', {
 });
 
 app.config(function ($httpProvider) {
-    $httpProvider.interceptors.push('authInterceptorService');
+    $httpProvider.interceptors.push('httpRequestInterceptor');
 });
 
 app.run(['authService', function (authService) {

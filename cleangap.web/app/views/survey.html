@@ -32,64 +32,39 @@
 <section class="main-content">
 	<div class="container-fluid">
 		<h1 class="title">Name or Title of Survey</h1>
-		<h2 class="sub-title">Question 6 (Out of 32)</h2>
+		<h2 class="sub-title">Question {{index+1}} (Out of {{surveys.length}})</h2>
 
 		<div class="col-lg-10 col-lg-offset-1 col-md-12">
-			<h2 class="question">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci eveniet natus a cupiditate quia consequatur?</h2>
+			<h2 class="question">{{currentSurvey.description}}</h2>
 			<div class="survey-card">
 
-				<div class="radio">
-					<label>
-						<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-						Option one is this and that&mdash;be sure to include why it's great
-					</label>
+				<div ng-repeat="option in currentSurvey.questionOption">
+                    <div class="col-xs-12" ng-show="option.optionType == 'input-text'">
+                        <label for="{{option.optionText}}">{{option.optionText}}:</label>
+                        <input type="text" />
+                    </div>  
 				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-						Option two can be something else and selecting it will deselect option one
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-						Option one is this and that&mdash;be sure to include why it's great
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-						Option two can be something else and selecting it will deselect option one
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-						Option one is this and that&mdash;be sure to include why it's great
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-						Option two can be something else and selecting it will deselect option one
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-						Option one is this and that&mdash;be sure to include why it's great
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-						Other: <input type="text" id="" class="" placeholder="">
-					</label>
-				</div>
+
+				<div ng-repeat="option in currentSurvey.questionOption">
+                    <div class="col-xs-12" ng-show="option.optionType == 'drop-down'">
+                        <label for="{{option.optionText}}">{{option.optionText}}: </label>
+                        <select ng-model="selectedOption" ng-options="selectableOption.description for selectableOption in option.questionChoices">
+                            <option value="">Select Option</option>
+                        </select>
+                    </div> 
+                </div>
+
+                <div ng-repeat="option in currentSurvey.questionOption">
+                    <div class="" ng-show="option.optionType == 'textarea'">
+                        <label for="{{option.optionText}}"> {{option.optionText}} </label>
+                        <textarea cols="50"> </textarea>
+                    </div>
+                </div>
+                   
 			</div>
 			<a href="/" class="btn btn-lg btn-green pull-right" type="submit">Save & Exit</a>
-			<a href="#" class="btn btn-lg btn-goto pull-right" type="submit">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
-			<a href="#" class="btn btn-lg btn-goto pull-right" type="submit"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
+			<a href="#" class="btn btn-lg btn-goto pull-right" ng-hide="surveys.length-1 === index" ng-click="next()">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
+			<a href="#" class="btn btn-lg btn-goto pull-right" ng-hide="index === 0" ng-click="back()"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
 		</div>
 	</div>
 </section>

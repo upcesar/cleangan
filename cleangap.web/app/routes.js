@@ -43,6 +43,11 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
         controller: "surveyController",
     });
 
+    $routeProvider.when("/survey/:questionID", {
+        templateUrl: "app/views/survey.html",
+        controller: "surveyController",
+    });
+
     $routeProvider.when("/tokens", {
         templateUrl: "app/views/tokens.html",
         controller: "tokensManagerController"
