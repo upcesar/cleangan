@@ -14,7 +14,7 @@ namespace cleangap.api
             // Web API configuration and services
 
             //Enable CORS security
-            EnableCors(config);
+            //EnableCors(config);
             // Web API routes
             config.MapHttpAttributeRoutes();
 
