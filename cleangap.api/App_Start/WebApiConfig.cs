@@ -27,7 +27,9 @@ namespace cleangap.api
 
         private static void EnableCors(HttpConfiguration config)
         {
-            var UrlOrigin = ConfigurationManager.AppSettings["WebUrl"].ToString();
+            var enableCors = ConfigurationManager.AppSettings["EnableCors"].ToString().ToLower();
+            var UrlOrigin = enableCors == "true" ? ConfigurationManager.AppSettings["WebUrl"].ToString() : "*";
+            
             var cors = new EnableCorsAttribute(UrlOrigin, "*", "*");
             
             config.EnableCors(cors);
