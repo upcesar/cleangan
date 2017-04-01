@@ -43,5 +43,42 @@ namespace cleangap.api.test
             Assert.AreEqual("My ERP is TOTVS", x.questions.FirstOrDefault().QuestionOption.FirstOrDefault().UniqueAnswer);
 
         }
+
+        [Test]
+        public void TestSetAnswer()
+        {
+            ISurveysBO qsBO = new SurveysBO();
+
+            AnswersModel answerModel = new AnswersModel()
+            {
+                QuestionOptionId = 1,
+                UniqueValue = "ERP Sigue Cloud"
+            };
+
+            string userId = "1"; // Customer Id.
+
+            var x = qsBO.SaveAnswer(answerModel, userId);
+
+            Assert.IsTrue(x);
+
+        }
+        [Test]
+        public void TestSetMultipleAnswer()
+        {
+            ISurveysBO qsBO = new SurveysBO();
+
+            AnswersModel answerModel = new AnswersModel()
+            {
+                QuestionOptionId = 17,
+                HasMultipleValue = true,
+                MultipleValues = new List<string>() { "email", "phone" }
+            };
+
+            string userId = "1"; // Customer Id.
+
+            var x = qsBO.SaveAnswer(answerModel, userId);
+
+            Assert.IsTrue(x);
+        }
     }
 }
