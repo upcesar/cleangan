@@ -353,3 +353,14 @@ table.table {
 .survey-card .radio {
 	margin-top: 0;
 }
+
+    .survey-card input,
+    .survey-card select,
+    .survey-card textarea {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+.survey-card select {
+    padding:2px;
+}

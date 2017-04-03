@@ -28,7 +28,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     var _login = function (loginData) {
 
-      var data = "grant_type=password&username=" + loginData.username + "&password=" + loginData.password;
+        var data = "grant_type=password&username=" + loginData.username + "&password=" + loginData.password;
         // var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
 
         if (loginData.useRefreshTokens) {
@@ -139,7 +139,12 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
         $http.post(serviceBase + 'api/account/registerexternal', registerExternalData).success(function (response) {
 
-            localStorageService.set('authorizationData', { token: response.access_token, username: response.userName, refreshToken: "", useRefreshTokens: false });
+            localStorageService.set('authorizationData', {
+                token: response.access_token,
+                username: response.userName,
+                refreshToken: "",
+                useRefreshTokens: false
+            });
 
             _authentication.isAuth = true;
             _authentication.userName = response.userName;
@@ -193,6 +198,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
         return deferred.promise;
     };
+      
 
     authServiceFactory.saveRegistration = _saveRegistration;
     authServiceFactory.login = _login;
