@@ -41,7 +41,7 @@
                 <div ng-repeat="option in currentSurvey.questionOption">
                     <div ng-show="option.optionType == 'radio'">
                         <div class="col-xs-12">
-                            <input ng-model="currentAnswer[option.optionText]" type="radio" name="{{option.optionText}}" value="{{option.optionText}}"> {{option.optionText}}<br>
+                            <input ng-model="currentAnswer[option.optionId]" type="radio" name="{{option.optionText}}" value="{{option.optionText}}"> {{option.optionText}}<br>
                         </div>
                     </div>
                 </div>
@@ -49,14 +49,14 @@
 				<div ng-repeat="option in currentSurvey.questionOption">
                     <div class="col-xs-12" ng-show="option.optionType == 'input-text'">
                         <label for="{{option.optionText}}">{{option.optionText}}:</label>
-                        <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionText]"  type="text" />
+                        <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]"  type="text" />
                     </div>  
 				</div>
 
 				<div ng-repeat="option in currentSurvey.questionOption">
                     <div class="col-xs-12" ng-show="option.optionType == 'drop-down'">
                         <label for="{{option.optionText}}">{{option.optionText}}: </label>
-                        <select ng-model="currentAnswer[option.optionText]" ng-options="selectableOption.description for selectableOption in option.questionChoices">
+                        <select ng-model="currentAnswer[option.optionId]" ng-options="selectableOption.description for selectableOption in option.questionChoices">
                             <option value="">Select Option</option>
                         </select>
                     </div> 
@@ -65,7 +65,7 @@
                 <div ng-repeat="option in currentSurvey.questionOption">
                     <div class="" ng-show="option.optionType == 'textarea'">
                         <label for="{{option.optionText}}"> {{option.optionText}} </label>
-                        <textarea ng-model="currentAnswer[option.optionText]" cols="50"> </textarea>
+                        <textarea ng-model="currentAnswer[option.optionId]" cols="50"> </textarea>
                     </div>
                 </div>
                    

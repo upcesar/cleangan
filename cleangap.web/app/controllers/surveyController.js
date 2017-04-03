@@ -57,13 +57,16 @@ function surveyController($scope, $http, $location, authService, $routeParams) {
 
     $scope.saveAnswer = function () {
         $scope.currentAnswer.currentQuestionID = $scope.currentSurvey.id;
-        $scope.currentAnswer.questionID = $scope.questionID;
+        $scope.currentAnswer.surveyID = $scope.questionID;
         $scope.currentAnswer.questionIndex = $scope.index;
         
-        if ($scope.currentSurvey.id === $scope.currentAnswer.questionID && $scope.answeredQuestions.length != 0) {
+        if ($scope.answeredQuestions.length > 0) {
             for (var x = 0; x < $scope.answeredQuestions.length; x++) {
-                if ($scope.answeredQuestions[x].currentQuestionIDs === $scope.currentSurvey.id) {
+                if ($scope.answeredQuestions[x].currentQuestionID === $scope.currentAnswer.currentQuestionID) {
                     $scope.answeredQuestions[x] = $scope.currentAnswer;
+                }
+                else {
+                    $scope.answeredQuestions.push($scope.currentAnswer);
                 }
             }
         }
@@ -71,7 +74,6 @@ function surveyController($scope, $http, $location, authService, $routeParams) {
             $scope.answeredQuestions.push($scope.currentAnswer);
         }
 
-        console.log($scope.answeredQuestions);
     };
 
     function update() {
