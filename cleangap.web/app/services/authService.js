@@ -3,7 +3,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     var serviceBase = ngAuthSettings.apiServiceBaseUri;
     var authServiceFactory = {};
-
+    
     var _authentication = {
         isAuth: false,
         username: "",
@@ -38,7 +38,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         var deferred = $q.defer();
 
         $http.post(serviceBase + 'api/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
-
+            
             if (loginData.useRefreshTokens) {
                 localStorageService.set('authorizationData', { token: response.access_token, username: loginData.username, refreshToken: response.refresh_token, useRefreshTokens: true });
             }
@@ -94,7 +94,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                 localStorageService.remove('authorizationData');
 
-                $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
+                $http.post(serviceBase + 'api/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
                     localStorageService.set('authorizationData', { token: response.access_token, username: response.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
 

@@ -16,6 +16,28 @@ function surveyController($scope, $http, $location, authService, $routeParams) {
 
     $scope.authentication = authService.authentication;
 
+    $scope.answeredQuestions = [];
+
+    $scope.currentAnswer = [];
+
+
+    //authService.refreshToken()
+    //    .then(function (response) {
+    //        console.log('teste');
+    //    // TODO: Put survey service here
+    //    $http.get('http://cleangap.westcentralus.cloudapp.azure.com:8080/api/surveys/questions/' + $scope.questionID || '')
+    //        .then(function (surveys) {
+    //            $scope.surveys = surveys.data.questions;
+    //            $scope.index = 0;
+    //            update();
+    //        });
+
+
+    //}, function (error) {
+    //    // TODO: LogOut and redirect to login
+    //    $location.path('/');
+    //});
+
     $http.get('http://cleangap.westcentralus.cloudapp.azure.com:8080/api/surveys/questions/' + $scope.questionID || '')
         .then(function (surveys) {
             $scope.surveys = surveys.data.questions;
@@ -31,10 +53,29 @@ function surveyController($scope, $http, $location, authService, $routeParams) {
     $scope.back = function () {
         $scope.index--;
         update();
-    }
+    };
+
+    $scope.saveAnswer = function () {
+        $scope.currentAnswer.currentQuestionID = $scope.currentSurvey.id;
+        $scope.currentAnswer.questionID = $scope.questionID;
+        $scope.currentAnswer.questionIndex = $scope.index;
+        
+        if ($scope.currentSurvey.id === $scope.currentAnswer.questionID && $scope.answeredQuestions.length != 0) {
+            for (var x = 0; x < $scope.answeredQuestions.length; x++) {
+                if ($scope.answeredQuestions[x].currentQuestionIDs === $scope.currentSurvey.id) {
+                    $scope.answeredQuestions[x] = $scope.currentAnswer;
+                }
+            }
+        }
+        else {
+            $scope.answeredQuestions.push($scope.currentAnswer);
+        }
+
+        console.log($scope.answeredQuestions);
+    };
 
     function update() {
         $scope.currentSurvey = $scope.surveys[$scope.index];
-        console.log($scope.currentSurvey);
-    }
+        
+    };
 }

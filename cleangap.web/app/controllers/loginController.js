@@ -15,7 +15,7 @@ app.controller('loginController', ['$scope', '$window', '$location', 'authServic
         authService.logOut();
         $scope.sendingData = true;
         authService.login($scope.loginData).then(function (response) {
-            $location.path('/survey');
+            $location.path('/survey/1');
 
         },
          function (err) {
