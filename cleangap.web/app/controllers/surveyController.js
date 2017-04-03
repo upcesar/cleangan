@@ -1,9 +1,9 @@
 'use strict';
 app.controller('surveyController', surveyController);
 
-surveyController.$inject = ['$scope', '$http', '$location', 'authService', '$routeParams'];
+surveyController.$inject = ['$scope', '$http', '$location', 'authService', '$routeParams', 'questionService'];
 
-function surveyController($scope, $http, $location, authService, $routeParams) {
+function surveyController($scope, $http, $location, authService, $routeParams, questionService) {
 
     $scope.user = JSON.parse(window.localStorage.getItem("ls.authorizationData"));
 
@@ -38,12 +38,17 @@ function surveyController($scope, $http, $location, authService, $routeParams) {
     //    $location.path('/');
     //});
 
-    $http.get('http://cleangap.westcentralus.cloudapp.azure.com:8080/api/surveys/questions/' + $scope.questionID || '')
-        .then(function (surveys) {
-            $scope.surveys = surveys.data.questions;
-            $scope.index = 0;
-            update();
-        });
+    var getQuestions = function (questionID) {
+        return questionService.Get(questionID)
+            .then(function (surveys) {
+                $scope.surveys = surveys.data.questions;
+                $scope.index = 0;
+                update();
+             });
+    }
+    getQuestions($scope.questionID);
+
+   
 
     $scope.next = function () {
         $scope.index++;
@@ -74,6 +79,7 @@ function surveyController($scope, $http, $location, authService, $routeParams) {
             $scope.answeredQuestions.push($scope.currentAnswer);
         }
 
+        console.log($scope.answeredQuestions);
     };
 
     function update() {
