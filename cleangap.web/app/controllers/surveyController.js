@@ -1,9 +1,9 @@
 'use strict';
 app.controller('surveyController', surveyController);
 
-surveyController.$inject = ['$scope', '$http', '$location', 'authService', '$routeParams'];
+surveyController.$inject = ['$scope', '$http', '$location', 'authService', '$routeParams', 'questionService'];
 
-function surveyController($scope, $http, $location, authService, $routeParams) {
+function surveyController($scope, $http, $location, authService, $routeParams, questionService) {
 
     $scope.user = JSON.parse(window.localStorage.getItem("ls.authorizationData"));
 
@@ -12,18 +12,40 @@ function surveyController($scope, $http, $location, authService, $routeParams) {
         $location.path('/');
     }
 
-    $scope.questionID = $routeParams.questionID;
+    $scope.questionID = $routeParams.questionID;    
 
     $scope.authentication = authService.authentication;
 
-    $http.get('http://cleangap.westcentralus.cloudapp.azure.com:8080/api/surveys/questions/' + $scope.questionID || '')
-        .then(function (surveys) {
-            $scope.surveys = surveys.data.questions;
-            $scope.index = 0;
-            update();
-        });
+    $scope.currentAnswer = [];
+
+ 
+    var getQuestions = function (questionID) {
+        return questionService.Get(questionID)
+            .then(function (surveys) {
+                $scope.surveys = surveys.data.questions;
+                $scope.index = 0;
+                update();
+             });
+    }
+    getQuestions($scope.questionID);
+
+   
 
     $scope.next = function () {
+        var response = $scope.currentAnswer.map(function (obj, index) {
+            var currentAnswerReturn = {
+                questionOptionId: index,
+                hasMultipleAnswer: !!obj['pop']
+            };
+            var prop = currentAnswerReturn.hasMultipleAnswer ? 'multipleValues' : 'uniqueValue';
+            currentAnswerReturn[prop] = obj.id ? obj.id : obj;
+            return currentAnswerReturn;
+        })
+
+        response.forEach(function (obj) {
+           questionService.Post(obj);     
+        });
+
         $scope.index++;
         update();
     };
@@ -31,10 +53,13 @@ function surveyController($scope, $http, $location, authService, $routeParams) {
     $scope.back = function () {
         $scope.index--;
         update();
-    }
+    };
+
+    $scope.saveAnswer = function () {
+        
+    };
 
     function update() {
         $scope.currentSurvey = $scope.surveys[$scope.index];
-        console.log($scope.currentSurvey);
-    }
+    };
 }

@@ -153,6 +153,7 @@
     <Content Include="app\services\ordersService.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="app\services\questionService.js" />
     <Content Include="app\services\tokensManagerService.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

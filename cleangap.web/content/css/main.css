@@ -354,7 +354,7 @@ table.table {
 	margin-top: 0;
 }
 
-    .survey-card input,
+    .survey-card input[type="text"],
     .survey-card select,
     .survey-card textarea {
         width: 100%;
