@@ -11,9 +11,11 @@
     {
         private void SeedQuestionsDomain(DAL.CleanGapDataContext context)
         {
+            question_sections qsDomain = context.question_sections.Find(2);
+
             context.questions
                    .AddOrUpdate(
-                        new questions() { id = 7, name = "domain_url", description = "URL Prefix Name: [name of company].repspark.net (no spaces or special characters allowed)", page = 8, question_sections = context.question_sections.Find(2) }
+                        new questions() { id = 7, name = "domain_url", description = "URL Prefix Name: [name of company].repspark.net (no spaces or special characters allowed)", page = 8, id_section = qsDomain.id }
             );
         }
     }
