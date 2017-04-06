@@ -71,6 +71,7 @@
                    
 			</div>
 			<a href="/" class="btn btn-lg btn-green pull-right" ng-click="saveAnswer()" type="submit">Save & Exit</a>
+            <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="surveys.length-1 === index" ng-click="finish()">Finish <i class="glyphicon glyphicon-ok"></i></a>
 			<a href="#" class="btn btn-lg btn-goto pull-right" ng-hide="surveys.length-1 === index" ng-click="next()">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
 			<a href="#" class="btn btn-lg btn-goto pull-right" ng-hide="index === 0" ng-click="back()"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
 		</div>
