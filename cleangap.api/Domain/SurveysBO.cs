@@ -32,6 +32,8 @@ namespace cleangap.api.Domain
         }
         private SurveyModel AddQuestion(SurveyModel s, List<questions> tblQuestion)
         {
+            var objSection = tblQuestion.FirstOrDefault();
+            
 
             foreach (var item in tblQuestion)
             {
@@ -42,6 +44,8 @@ namespace cleangap.api.Domain
                 {
                     id = item.id,
                     description = item.description,
+                    section_id = objSection != null ? objSection.question_sections.id : 0,
+                    section_name = objSection != null ? objSection.question_sections.name : "Uncategorized",
                     QuestionOption = options,
                 });
             }
@@ -110,6 +114,8 @@ namespace cleangap.api.Domain
                 {
                     var tblQuestion = db.questions.Where(q => q.page == pageNum).ToList();
                     var maxPage = db.questions.Max(x => x.page);
+
+                    
 
                     if (maxPage != null && tblQuestion.Count > 0)
                     {
