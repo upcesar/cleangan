@@ -12,9 +12,13 @@ namespace cleangap.api.Models.Domain
         public int PageTotal { get; set; }
 
         public List<QuestionsModel> questions { get; set; }
+        public int section_id { get; internal set; }
+        public string section_name { get; internal set; }
 
         public SurveyModel()
         {
+            section_id = 0;
+            section_name = "Uncategorized";
             questions = new List<QuestionsModel>();
         }
 
