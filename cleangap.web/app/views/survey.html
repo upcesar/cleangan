@@ -22,7 +22,7 @@
 			</ul>
 			<div class="myclearfix"></div>
 			<ul class="nav navbar-nav navbar-right number-survey">
-				<p>Progress Status: <strong>Step 3 of 10</strong></p>
+				<p>Progress Status: <strong>Step {{ survey.page }} of {{ survey.pageTotal }}</strong></p>
 			</ul>
 			</div>
 		</div><!-- /.navbar-collapse -->
@@ -31,7 +31,7 @@
 
 <section class="main-content">
 	<div class="container-fluid">
-		<h1 class="title">Name or Title of Survey</h1>
+		<h1 class="title">{{ survey.section_name }}</h1>
 		<h2 class="sub-title">Question {{index+1}} (Out of {{surveys.length}})</h2>
 
 		<div class="col-lg-10 col-lg-offset-1 col-md-12">
