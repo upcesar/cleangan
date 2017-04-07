@@ -22,7 +22,8 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
     var getQuestions = function (questionID) {
         return questionService.Get(questionID)
             .then(function (surveys) {
-                $scope.surveys = surveys.data.questions;
+                $scope.survey = surveys.data
+                $scope.surveys = $scope.survey.questions;
                 $scope.index = 0;
                 update();
              });

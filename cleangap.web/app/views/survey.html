@@ -22,7 +22,7 @@
 			</ul>
 			<div class="myclearfix"></div>
 			<ul class="nav navbar-nav navbar-right number-survey">
-				<p>Progress Status: <strong>Step 3 of 10</strong></p>
+				<p>Progress Status: <strong>Step {{ survey.page }} of {{ survey.pageTotal }}</strong></p>
 			</ul>
 			</div>
 		</div><!-- /.navbar-collapse -->
@@ -31,7 +31,7 @@
 
 <section class="main-content">
 	<div class="container-fluid">
-		<h1 class="title">Name or Title of Survey</h1>
+		<h1 class="title">{{ survey.section_name }}</h1>
 		<h2 class="sub-title">Question {{index+1}} (Out of {{surveys.length}})</h2>
 
 		<div class="col-lg-10 col-lg-offset-1 col-md-12">
@@ -71,6 +71,7 @@
                    
 			</div>
 			<a href="/" class="btn btn-lg btn-green pull-right" ng-click="saveAnswer()" type="submit">Save & Exit</a>
+            <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="surveys.length-1 === index" ng-click="finish()">Finish <i class="glyphicon glyphicon-ok"></i></a>
 			<a href="#" class="btn btn-lg btn-goto pull-right" ng-hide="surveys.length-1 === index" ng-click="next()">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
 			<a href="#" class="btn btn-lg btn-goto pull-right" ng-hide="index === 0" ng-click="back()"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
 		</div>
