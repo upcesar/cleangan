@@ -25,6 +25,8 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
                 $scope.survey = surveys.data
                 $scope.surveys = $scope.survey.questions;
                 $scope.index = 0;
+                $scope.prevPage = (parseInt($scope.survey.page, 10) - 1);
+                $scope.nextPage = (parseInt($scope.survey.page, 10) + 1);
                 update();
              });
     }
@@ -47,18 +49,21 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
            questionService.Post(obj);     
         });
 
-        console.log($scope.survey.page++);
 
-        $location.path('/survey/' + $scope.survey.page++);
+        $location.path('/survey/' + $scope.nextPage);
     
         
     };
 
     $scope.back = function () {
-        $location.path('/survey/' + $scope.survey.page--);
+        $location.path('/survey/' + $scope.prevPage);
     };
 
     $scope.saveAnswer = function () {
         
+    };
+
+    function update() {
+        $scope.currentSurvey = $scope.surveys[$scope.index];
     };
 }
