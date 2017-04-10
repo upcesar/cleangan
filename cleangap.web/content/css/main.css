@@ -339,17 +339,17 @@ table.table {
 }
 
 .survey-card {
-	display: block;
-	background-color: #fff;
-	border: 1px solid #e7e7e7;
-	width: 100%;
-	min-height: 2px;
-	padding: 15px 10px 10px 10px;
-	margin-bottom: 20px;
-	-webkit-columns: 10px 2; /* Chrome, Safari, Opera */
-    -moz-columns: 10px 2; /* Firefox */
-    columns: 10px 2;
+    display: block;
+    background-color: #fff;
+    border: 1px solid #e7e7e7;
+    width: 100%;
+    min-height: 2px;
+    padding: 15px 10px 10px 10px;
+    margin-bottom: 20px;
+    overflow: auto;
+    zoom: 1;
 }
+
 .survey-card .radio {
 	margin-top: 0;
 }
@@ -359,6 +359,9 @@ table.table {
     .survey-card textarea {
         width: 100%;
         margin-bottom: 10px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
     }
 
 .survey-card select {

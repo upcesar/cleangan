@@ -32,48 +32,51 @@
 <section class="main-content">
 	<div class="container-fluid">
 		<h1 class="title">{{ survey.section_name }}</h1>
-		<h2 class="sub-title">Question {{index+1}} (Out of {{surveys.length}})</h2>
+		<!-- <h2 class="sub-title">Question {{index+1}} (Out of {{surveys.length}})</h2> -->
 
 		<div class="col-lg-10 col-lg-offset-1 col-md-12">
-			<h2 class="question">{{currentSurvey.description}}</h2>
-			<div class="survey-card">
+            <div ng-repeat="question in survey.questions">
+                <h2 class="question">{{currentSurvey.description}}</h2>
+                <div class="survey-card">
 
-                <div ng-repeat="option in currentSurvey.questionOption">
-                    <div ng-show="option.optionType == 'radio'">
-                        <div class="col-xs-12">
-                            <input ng-model="currentAnswer[option.optionId]" type="radio" name="{{option.optionText}}" value="{{option.optionText}}"> {{option.optionText}}<br>
+                    <div ng-repeat="option in currentSurvey.questionOption">
+                        <div ng-show="option.optionType == 'radio'">
+                            <div ng-class="currentSurvey.questionOption.length === 1?'col-xs-12':'col-xs-6'">
+                                <input ng-model="currentAnswer[option.optionId]" type="radio" name="{{option.optionText}}" value="{{option.optionText}}"> {{option.optionText}}<br>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-				<div ng-repeat="option in currentSurvey.questionOption">
-                    <div class="col-xs-12" ng-show="option.optionType == 'input-text'">
-                        <label for="{{option.optionText}}">{{option.optionText}}:</label>
-                        <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]"  type="text" />
-                    </div>  
-				</div>
-
-				<div ng-repeat="option in currentSurvey.questionOption">
-                    <div class="col-xs-12" ng-show="option.optionType == 'drop-down'">
-                        <label for="{{option.optionText}}">{{option.optionText}}: </label>
-                        <select ng-model="currentAnswer[option.optionId]" ng-options="selectableOption.description for selectableOption in option.questionChoices">
-                            <option value="">Select Option</option>
-                        </select>
-                    </div> 
-                </div>
-
-                <div ng-repeat="option in currentSurvey.questionOption">
-                    <div class="" ng-show="option.optionType == 'textarea'">
-                        <label for="{{option.optionText}}"> {{option.optionText}} </label>
-                        <textarea ng-model="currentAnswer[option.optionId]" cols="50"> </textarea>
+                    <div ng-repeat="option in currentSurvey.questionOption">
+                        <div ng-class="currentSurvey.questionOption.length === 1?'col-xs-12':'col-xs-6'" ng-show="option.optionType == 'input-text'">
+                            <label for="{{option.optionText}}">{{option.optionText}}:</label>
+                            <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" type="text" />
+                        </div>
                     </div>
+
+                    <div ng-repeat="option in currentSurvey.questionOption">
+                        <div ng-class="currentSurvey.questionOption.length === 1?'col-xs-12':'col-xs-6'" ng-show="option.optionType == 'drop-down'">
+                            <label for="{{option.optionText}}">{{option.optionText}}: </label>
+                            <select ng-model="currentAnswer[option.optionId]" ng-options="selectableOption.description for selectableOption in option.questionChoices">
+                                <option value="">Select Option</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div ng-repeat="option in currentSurvey.questionOption">
+                        <div ng-class="currentSurvey.questionOption.length === 1?'col-xs-12':'col-xs-6'" ng-show="option.optionType == 'textarea'">
+                            <label for="{{option.optionText}}"> {{option.optionText}} </label>
+                            <textarea ng-model="currentAnswer[option.optionId]" cols="50"> </textarea>
+                        </div>
+                    </div>
+
                 </div>
-                   
-			</div>
-			<a href="/" class="btn btn-lg btn-green pull-right" ng-click="saveAnswer()" type="submit">Save & Exit</a>
-            <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="surveys.length-1 === index" ng-click="finish()">Finish <i class="glyphicon glyphicon-ok"></i></a>
-			<a href="#" class="btn btn-lg btn-goto pull-right" ng-hide="surveys.length-1 === index" ng-click="next()">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
-			<a href="#" class="btn btn-lg btn-goto pull-right" ng-hide="index === 0" ng-click="back()"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
+            </div>
+            <a href="/" class="btn btn-lg btn-green pull-right" ng-click="saveAnswer()" type="submit">Save & Exit</a>
+            <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page === survey.pageTotal" ng-click="finish()">Finish <i class="glyphicon glyphicon-ok"></i></a>
+            <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page < survey.pageTotal" ng-click="next()">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
+            <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page <= survey.pageTotal && survey.page > 1" ng-click="back()"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
 		</div>
+        
 	</div>
 </section>

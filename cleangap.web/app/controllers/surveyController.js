@@ -47,20 +47,18 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
            questionService.Post(obj);     
         });
 
-        $scope.index++;
-        update();
+        console.log($scope.survey.page++);
+
+        $location.path('/survey/' + $scope.survey.page++);
+    
+        
     };
 
     $scope.back = function () {
-        $scope.index--;
-        update();
+        $location.path('/survey/' + $scope.survey.page--);
     };
 
     $scope.saveAnswer = function () {
         
-    };
-
-    function update() {
-        $scope.currentSurvey = $scope.surveys[$scope.index];
     };
 }
