@@ -15,7 +15,7 @@
 
             context.questions
                    .AddOrUpdate(
-                        new questions() { id = 8, name = "domain_url", description = "URL Prefix Name: [name of company].repspark.net (no spaces or special characters allowed)", page = 8, id_section = qsDomain.id }
+                        new questions() { id = 8, name = "domain_url", description = "URL Prefix Name: [name of company].repspark.net (no spaces or special characters allowed)", page = 4, id_section = qsDomain.id }
             );
         }
     }

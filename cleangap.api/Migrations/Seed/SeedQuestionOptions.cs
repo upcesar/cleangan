@@ -13,12 +13,9 @@
         {
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_options ON");
             SeedQuestionOptionsERP(context);
+            SeedQuestionOptionsDomain(context);
+            SeedQuestionOptionsBrands(context);
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_options OFF");
-        }
-
-        private void SeedQuestionOptionsERP2(DAL.CleanGapDataContext context)
-        {
-
         }
 
         private void SeedQuestionOptionsERP(DAL.CleanGapDataContext context)
@@ -64,5 +61,54 @@
 
             );
         }
+
+        private void SeedQuestionOptionsDomain(DAL.CleanGapDataContext context)
+        {
+            context.question_options
+                   .AddOrUpdate(qo => qo.id,
+                    new question_options() { id = 26, id_question = 8, input_type = "textarea", order = 1 }
+            );
+        }
+
+        private void SeedQuestionOptionsBrands(DAL.CleanGapDataContext context)
+        {
+            context.question_options
+                   .AddOrUpdate(qo => qo.id,
+                    
+                    // Are there multiple brands?
+                    new question_options() { id = 27, id_question = 9, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 28, id_question = 9, input_type = "radio", option_text = "No", order = 2 },
+                    
+                    // Are there separate divisions within a brand?
+                    new question_options() { id = 29, id_question = 10, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 30, id_question = 10, input_type = "radio", option_text = "No", order = 2 },
+
+                    // Can brands be combined on one order?
+                    new question_options() { id = 31, id_question = 11, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 32, id_question = 11, input_type = "radio", option_text = "No", order = 2 },
+
+                    // Are customers assigned a brand in the ERP?
+                    new question_options() { id = 33, id_question = 12, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 34, id_question = 12, input_type = "radio", option_text = "No", order = 2 },
+
+                    // Are lookups (colors, genders, sales reps, shipping options) brand specific?
+                    new question_options() { id = 35, id_question = 13, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 36, id_question = 13, input_type = "radio", option_text = "No", order = 2 },
+
+                    // Can divisions be combined on one order?
+                    new question_options() { id = 35, id_question = 14, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 36, id_question = 14, input_type = "radio", option_text = "No", order = 2 },
+
+                    // Do you want a division filter?
+                    new question_options() { id = 35, id_question = 15, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 36, id_question = 15, input_type = "radio", option_text = "No", order = 2 },
+
+                    // Are some sales reps limited to what divisions they can sell?
+                    new question_options() { id = 35, id_question = 16, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 36, id_question = 16, input_type = "radio", option_text = "No", order = 2 }
+
+            );
+        }
+
     }
 }
