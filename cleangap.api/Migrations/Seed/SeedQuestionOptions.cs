@@ -11,8 +11,16 @@
     {
         private void SeedQuestionOptions(DAL.CleanGapDataContext context)
         {
+            context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_options ON");
             SeedQuestionOptionsERP(context);
+            context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_options OFF");
         }
+
+        private void SeedQuestionOptionsERP2(DAL.CleanGapDataContext context)
+        {
+
+        }
+
         private void SeedQuestionOptionsERP(DAL.CleanGapDataContext context)
         {
             context.question_options

@@ -46,7 +46,8 @@
         }
         private void SeedSections(DAL.CleanGapDataContext context)
         {
-
+            context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_sections ON");
+            
             context.question_sections
                    .AddOrUpdate(qs => qs.id,
                         new question_sections() { id = 1, name = "ERP Questions" },
@@ -64,6 +65,11 @@
                         new question_sections() { id = 13, name = "Summary" },
                         new question_sections() { id = 14, name = "Terms & Conditions" }
             );
+
+            SeedSubSections(context);
+
+            context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_sections OFF");
+
         }
 
     }

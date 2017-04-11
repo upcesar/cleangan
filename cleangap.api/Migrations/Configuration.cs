@@ -16,9 +16,11 @@ namespace cleangap.api.Migrations
         }        
         private void SeedQuestions(DAL.CleanGapDataContext context)
         {
+            context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT questions ON");
             SeedQuestionsERP(context);
             SeedQuestionsDomain(context);
             SeedQuestionBrands(context);
+            context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT questions OFF");
         }
         protected override void Seed(cleangap.api.DAL.CleanGapDataContext context)
         {
@@ -35,15 +37,9 @@ namespace cleangap.api.Migrations
             //    );
             //
 
-            context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_sections ON");
-
             SeedSections(context);
-            SeedSubSections(context);
             SeedQuestions(context);
             SeedQuestionOptions(context);
-
-
-            context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_sections OFF");
 
         }
 
