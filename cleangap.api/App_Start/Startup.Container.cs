@@ -17,7 +17,7 @@
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/api/token"),
                 AuthorizeEndpointPath = new PathString("/api/account/auth"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromSeconds(45),
+                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(20), //TimeSpan.FromSeconds(45),
                 Provider = new SimpleAuthorizationServerProvider(),
                 RefreshTokenProvider = new SimpleRefreshTokenProvider(),
 
