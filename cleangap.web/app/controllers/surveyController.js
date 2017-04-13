@@ -27,7 +27,6 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
                 $scope.index = 0;
                 $scope.prevPage = (parseInt($scope.survey.page, 10) - 1);
                 $scope.nextPage = (parseInt($scope.survey.page, 10) + 1);
-                update();
              });
     }
     getQuestions($scope.questionID);
@@ -35,6 +34,16 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
    
 
     $scope.next = function () {
+        $scope.saveAnswer();
+        $location.path('/survey/' + $scope.nextPage);
+        
+    };
+
+    $scope.back = function () {
+        $location.path('/survey/' + $scope.prevPage);
+    };
+
+    $scope.saveAnswer = function () {
         var response = $scope.currentAnswer.map(function (obj, index) {
             var currentAnswerReturn = {
                 questionOptionId: index,
@@ -46,24 +55,13 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
         })
 
         response.forEach(function (obj) {
-           questionService.Post(obj);     
+            questionService.Post(obj);
         });
 
-
-        $location.path('/survey/' + $scope.nextPage);
-    
-        
     };
 
-    $scope.back = function () {
-        $location.path('/survey/' + $scope.prevPage);
-    };
-
-    $scope.saveAnswer = function () {
-        
-    };
-
-    function update() {
-        $scope.currentSurvey = $scope.surveys[$scope.index];
+    $scope.finish = function () {
+        $scope.saveAnswer();
+        authService.logOut();
     };
 }
