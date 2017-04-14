@@ -12,13 +12,13 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
         $location.path('/');
     }
 
-    $scope.questionID = $routeParams.questionID;    
+    $scope.questionID = $routeParams.questionID;
 
     $scope.authentication = authService.authentication;
 
     $scope.currentAnswer = [];
 
- 
+
     var getQuestions = function (questionID) {
         return questionService.Get(questionID)
             .then(function (surveys) {
@@ -27,16 +27,36 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
                 $scope.index = 0;
                 $scope.prevPage = (parseInt($scope.survey.page, 10) - 1);
                 $scope.nextPage = (parseInt($scope.survey.page, 10) + 1);
-             });
-    }
+
+                convertAnswerToCurrent(surveys.data);
+            });
+    };
+
+    var convertAnswerToCurrent = function (serverAnswer) {
+        var currentAnswers = [];
+
+        serverAnswer.questions.forEach(function (question) {
+            question.questionOption.forEach(function (option) {
+                if (option.optionType === 'radio') {
+                    currentAnswers[question.id] = option;
+                } else {
+                    currentAnswers[option.optionId] = option.uniqueAnswer;
+                }
+
+            });
+        });
+
+        $scope.currentAnswer = currentAnswers;
+    };
+
     getQuestions($scope.questionID);
 
-   
+
 
     $scope.next = function () {
         $scope.saveAnswer();
         $location.path('/survey/' + $scope.nextPage);
-        
+
     };
 
     $scope.back = function () {
@@ -44,24 +64,23 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
     };
 
     $scope.saveAnswer = function () {
-        var response = $scope.currentAnswer.map(function (obj, index) {
+        var response = $scope.currentAnswer.map(function (answer, index) {
             var currentAnswerReturn = {
                 questionOptionId: index,
-                hasMultipleAnswer: !!obj['pop']
+                hasMultipleAnswer: !!answer['pop']
             };
             var prop = currentAnswerReturn.hasMultipleAnswer ? 'multipleValues' : 'uniqueValue';
-            currentAnswerReturn[prop] = obj.id ? obj.id : obj;
+            currentAnswerReturn[prop] = answer.id ? answer.id : answer;
             return currentAnswerReturn;
-        })
+        });
 
         response.forEach(function (obj) {
             questionService.Post(obj);
         });
-
     };
 
-    $scope.finish = function () {
+    $scope.saveAndExit = function () {
         $scope.saveAnswer();
-        authService.logOut();
+        //authService.logOut();
     };
 }

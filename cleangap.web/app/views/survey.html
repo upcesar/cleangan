@@ -1,77 +1,77 @@
 <div class="header"></div>
 <nav class="navbar navbar-default navbar-fixed-top">
-	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#"></a>
-		</div>
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"></a>
+        </div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<div class="pull-right">
-			<ul class="nav navbar-nav navbar-right primary">
-				<li><a href="">{{ user.username }}</a></li>
-				<hr>
-				<li><a data-ng-click="logOut()" style="cursor:pointer">Sign out</a></li>
-			</ul>
-			<div class="myclearfix"></div>
-			<ul class="nav navbar-nav navbar-right number-survey">
-				<p>Progress Status: <strong>Step {{ survey.page }} of {{ survey.pageTotal }}</strong></p>
-			</ul>
-			</div>
-		</div><!-- /.navbar-collapse -->
-	</div><!-- /.container-fluid -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="pull-right">
+                <ul class="nav navbar-nav navbar-right primary">
+                    <li><a href="">{{ user.username }}</a></li>
+                    <hr>
+                    <li><a data-ng-click="logOut()" style="cursor:pointer">Sign out</a></li>
+                </ul>
+                <div class="myclearfix"></div>
+                <ul class="nav navbar-nav navbar-right number-survey">
+                    <p>Progress Status: <strong>Step {{ survey.page }} of {{ survey.pageTotal }}</strong></p>
+                </ul>
+            </div>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 </nav>
 
 <section class="main-content">
-	<div class="container-fluid">
-		<h1 class="title">{{ survey.section_name }}</h1>
-		<!-- <h2 class="sub-title">Question {{index+1}} (Out of {{surveys.length}})</h2> -->
+    <div class="container-fluid">
+        <h1 class="title">{{ survey.section_name }}</h1>
+        <!-- <h2 class="sub-title">Question {{index+1}} (Out of {{surveys.length}})</h2> -->
 
-		<div class="col-lg-10 col-lg-offset-1 col-md-12">
+        <div class="col-lg-10 col-lg-offset-1 col-md-12">
             <div ng-repeat="question in survey.questions">
                 <h2 class="question">{{question.description}}</h2>
                 <div class="survey-card">
 
                     <div ng-repeat="option in question.questionOption">
-                        
+
                         <div ng-if="option.optionType == 'radio'">
                             <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'">
-                                <input ng-model="currentAnswer[option.optionId]" type="radio" name="{{question.id}}" ng-value="{{option.optionText}}"> {{option.optionText}} <br />
+                                <input ng-model="currentAnswer[question.id]" value="{{option}}" type="radio" name="{{question.id}}"> {{option.optionText}} <br />
                             </div>
                         </div>
-                   
-                        <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType == 'input-text'">
+
+                        <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'input-text'">
                             <label for="{{option.optionText}}">{{option.optionText}}:</label>
                             <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" type="text" />
                         </div>
-                   
-                        <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType == 'drop-down'">
+
+                        <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'drop-down'">
                             <label>{{option.optionText}}: </label>
                             <select ng-model="currentAnswer[option.optionId]" ng-options="selectableOption.description for selectableOption in option.questionChoices">
                                 <option value="">Select Option</option>
                             </select>
                         </div>
-                   
-                        <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType == 'textarea'">
+
+                        <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'textarea'">
                             <label for="{{option.optionText}}"> {{option.optionText}} </label>
-                            <textarea ng-model="currentAnswer[option.optionId]" cols="50"> </textarea>
+                            <textarea ng-model="currentAnswer[option.optionId]" cols="50"> {{option.uniqueAnswer}} </textarea>
                         </div>
                     </div>
 
                 </div>
             </div>
-            <a href="/" class="btn btn-lg btn-green pull-right" ng-click="saveAnswer()" type="submit">Save & Exit</a>
+            <a href="/" class="btn btn-lg btn-green pull-right" ng-click="saveAndExit()" type="submit">Save & Exit</a>
             <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page === survey.pageTotal" ng-click="finish()">Finish <i class="glyphicon glyphicon-ok"></i></a>
             <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page < survey.pageTotal" ng-click="next()">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
             <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page <= survey.pageTotal && survey.page > 1" ng-click="back()"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
-		</div>
-        
-	</div>
+        </div>
+
+    </div>
 </section>
