@@ -14,5 +14,17 @@ namespace cleangap.api.Services.Security
             IEnumerable<Claim> claims = identity.Claims;
             return claims.FirstOrDefault(x => x.Type == ClaimTypes.Sid).Value;
         }
+
+        public static int? GetCurrentUserInt()
+        {
+            int intUserID = 0;
+            string userID = GetCurrentUser();            
+            bool parsed = int.TryParse(userID, out intUserID);
+
+            if (parsed)            
+                return intUserID;
+            
+            return null;
+        }
     }
 }

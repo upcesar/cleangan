@@ -1,6 +1,7 @@
 ﻿using cleangap.api.DAL;
 using cleangap.api.Models.Domain;
 using cleangap.api.Models.Tables;
+using cleangap.api.Services.Security;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -83,18 +84,23 @@ namespace cleangap.api.Domain
                                                           .OrderBy(x => x.order)
                                                           .ToList();
 
+            int? idCustomer = AccountIdentity.GetCurrentUserInt();
 
             foreach (var item in tblOptions)
             {
+                List<string> MultAnswers = item.answers.Where(x => x.id_customer == idCustomer)
+                                                       .Select(x => x.answers_value)
+                                                       .ToList<string>();
+
                 OptionList.Add(new QuestionOptionModel()
                 {
                     OptionId = item.id,
                     OptionText = item.option_text != null ? item.option_text.Trim() : null,
                     OptionType = item.input_type != null ? item.input_type.Trim() : null,
                     QuestionChoices = ListChoices(item),
-                    HasMultipleAnswer = item.answers.Count > 1,
-                    UniqueAnswer = item.answers.Select(x => x.answers_value).FirstOrDefault(),
-                    MultipleAnswers = item.answers.Select(x => x.answers_value).ToList<string>()
+                    HasMultipleAnswer = MultAnswers.Count > 1,
+                    UniqueAnswer = MultAnswers.FirstOrDefault(),
+                    MultipleAnswers = MultAnswers,
                 });
             }
 
