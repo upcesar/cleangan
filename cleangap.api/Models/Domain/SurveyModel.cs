@@ -5,6 +5,9 @@ using System.Web;
 
 namespace cleangap.api.Models.Domain
 {
+    /// <summary>
+    /// Survey's Model
+    /// </summary>
     public class SurveyModel
     {
         public int id { get; set; }

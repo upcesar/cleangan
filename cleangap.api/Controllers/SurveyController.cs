@@ -14,6 +14,10 @@ namespace cleangap.api.Controllers
     [RoutePrefix("api/surveys"), Authorize]
     public class SurveyController : ApiController
     {
+        /// <summary>
+        /// List question structure, given a page number
+        /// </summary>
+        /// <param name="PageNum">Question's Page / Ster number</param>
         [HttpGet, Route("questions/{PageNum}")]
         public SurveyModel ListQuestions(int PageNum = 1)
         {
@@ -23,6 +27,11 @@ namespace cleangap.api.Controllers
             return sBO.ListQuestions(PageNum);
         }
 
+        /// <summary>
+        /// Save answer
+        /// </summary>
+        /// <param name="pAnswer"></param>
+        /// <returns></returns>
         [HttpPost, Route("answers")]
         public ApiResponse AnswerQuestions(AnswersModel pAnswer)
         {

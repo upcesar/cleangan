@@ -17,6 +17,9 @@ namespace cleangap.api.Controllers
     {
         private CustomersBO customerBO = new CustomersBO();
 
+        /// <summary>
+        /// Customer Register / Signup
+        /// </summary>
         //POST api/account/register
         [HttpPost, AllowAnonymous, Route("register")]
         public async Task<ApiResponse> Register(CustomerModel data)
@@ -45,6 +48,9 @@ namespace cleangap.api.Controllers
             };
         }
 
+        /// <summary>
+        /// Send password recovery instruction, given a customer e-mail addreess
+        /// </summary>
         //POST api/account/send-password-recovery
         [HttpPost, AllowAnonymous, Route("send-password-recovery")]
         public ApiResponse SendPasswordRecovery(CustomerModel data)
@@ -71,6 +77,9 @@ namespace cleangap.api.Controllers
             };
         }
 
+        /// <summary>
+        /// Reset customer password, given a token previously received by e-mail
+        /// </summary>
         //POST api/account/send-password-recovery
         [HttpPost, AllowAnonymous, Route("reset-password")]
         public ApiResponse ResetPassword(ResetPasswordModel data)
