@@ -18,6 +18,8 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
 
     $scope.currentAnswer = [];
 
+    $scope.isValidForm = false;
+    $scope.isValidated = false;
 
     var getQuestions = function (questionID) {
         return questionService.Get(questionID)
@@ -63,14 +65,39 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
         $location.path('/survey/' + $scope.prevPage);
     };
 
+    $scope.validateTextBox = function (optionObj) {
+        var answerText = $scope.currentAnswer[optionObj.optionId];
+        return answerText != null && answerText != "";
+    };
+
+    $scope.checkForm = function () {
+        $scope.isValidForm = true;
+
+        $scope.currentAnswer.forEach(function (item) {
+            if (item === null || item === "") {
+                $scope.isValidForm = false;
+                return true;
+            }            
+        });
+
+        $scope.isValidated = true;
+    }
+
     $scope.saveAnswer = function () {
         var response = $scope.currentAnswer.map(function (answer, index) {
             var currentAnswerReturn = {
                 questionOptionId: index,
-                hasMultipleAnswer: !!answer['pop']
+                hasMultipleAnswer: false
             };
-            var prop = currentAnswerReturn.hasMultipleAnswer ? 'multipleValues' : 'uniqueValue';
-            currentAnswerReturn[prop] = answer.id ? answer.id : answer;
+
+            if (answer != null) {
+                currentAnswerReturn.hasMultipleAnswer = !!answer['pop'];
+                var prop = currentAnswerReturn.hasMultipleAnswer ? 'multipleValues' : 'uniqueValue';
+                currentAnswerReturn[prop] = answer.id ? answer.id : answer;
+            } else {
+                currentAnswerReturn.uniqueValue = null;
+            }
+            
             return currentAnswerReturn;
         });
 
@@ -81,6 +108,6 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
 
     $scope.saveAndExit = function () {
         $scope.saveAnswer();
-        //authService.logOut();
+        authService.logOut();
     };
 }
