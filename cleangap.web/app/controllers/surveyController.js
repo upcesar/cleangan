@@ -65,7 +65,11 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
         $location.path('/survey/' + $scope.prevPage);
     };
 
-    $scope.validateTextBox = function (optionObj) {
+    /******************************
+     *  Fields Validations
+     ******************************/
+
+    $scope.validateUniqueAnswer = function (optionObj) {
         var answerText = $scope.currentAnswer[optionObj.optionId];
         return answerText != null && answerText != "";
     };
@@ -82,6 +86,10 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
 
         $scope.isValidated = true;
     }
+
+    /******************************
+     *  Fields Validations - End
+     ******************************/
 
     $scope.saveAnswer = function () {
         var response = $scope.currentAnswer.map(function (answer, index) {
