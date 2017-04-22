@@ -78,42 +78,42 @@
                     // Are there multiple brands?
                     new question_options() { id = 27, id_question = 9, input_type = "radio", option_text = "Yes", order = 1 },
                     new question_options() { id = 28, id_question = 9, input_type = "radio", option_text = "No", order = 2 },
-                    
-                    // Are there separate divisions within a brand?
+
+                    // Can brands be combined on one order?
                     new question_options() { id = 29, id_question = 10, input_type = "radio", option_text = "Yes", order = 1 },
                     new question_options() { id = 30, id_question = 10, input_type = "radio", option_text = "No", order = 2 },
 
-                    // Can brands be combined on one order?
+                    // Are customers assigned a brand in the ERP?
                     new question_options() { id = 31, id_question = 11, input_type = "radio", option_text = "Yes", order = 1 },
                     new question_options() { id = 32, id_question = 11, input_type = "radio", option_text = "No", order = 2 },
 
-                    // Are customers assigned a brand in the ERP?
+                    // Are lookups (colors, genders, sales reps, shipping options) brand specific?
                     new question_options() { id = 33, id_question = 12, input_type = "radio", option_text = "Yes", order = 1 },
                     new question_options() { id = 34, id_question = 12, input_type = "radio", option_text = "No", order = 2 },
-
-                    // Are lookups (colors, genders, sales reps, shipping options) brand specific?
+                                        
+                    // Are there separate divisions within a brand?
                     new question_options() { id = 35, id_question = 13, input_type = "radio", option_text = "Yes", order = 1 },
                     new question_options() { id = 36, id_question = 13, input_type = "radio", option_text = "No", order = 2 },
 
                     // Can divisions be combined on one order?
-                    new question_options() { id = 35, id_question = 14, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 36, id_question = 14, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 37, id_question = 14, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 38, id_question = 14, input_type = "radio", option_text = "No", order = 2 },
 
                     // Do you want a division filter?
-                    new question_options() { id = 35, id_question = 15, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 36, id_question = 15, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 39, id_question = 15, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 40, id_question = 15, input_type = "radio", option_text = "No", order = 2 },
 
                     // Are some sales reps limited to what divisions they can sell?
-                    new question_options() { id = 35, id_question = 16, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 36, id_question = 16, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 41, id_question = 16, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 42, id_question = 16, input_type = "radio", option_text = "No", order = 2 },
 
                     // Do you want a division filter?
-                    new question_options() { id = 35, id_question = 17, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 36, id_question = 17, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 43, id_question = 17, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 44, id_question = 17, input_type = "radio", option_text = "No", order = 2 },
 
                     // Are some sales reps limited to what divisions they can sell?
-                    new question_options() { id = 35, id_question = 18, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 36, id_question = 18, input_type = "radio", option_text = "No", order = 2 }
+                    new question_options() { id = 45, id_question = 18, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 46, id_question = 18, input_type = "radio", option_text = "No", order = 2 }
 
             );
         }
