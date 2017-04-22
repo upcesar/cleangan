@@ -45,7 +45,8 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
 
                 switch (option.optionType) {
                     case 'radio':
-                        currentAnswers[question.id] = option;
+                        if (option.optionText == option.uniqueAnswer)
+                            currentAnswers[question.id] = option;
                         break;
                     case 'drop-down':
 
@@ -124,7 +125,9 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
             if (answer != null) {
                 currentAnswerReturn.hasMultipleAnswer = !!answer['pop'];
                 var prop = currentAnswerReturn.hasMultipleAnswer ? 'multipleValues' : 'uniqueValue';
-                currentAnswerReturn[prop] = answer.id ? answer.id : answer;
+                // For input radio, set {optionId, optionText}. Otherwise, {index, answer}
+                currentAnswerReturn[prop] = answer.optionId ? answer.optionText : answer;
+                currentAnswerReturn.questionOptionId = answer.optionId ? answer.optionId : index;
             } else {
                 currentAnswerReturn.uniqueValue = null;
             }

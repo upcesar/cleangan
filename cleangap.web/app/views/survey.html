@@ -43,7 +43,8 @@
                         <div ng-if="option.optionType == 'radio'">                            
                             <div ng-show="$index == 0 && validateFields(currentAnswer[question.id]) && !saved" class="text-danger">Select an answer</div>
                             <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'">
-                                <input ng-model="currentAnswer[question.id]" value="{{option}}" type="radio" name="{{question.id}}" ng-change="checkForm()"> {{option.optionText}} <br />
+                                <input ng-model="currentAnswer[question.id]" ng-value="option" type="radio" name="{{question.id}}" ng-change="checkForm()"> {{option.optionText}} <br />
+                                <!--<input ng-model="currentAnswer[question.id]" ng-value="option.optionText == option.uniqueAnswer" name="" type="radio" ng-change="checkForm()">{{option.optionText}} <br />--> 
                             </div>
                         </div>
 
