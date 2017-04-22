@@ -19,7 +19,7 @@ namespace cleangap.api.Migrations
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT questions ON");
             SeedQuestionsERP(context);
             SeedQuestionsDomain(context);
-            SeedQuestionBrands(context);
+            SeedQuestionPartitions(context);
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT questions OFF");
         }
         protected override void Seed(cleangap.api.DAL.CleanGapDataContext context)

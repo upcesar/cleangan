@@ -52,7 +52,7 @@
                    .AddOrUpdate(qs => qs.id,
                         new question_sections() { id = 1, name = "ERP Questions" },
                         new question_sections() { id = 2, name = "Domain Name" },
-                        new question_sections() { id = 3, name = "Brands" },
+                        new question_sections() { id = 3, name = "Partitions" },
                         new question_sections() { id = 4, name = "Header" },
                         new question_sections() { id = 5, name = "Selections" },
                         new question_sections() { id = 6, name = "Lines" },

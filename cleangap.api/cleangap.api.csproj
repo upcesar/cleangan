@@ -278,7 +278,7 @@
     <Compile Include="Migrations\Seed\SeedQuestionDomain.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionOptions.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionsERP.cs" />
-    <Compile Include="Migrations\Seed\SeedQuestionBrands.cs" />
+    <Compile Include="Migrations\Seed\SeedQuestionPartitions.cs" />
     <Compile Include="Migrations\Seed\SeedSections.cs" />
     <Compile Include="Models\ApiResponse.cs" />
     <Compile Include="Models\Domain\AnswersModel.cs" />
