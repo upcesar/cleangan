@@ -63,12 +63,13 @@
                                 <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">
                                     Select an answer from the list
                                 </div>
-                            </div>                           
-                            
-                            <select ng-model="currentAnswer[option.optionId]" ng-options="selectableOption.description for selectableOption in option.questionChoices" ng-change="checkForm()">
+                            </div>
+
+                            <select ng-model="dropDownElement[option.optionId]" ng-options="selectableOption.description for selectableOption in option.questionChoices track by selectableOption.id" ng-change="dropdownChanged(option.optionId)">
                                 <option value="">Select Option</option>
-                            </select>                            
+                            </select>
                         </div>
+
 
                         <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'textarea'">
                             <div class="row">

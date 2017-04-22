@@ -18,6 +18,8 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
 
     $scope.currentAnswer = [];
 
+    $scope.dropDownElement = [];
+
     $scope.isValidForm = false;
     $scope.isValidated = false;
 
@@ -39,10 +41,27 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
 
         serverAnswer.questions.forEach(function (question) {
             question.questionOption.forEach(function (option) {
-                if (option.optionType === 'radio') {
-                    currentAnswers[question.id] = option;
-                } else {
-                    currentAnswers[option.optionId] = option.uniqueAnswer;
+
+                switch (option.optionType) {
+                    case 'radio':
+                        currentAnswers[question.id] = option;
+                        break;
+                    case 'drop-down':
+
+                        currentAnswers[option.optionId] = option.uniqueAnswer;
+
+                        option.questionChoices.forEach(function (dropdownList) {
+                            if (option.uniqueAnswer == dropdownList.id) {
+                                $scope.dropDownElement[option.optionId] = dropdownList;
+                                return;
+                            }
+                        });
+                        break;
+                    
+                    default:
+                        currentAnswers[option.optionId] = option.uniqueAnswer;
+                        break;
+
                 }
 
             });
@@ -53,7 +72,10 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
 
     getQuestions($scope.questionID);
 
-
+    $scope.dropdownChanged = function (optionId) {
+        $scope.currentAnswer[optionId] = $scope.dropDownElement[optionId];
+        $scope.checkForm();
+    };
 
     $scope.next = function () {
         $scope.saveAnswer();
