@@ -105,15 +105,7 @@
 
                     // Are some sales reps limited to what divisions they can sell?
                     new question_options() { id = 41, id_question = 16, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 42, id_question = 16, input_type = "radio", option_text = "No", order = 2 },
-
-                    // Do you want a division filter?
-                    new question_options() { id = 43, id_question = 17, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 44, id_question = 17, input_type = "radio", option_text = "No", order = 2 },
-
-                    // Are some sales reps limited to what divisions they can sell?
-                    new question_options() { id = 45, id_question = 18, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 46, id_question = 18, input_type = "radio", option_text = "No", order = 2 }
+                    new question_options() { id = 42, id_question = 16, input_type = "radio", option_text = "No", order = 2 }
 
             );
         }
