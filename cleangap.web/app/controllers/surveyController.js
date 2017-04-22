@@ -33,6 +33,7 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
                 $scope.nextPage = (parseInt($scope.survey.page, 10) + 1);
 
                 convertAnswerToCurrent(surveys.data);
+                $scope.checkForm();
             });
     };
 
@@ -73,7 +74,7 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
     getQuestions($scope.questionID);
 
     $scope.dropdownChanged = function (optionId) {
-        $scope.currentAnswer[optionId] = $scope.dropDownElement[optionId];
+        $scope.currentAnswer[optionId] = $scope.dropDownElement[optionId].id;
         $scope.checkForm();
     };
 
