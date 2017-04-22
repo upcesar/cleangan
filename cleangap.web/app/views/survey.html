@@ -37,7 +37,6 @@
             <div ng-repeat="question in survey.questions">
                 <h2 class="question">{{question.description}}</h2>
                 <div class="survey-card">
-                    
                     <div ng-repeat="option in question.questionOption">
 
                         <div ng-if="option.optionType == 'radio'">                            

@@ -34,6 +34,7 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
 
                 convertAnswerToCurrent(surveys.data);
                 $scope.checkForm();
+                $scope.isValidated = false;
             });
     };
 
