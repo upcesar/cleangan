@@ -31,19 +31,40 @@ namespace cleangap.api.Domain
         {
             intQtySubSection = qtySubSections;
         }
+        private bool ShowDependentQuestion(questions depItem, string dependentAnswerValue)
+        {
+            List<QuestionOptionModel> options = AddQuestionOptions(depItem);
+
+            if (depItem != null)            
+                return options.Where(x=>x.UniqueAnswer == dependentAnswerValue).Any();
+
+            return true;
+            
+        }
+
         private SurveyModel AddQuestion(SurveyModel s, List<questions> tblQuestion)
         {
+
             foreach (var item in tblQuestion)
             {
 
                 List<QuestionOptionModel> options = AddQuestionOptions(item);
 
-                s.questions.Add(new QuestionsModel()
+                QuestionsModel q = new QuestionsModel()
                 {
                     id = item.id,
                     description = item.description,
+                    DependentAnswerValue = item.dependent_answer_value,
                     QuestionOption = options,
-                });
+                    DependentSelected = true,
+                };
+
+                if (item.dependent_question != null) {
+                    q.DependentQuestionId = item.dependent_question.id;
+                    q.DependentSelected = ShowDependentQuestion(item.dependent_question, item.dependent_answer_value);
+                }
+
+                s.questions.Add(q);
             }
 
             return s;
@@ -145,7 +166,7 @@ namespace cleangap.api.Domain
             throw new NullReferenceException("Page Num cannot be empty");
         }
 
-        
+
 
         public bool HasAnswer(int pageNum)
         {
