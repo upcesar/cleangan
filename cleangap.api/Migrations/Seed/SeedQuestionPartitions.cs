@@ -25,16 +25,16 @@
             questions qMB = context.questions.Find(9);  // Are there multiple brands? Yes
             context.questions
                    .AddOrUpdate(
-                        new questions() { id = 10, name = "brands_combined", description = "Can brands be combined on one order?", page = 5, dependent_question = qMB, dependent_answer_value = "Yes", id_section = qsBrands.id },
-                        new questions() { id = 11, name = "brands_assigned", description = "Are customers assigned a brand in the ERP? *Note:  If a customer is assigned to a brand, they will only exist int hat brand.", page = 5, dependent_question = qMB, dependent_answer_value = "Yes", id_section = qsBrands.id },
-                        new questions() { id = 12, name = "brand_lookup", description = "Are lookups (colors, genders, sales reps, shipping options) brand specific? IE: is there a potential for the same lookup code to exist in multiple brands with different descriptions.", page = 5, dependent_question = qMB, dependent_answer_value = "Yes", id_section = qsBrands.id }
+                        new questions() { id = 10, name = "brands_combined", description = "Can brands be combined on one order?", page = 5, parent_question_id = qMB.id, parent_answer_value = "Yes", id_section = qsBrands.id },
+                        new questions() { id = 11, name = "brands_assigned", description = "Are customers assigned a brand in the ERP? *Note:  If a customer is assigned to a brand, they will only exist int hat brand.", page = 5, parent_question_id = qMB.id, parent_answer_value = "Yes", id_section = qsBrands.id },
+                        new questions() { id = 12, name = "brand_lookup", description = "Are lookups (colors, genders, sales reps, shipping options) brand specific? IE: is there a potential for the same lookup code to exist in multiple brands with different descriptions.", page = 5, parent_question_id = qMB.id, parent_answer_value = "Yes", id_section = qsBrands.id }
             );
         }
         private void SeedDependentQtnSepDivBrand(DAL.CleanGapDataContext context, question_sections qsBrands)
         {
             questions qSepDiv = context.questions.Find(13);  // Are there separate divisions within a brand? Yes
             context.questions.AddOrUpdate(
-                        new questions() { id = 14, name = "brand_div_combined", description = "Can divisions be combined on one order?", page = 6, dependent_question = qSepDiv, dependent_answer_value = "Yes", id_section = qsBrands.id }
+                        new questions() { id = 14, name = "brand_div_combined", description = "Can divisions be combined on one order?", page = 6, parent_question_id = qSepDiv.id, parent_answer_value = "Yes", id_section = qsBrands.id }
             );
             SeedDependentQtnDivCombBrands(context, qsBrands);
         }
@@ -43,8 +43,8 @@
             questions qDivCombBrand = context.questions.Find(14);  // Can divisions be combined on one order? Yes
             context.questions
                    .AddOrUpdate(
-                        new questions() { id = 15, name = "brand_division", description = "Do you want a division filter?", page = 6, dependent_question = qDivCombBrand, dependent_answer_value = "Yes", id_section = qsBrands.id },
-                        new questions() { id = 16, name = "brand_reps_div", description = "Are some sales reps limited to what divisions they can sell?", page = 6, dependent_question = qDivCombBrand, dependent_answer_value = "Yes", id_section = qsBrands.id }                        
+                        new questions() { id = 15, name = "brand_division", description = "Do you want a division filter?", page = 6, parent_question_id = qDivCombBrand.id, parent_answer_value = "Yes", id_section = qsBrands.id },
+                        new questions() { id = 16, name = "brand_reps_div", description = "Are some sales reps limited to what divisions they can sell?", page = 6, parent_question_id = qDivCombBrand.id, parent_answer_value = "Yes", id_section = qsBrands.id }                        
             );
         }
     }

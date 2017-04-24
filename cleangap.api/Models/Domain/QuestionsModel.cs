@@ -10,10 +10,10 @@ namespace cleangap.api.Models.Domain
         public int id { get; set; }
         public string description { get; set; }
         public List<QuestionOptionModel> QuestionOption { get; set; }
-        public QuestionsModel DependentQuestion { get; set; }
-        public int? DependentQuestionId { get; set; }
-        public string DependentAnswerValue { get; set; }
-        public bool DependentSelected { get; set; }
+        public int? ParentQuestionId { get; set; }
+        public string ParentAnswerValue { get; set; }
+        public bool ParentSelected { get; set; }
+        public List<int> ChildrenQuestionId { get; set; }
         public QuestionsModel()
         {
             QuestionOption = new List<QuestionOptionModel>();

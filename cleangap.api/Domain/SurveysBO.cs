@@ -31,15 +31,22 @@ namespace cleangap.api.Domain
         {
             intQtySubSection = qtySubSections;
         }
-        private bool ShowDependentQuestion(questions depItem, string dependentAnswerValue)
+        private bool ShowParentQuestion(questions depItem, string dependentAnswerValue)
         {
             List<QuestionOptionModel> options = AddQuestionOptions(depItem);
 
-            if (depItem != null)            
-                return options.Where(x=>x.UniqueAnswer == dependentAnswerValue).Any();
+            if (depItem != null)
+                return options.Where(x => x.UniqueAnswer == dependentAnswerValue).Any();
 
             return true;
+
+        }
+
+        private List<int> GetChilderQuestions(questions q)
+        {
             
+
+            return null;
         }
 
         private SurveyModel AddQuestion(SurveyModel s, List<questions> tblQuestion)
@@ -54,14 +61,16 @@ namespace cleangap.api.Domain
                 {
                     id = item.id,
                     description = item.description,
-                    DependentAnswerValue = item.dependent_answer_value,
+                    ParentAnswerValue = item.parent_answer_value,
                     QuestionOption = options,
-                    DependentSelected = true,
+                    ParentSelected = true,
+                    ChildrenQuestionId = item.children_question.Select(x => x.id).ToList<int>(),
                 };
 
-                if (item.dependent_question != null) {
-                    q.DependentQuestionId = item.dependent_question.id;
-                    q.DependentSelected = ShowDependentQuestion(item.dependent_question, item.dependent_answer_value);
+                if (item.parent_question != null)
+                {
+                    q.ParentQuestionId = item.parent_question.id;
+                    q.ParentSelected = ShowParentQuestion(item.parent_question, item.parent_answer_value);
                 }
 
                 s.questions.Add(q);

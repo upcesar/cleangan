@@ -274,6 +274,10 @@
     <Compile Include="Migrations\201703272224404_AjustProjectFields.Designer.cs">
       <DependentUpon>201703272224404_AjustProjectFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704242112123_RenameFieldDepQuestion.cs" />
+    <Compile Include="Migrations\201704242112123_RenameFieldDepQuestion.Designer.cs">
+      <DependentUpon>201704242112123_RenameFieldDepQuestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionDomain.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionOptions.cs" />
@@ -413,6 +417,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703272224404_AjustProjectFields.resx">
       <DependentUpon>201703272224404_AjustProjectFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704242112123_RenameFieldDepQuestion.resx">
+      <DependentUpon>201704242112123_RenameFieldDepQuestion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

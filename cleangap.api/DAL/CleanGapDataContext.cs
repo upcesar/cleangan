@@ -97,6 +97,11 @@ namespace cleangap.api.DAL
                 .WithOptional(e => e.questions)
                 .HasForeignKey(e => e.id_question);
 
+            modelBuilder.Entity<questions>()
+                .HasMany(e => e.children_question)
+                .WithOptional(e => e.parent_question)
+                .HasForeignKey(e => e.parent_question_id);
+
             modelBuilder.Entity<staff>()
                 .Property(e => e.fullname)
                 .IsUnicode(false);
