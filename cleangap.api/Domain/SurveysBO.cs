@@ -42,9 +42,26 @@ namespace cleangap.api.Domain
 
         }
 
-        private List<int> GetChilderQuestions(questions q)
+        private List<QuestionsModel> GetChilderQuestions(ICollection<questions> childrenQuestions)
         {
-            
+            // item.children_question.Select(x => x.id).ToList<int>()
+            if (childrenQuestions != null)
+            {
+                List<QuestionsModel> childrenQuestionList = new List<QuestionsModel>();
+
+                foreach (var item in childrenQuestions)
+                {
+                    childrenQuestionList.Add(new QuestionsModel()
+                    {
+                        id = item.id,
+                        ParentAnswerValue = item.parent_answer_value,
+                    });
+                }
+
+                return childrenQuestionList;
+
+            }
+
 
             return null;
         }
@@ -64,7 +81,7 @@ namespace cleangap.api.Domain
                     ParentAnswerValue = item.parent_answer_value,
                     QuestionOption = options,
                     ParentSelected = true,
-                    ChildrenQuestionId = item.children_question.Select(x => x.id).ToList<int>(),
+                    ChildrenQuestion = GetChilderQuestions(item.children_question),
                 };
 
                 if (item.parent_question != null)
@@ -184,6 +201,37 @@ namespace cleangap.api.Domain
             return s.questions.Any(x => x.QuestionOption.Any(y => !string.IsNullOrEmpty(y.UniqueAnswer)));
         }
 
+        private void ExcludeAnswerRadio(AnswersModel pAnswer, string currentCustomerId)
+        {
+
+            using (var db = new CleanGapDataContext())
+            {
+                // Get Question ID
+                var intQuestionID = db.question_options
+                                      .Where(x => x.id == pAnswer.QuestionOptionId)
+                                      .Select(x => x.id_question)
+                                      .FirstOrDefault();
+
+                if (intQuestionID != null)
+                {
+                    var query = from qo in db.question_options
+                                join a in db.answers on qo.id equals a.id_question_option
+                                where qo.id_question == intQuestionID && qo.id != pAnswer.QuestionOptionId && qo.input_type.ToLower().Trim() == "radio"
+                                select a.id_question_option;
+
+                    var listAnswerId = query.ToList();
+
+                    if(listAnswerId.Count > 0)
+                    {
+                        var queryAnswer = db.answers.Where(x => listAnswerId.Contains(x.id_question_option));
+
+                        db.answers.RemoveRange(queryAnswer);
+                        db.SaveChanges();
+                    }
+                }                
+            }
+        }
+
         private bool SaveSingleAnswer(AnswersModel pAnswer, string currentCustomerId)
         {
             int intCustomerId = 0;
@@ -193,6 +241,7 @@ namespace cleangap.api.Domain
             {
                 using (var db = new CleanGapDataContext())
                 {
+
                     answers tblanswer = db.answers.Where
                                             (x => x.id_question_option == pAnswer.QuestionOptionId
                                             && x.id_customer == intCustomerId
@@ -274,6 +323,8 @@ namespace cleangap.api.Domain
             else
             {
                 saved = SaveSingleAnswer(pAnswer, currentUserId);
+                ExcludeAnswerRadio(pAnswer, currentUserId);
+
             }
 
             return saved;

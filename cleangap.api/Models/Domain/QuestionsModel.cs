@@ -13,7 +13,7 @@ namespace cleangap.api.Models.Domain
         public int? ParentQuestionId { get; set; }
         public string ParentAnswerValue { get; set; }
         public bool ParentSelected { get; set; }
-        public List<int> ChildrenQuestionId { get; set; }
+        public List<QuestionsModel> ChildrenQuestion { get; set; }
         public QuestionsModel()
         {
             QuestionOption = new List<QuestionOptionModel>();
