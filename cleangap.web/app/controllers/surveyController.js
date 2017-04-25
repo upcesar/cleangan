@@ -17,6 +17,7 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
     $scope.authentication = authService.authentication;
 
     $scope.currentAnswer = [];
+    $scope.childrenQuestionUI = [];
 
     $scope.dropDownElement = [];
 
@@ -38,10 +39,24 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
             });
     };
 
+    //Set dependent question map for showing / hiding in HTML
+    var showChildrenQuestionMap = function (question, currentAnswers) {
+        
+        if ($scope.childrenQuestionUI.length == 0) {
+            $scope.childrenQuestionUI[question.id] = true;
+        }
+        
+        question.childrenQuestion.forEach(function (childQuestion) {
+            debugger;
+            $scope.childrenQuestionUI[childQuestion.id] = childQuestion.parentAnswerValue == currentAnswers[question.id].uniqueAnswer;
+        });
+    };
+    
     var convertAnswerToCurrent = function (serverAnswer) {
         var currentAnswers = [];
-
+        
         serverAnswer.questions.forEach(function (question) {
+
             question.questionOption.forEach(function (option) {
 
                 switch (option.optionType) {
@@ -68,6 +83,9 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
                 }
 
             });
+
+            showChildrenQuestionMap(question, currentAnswers);
+
         });
 
         $scope.currentAnswer = currentAnswers;
@@ -75,10 +93,16 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
 
     getQuestions($scope.questionID);
 
-    $scope.dropdownChanged = function (optionId) {
-        $scope.currentAnswer[optionId] = $scope.dropDownElement[optionId].id;
+    /******************************
+     *  Events
+     ******************************/
+    $scope.radioChanged = function (question, currentAnswer) {
+        showChildrenQuestionMap(question, currentAnswer);
         $scope.checkForm();
     };
+    /******************************
+     *  Events - End
+     ******************************/
 
     $scope.next = function () {
         $scope.saveAnswer();
