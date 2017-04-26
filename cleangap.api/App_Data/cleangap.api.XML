@@ -514,10 +514,5 @@
             Survey's Model
             </summary>
         </member>
-        <member name="P:cleangap.api.Models.Domain.SurveyModel.id">
-            <summary>
-            Get the Oroject ID
-            </summary>
-        </member>
     </members>
 </doc>

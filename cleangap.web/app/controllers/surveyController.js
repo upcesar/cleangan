@@ -62,8 +62,6 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
 
         $scope.qtyChildrenHidden = qtyChildrenHidden;
 
-        debugger;
-
     };
 
     $scope.dropdownChanged = function (optionId) {
