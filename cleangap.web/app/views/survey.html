@@ -87,6 +87,7 @@
                     </div>
                 </div>
             </div>
+            
             <a href="/" class="btn btn-lg btn-green pull-right" ng-class="isValidForm ? '' : 'disabled'" ng-click="saveAndExit()" type="submit">Save & Exit</a>
             <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page === survey.pageTotal" ng-class="isValidForm ? '' : 'disabled'" ng-click="finish()">Finish <i class="glyphicon glyphicon-ok"></i></a>
             <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page < survey.pageTotal" ng-class="isValidForm ? '' : 'disabled'" ng-click="next()">Next <i class="glyphicon glyphicon-chevron-right"></i></a>

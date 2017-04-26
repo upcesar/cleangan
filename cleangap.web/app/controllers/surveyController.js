@@ -23,7 +23,7 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
 
     $scope.isValidForm = false;
     $scope.isValidated = false;
-    $scope.qtyRadioType = 0;
+    $scope.qtyChildrenHidden = 0;
 
     var getQuestions = function (questionID) {
         return questionService.Get(questionID)
@@ -43,10 +43,8 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
     //Set dependent question map for showing / hiding in HTML
     var showChildrenQuestionMap = function (question, currentAnswers) {
 
-        $scope.qtyRadioType = 0;
-
         var sizeChildrenQuestionUI = $scope.childrenQuestionUI.filter(function (value) {
-            return value !== undefined && value != null
+            return value !== undefined && value != null;
         }).length;
 
         question.childrenQuestion.forEach(function (childQuestion) {
@@ -54,12 +52,18 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
             $scope.childrenQuestionUI[childQuestion.id] = currentAnswers[question.id] != null &&
                                                           currentAnswers.length > 0 &&                                                          
                                                           childQuestion != null &&
-                                                          childQuestion.parentAnswerValue === currentAnswers[question.id].optionText;
-
-            if ($scope.childrenQuestionUI[childQuestion.id])
-                $scope.qtyRadioType++;
+                                                          childQuestion.parentAnswerValue === currentAnswers[question.id].optionText;     
 
         });
+
+        var qtyChildrenHidden = $scope.childrenQuestionUI.filter(function (value) {
+            return value !== undefined && (value == null || !value);
+        }).length;
+
+        $scope.qtyChildrenHidden = qtyChildrenHidden;
+
+        debugger;
+
     };
 
     $scope.dropdownChanged = function (optionId) {
@@ -71,7 +75,7 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
     var convertAnswerToCurrent = function (serverAnswer) {
         var currentAnswers = [];
 
-        $scope.qtyRadioType = 0;
+        $scope.qtyChildrenHidden = 0;
 
         serverAnswer.questions.forEach(function (question) {
 
@@ -99,7 +103,6 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
                     default:
                         currentAnswers[option.optionId] = option.uniqueAnswer;
                         break;
-
                 }
 
             });
@@ -125,15 +128,6 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
      *  Events - End
      ******************************/
 
-    $scope.next = function () {
-        $scope.saveAnswer();
-        $location.path('/survey/' + $scope.nextPage);
-
-    };
-
-    $scope.back = function () {
-        $location.path('/survey/' + $scope.prevPage);
-    };
 
     /******************************
      *  Fields Validations
@@ -144,6 +138,10 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
         return answerText != null && answerText != "";
     };
 
+    $scope.sizeCurrentAnswer = 0;
+    $scope.sizeAllAnswer = 0;
+
+
     $scope.checkForm = function () {
         var sizeCurrentAnswer = $scope.currentAnswer.filter(function (value) {
             return value !== undefined && value != null && value != "";
@@ -151,9 +149,13 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
 
         var sizeAllAnswer = $scope.currentAnswer.filter(function (value) {
             return value !== undefined;
-        }).length;
+        }).length - $scope.qtyChildrenHidden;
 
-        $scope.isValidForm = (sizeAllAnswer === sizeCurrentAnswer);
+        $scope.sizeCurrentAnswer = sizeCurrentAnswer;
+        $scope.sizeAllAnswer = sizeAllAnswer;
+
+
+        $scope.isValidForm = (sizeAllAnswer <= sizeCurrentAnswer);
         
         $scope.isValidated = true;
     }
@@ -185,6 +187,16 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
         response.forEach(function (obj) {
             questionService.Post(obj);
         });
+    };
+
+    $scope.next = function () {
+        $scope.saveAnswer();
+        $location.path('/survey/' + $scope.nextPage);
+
+    };
+
+    $scope.back = function () {
+        $location.path('/survey/' + $scope.prevPage);
     };
 
     $scope.saveAndExit = function () {
