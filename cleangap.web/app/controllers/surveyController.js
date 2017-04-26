@@ -71,7 +71,6 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
     };
 
     $scope.dropdownChanged = function (optionId) {
-        debugger;
         $scope.currentAnswer[optionId] = $scope.dropDownElement[optionId].id;
         $scope.checkForm();
     };
