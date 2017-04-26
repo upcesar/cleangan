@@ -49,14 +49,6 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
             return value !== undefined && value != null
         }).length;
 
-        if (sizeChildrenQuestionUI == 0) {
-            $scope.childrenQuestionUI[question.id] = true;
-        }
-
-        if ($scope.childrenQuestionUI[question.id]) {
-            $scope.qtyCtrlVisible++;
-        }            
-
         question.childrenQuestion.forEach(function (childQuestion) {
 
             $scope.childrenQuestionUI[childQuestion.id] = currentAnswers[question.id] != null &&
@@ -153,29 +145,17 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
     };
 
     $scope.checkForm = function () {
-
-        
         var sizeCurrentAnswer = $scope.currentAnswer.filter(function (value) {
-            return value !== undefined && value != null
+            return value !== undefined && value != null && value != "";
         }).length;
 
-        $scope.isValidForm = sizeCurrentAnswer > 0;
+        var sizeAllAnswer = $scope.currentAnswer.filter(function (value) {
+            return value !== undefined;
+        }).length;
 
-
-        $scope.currentAnswer.forEach(function (item) {
-            if (item === null || item === "") {
-                $scope.isValidForm = false;
-                return true;
-            } else if (item.optionType !== undefined && item.optionType == 'radio') {
-                $scope.isValidForm = sizeCurrentAnswer >= $scope.qtyRadioType;
-                return true;
-            }
-        });
-
-        if ($scope.qtyRadioType > 0)
-            $scope.isValidated = $scope.qtyRadioType;
-        else
-            $scope.isValidated = true;
+        $scope.isValidForm = (sizeAllAnswer === sizeCurrentAnswer);
+        
+        $scope.isValidated = true;
     }
 
     /******************************
