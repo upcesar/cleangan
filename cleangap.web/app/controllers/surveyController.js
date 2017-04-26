@@ -173,7 +173,6 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
                 currentAnswerReturn.hasMultipleAnswer = !!answer['pop'];
                 var prop = currentAnswerReturn.hasMultipleAnswer ? 'multipleValues' : 'uniqueValue';
                 // For input radio, set {optionId, optionText}. Otherwise, {index, answer}
-                debugger;
                 currentAnswerReturn[prop] = answer.optionId ? answer.optionText : answer;
                 currentAnswerReturn.questionOptionId = answer.optionId ? answer.optionId : index;
             } else {
