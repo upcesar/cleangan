@@ -35,13 +35,13 @@
         <!-- <h2 class="sub-title">Question {{index+1}} (Out of {{surveys.length}})</h2> -->
         <div class="col-lg-10 col-lg-offset-1 col-md-12">
             <div ng-repeat="question in survey.questions">
-                <div id="question{{question.id}}" ng-show="childrenQuestionUI[question.id]">
+                <div id="question{{question.id}}" ng-show="childrenQuestionUI[question.id] || true">
                     <h2 class="question">{{question.description}}</h2>
                     <div class="survey-card">                    
                         <div ng-repeat="option in question.questionOption">
 
                             <div ng-if="option.optionType == 'radio'">                            
-                                <div ng-show="$index == 0 && validateFields(currentAnswer[question.id]) && !saved" class="text-danger">Select an answer</div>
+                                <div ng-show="$index == 0 && !currentAnswer[question.id] && !saved" class="text-danger">Select an answer</div>
                                 <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'">
                                     <input ng-model="currentAnswer[question.id]" ng-value="option" type="radio" name="{{question.id}}" ng-change="radioChanged(question, currentAnswer)"> {{option.optionText}} <br />
                                 </div>
@@ -60,7 +60,7 @@
                             <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'drop-down'">
                                 <div class="row">
                                     <label class="col-xs-6">{{option.optionText}}: </label>
-                                    <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">
+                                    <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated" >
                                         Select an answer from the list
                                     </div>
                                 </div>
@@ -87,6 +87,7 @@
                     </div>
                 </div>
             </div>
+            <pre>{{qtyRadioType}}</pre>
             <a href="/" class="btn btn-lg btn-green pull-right" ng-class="isValidForm ? '' : 'disabled'" ng-click="saveAndExit()" type="submit">Save & Exit</a>
             <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page === survey.pageTotal" ng-class="isValidForm ? '' : 'disabled'" ng-click="finish()">Finish <i class="glyphicon glyphicon-ok"></i></a>
             <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page < survey.pageTotal" ng-class="isValidForm ? '' : 'disabled'" ng-click="next()">Next <i class="glyphicon glyphicon-chevron-right"></i></a>

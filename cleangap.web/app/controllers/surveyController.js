@@ -23,6 +23,7 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
 
     $scope.isValidForm = false;
     $scope.isValidated = false;
+    $scope.qtyRadioType = 0;
 
     var getQuestions = function (questionID) {
         return questionService.Get(questionID)
@@ -41,28 +42,56 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
 
     //Set dependent question map for showing / hiding in HTML
     var showChildrenQuestionMap = function (question, currentAnswers) {
-        
-        if ($scope.childrenQuestionUI.length == 0) {
+
+        $scope.qtyRadioType = 0;
+
+        var sizeChildrenQuestionUI = $scope.childrenQuestionUI.filter(function (value) {
+            return value !== undefined && value != null
+        }).length;
+
+        if (sizeChildrenQuestionUI == 0) {
             $scope.childrenQuestionUI[question.id] = true;
         }
-        
+
+        if ($scope.childrenQuestionUI[question.id]) {
+            $scope.qtyCtrlVisible++;
+        }            
+
         question.childrenQuestion.forEach(function (childQuestion) {
-            debugger;
-            $scope.childrenQuestionUI[childQuestion.id] = childQuestion.parentAnswerValue == currentAnswers[question.id].uniqueAnswer;
+
+            $scope.childrenQuestionUI[childQuestion.id] = currentAnswers[question.id] != null &&
+                                                          currentAnswers.length > 0 &&                                                          
+                                                          childQuestion != null &&
+                                                          childQuestion.parentAnswerValue === currentAnswers[question.id].optionText;
+
+            if ($scope.childrenQuestionUI[childQuestion.id])
+                $scope.qtyRadioType++;
+
         });
     };
-    
+
+    $scope.dropdownChanged = function (optionId) {
+        debugger;
+        $scope.currentAnswer[optionId] = $scope.dropDownElement[optionId].id;
+        $scope.checkForm();
+    };
+
+
     var convertAnswerToCurrent = function (serverAnswer) {
         var currentAnswers = [];
-        
+
+        $scope.qtyRadioType = 0;
+
         serverAnswer.questions.forEach(function (question) {
 
             question.questionOption.forEach(function (option) {
 
                 switch (option.optionType) {
                     case 'radio':
-                        if (option.optionText == option.uniqueAnswer)
+                        if (option.optionText == option.uniqueAnswer) {
                             currentAnswers[question.id] = option;
+                        }
+                        currentAnswers[question.id] = currentAnswers[question.id] === undefined ? null : currentAnswers[question.id];
                         break;
                     case 'drop-down':
 
@@ -75,7 +104,7 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
                             }
                         });
                         break;
-                    
+
                     default:
                         currentAnswers[option.optionId] = option.uniqueAnswer;
                         break;
@@ -100,6 +129,7 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
         showChildrenQuestionMap(question, currentAnswer);
         $scope.checkForm();
     };
+
     /******************************
      *  Events - End
      ******************************/
@@ -124,16 +154,29 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
     };
 
     $scope.checkForm = function () {
-        $scope.isValidForm = true;
+
+        
+        var sizeCurrentAnswer = $scope.currentAnswer.filter(function (value) {
+            return value !== undefined && value != null
+        }).length;
+
+        $scope.isValidForm = sizeCurrentAnswer > 0;
+
 
         $scope.currentAnswer.forEach(function (item) {
             if (item === null || item === "") {
                 $scope.isValidForm = false;
                 return true;
-            }            
+            } else if (item.optionType !== undefined && item.optionType == 'radio') {
+                $scope.isValidForm = sizeCurrentAnswer >= $scope.qtyRadioType;
+                return true;
+            }
         });
 
-        $scope.isValidated = true;
+        if ($scope.qtyRadioType > 0)
+            $scope.isValidated = $scope.qtyRadioType;
+        else
+            $scope.isValidated = true;
     }
 
     /******************************
@@ -151,12 +194,13 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
                 currentAnswerReturn.hasMultipleAnswer = !!answer['pop'];
                 var prop = currentAnswerReturn.hasMultipleAnswer ? 'multipleValues' : 'uniqueValue';
                 // For input radio, set {optionId, optionText}. Otherwise, {index, answer}
+                debugger;
                 currentAnswerReturn[prop] = answer.optionId ? answer.optionText : answer;
                 currentAnswerReturn.questionOptionId = answer.optionId ? answer.optionId : index;
             } else {
                 currentAnswerReturn.uniqueValue = null;
             }
-            
+
             return currentAnswerReturn;
         });
 
