@@ -22,7 +22,6 @@ namespace cleangap.api.Domain
     public class SurveysBO : ISurveysBO
     {
         private int intQtySubSection;
-
         public SurveysBO()
         {
             intQtySubSection = 1;
@@ -41,7 +40,6 @@ namespace cleangap.api.Domain
             return true;
 
         }
-
         private List<QuestionsModel> GetChilderQuestions(ICollection<questions> childrenQuestions)
         {
             // item.children_question.Select(x => x.id).ToList<int>()
@@ -65,7 +63,6 @@ namespace cleangap.api.Domain
 
             return null;
         }
-
         private SurveyModel AddQuestion(SurveyModel s, List<questions> tblQuestion)
         {
 
@@ -163,44 +160,6 @@ namespace cleangap.api.Domain
                 s.section_name = objSection.question_sections.name;
             }
         }
-        public SurveyModel ListQuestions(int? pageNum)
-        {
-            if (pageNum != null)
-            {
-                SurveyModel s = new SurveyModel();
-                using (var db = new CleanGapDataContext())
-                {
-                    var tblQuestion = db.questions.Where(q => q.page == pageNum).ToList();
-                    var maxPage = db.questions.Max(x => x.page);
-
-                    if (maxPage != null && tblQuestion.Count > 0)
-                    {
-
-                        s.Page = (int)pageNum;
-                        s.PageTotal = (int)maxPage;
-
-                        SetQuestionSection(s, tblQuestion);
-
-                        s = AddQuestion(s, tblQuestion);
-                    }
-
-                    return s;
-
-                }
-
-            }
-            throw new NullReferenceException("Page Num cannot be empty");
-        }
-
-
-
-        public bool HasAnswer(int pageNum)
-        {
-            SurveyModel s = ListQuestions(pageNum);
-
-            return s.questions.Any(x => x.QuestionOption.Any(y => !string.IsNullOrEmpty(y.UniqueAnswer)));
-        }
-
         private void ExcludeAnswerRadio(AnswersModel pAnswer, string currentCustomerId)
         {
 
@@ -221,17 +180,16 @@ namespace cleangap.api.Domain
 
                     var listAnswerId = query.ToList();
 
-                    if(listAnswerId.Count > 0)
+                    if (listAnswerId.Count > 0)
                     {
                         var queryAnswer = db.answers.Where(x => listAnswerId.Contains(x.id_question_option));
 
                         db.answers.RemoveRange(queryAnswer);
                         db.SaveChanges();
                     }
-                }                
+                }
             }
         }
-
         private bool SaveSingleAnswer(AnswersModel pAnswer, string currentCustomerId)
         {
             int intCustomerId = 0;
@@ -275,7 +233,6 @@ namespace cleangap.api.Domain
 
             return saved;
         }
-
         private bool SaveMultipleAnswer(AnswersModel pAnswer, string currentCustomerId)
         {
             int intCustomerId = 0;
@@ -312,6 +269,40 @@ namespace cleangap.api.Domain
             return saved;
         }
 
+        public SurveyModel ListQuestions(int? pageNum)
+        {
+            if (pageNum != null)
+            {
+                SurveyModel s = new SurveyModel();
+                using (var db = new CleanGapDataContext())
+                {
+                    var tblQuestion = db.questions.Where(q => q.page == pageNum).ToList();
+                    var maxPage = db.questions.Max(x => x.page);
+
+                    if (maxPage != null && tblQuestion.Count > 0)
+                    {
+
+                        s.Page = (int)pageNum;
+                        s.PageTotal = (int)maxPage;
+
+                        SetQuestionSection(s, tblQuestion);
+
+                        s = AddQuestion(s, tblQuestion);
+                    }
+
+                    return s;
+
+                }
+
+            }
+            throw new NullReferenceException("Page Num cannot be empty");
+        }
+        public bool HasAnswer(int pageNum)
+        {
+            SurveyModel s = ListQuestions(pageNum);
+
+            return s.questions.Any(x => x.QuestionOption.Any(y => !string.IsNullOrEmpty(y.UniqueAnswer)));
+        }
         public bool SaveAnswer(AnswersModel pAnswer, string currentUserId)
         {
             bool saved = false;
