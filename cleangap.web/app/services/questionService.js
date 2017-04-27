@@ -7,13 +7,16 @@ function questionService($http) {
 
     return {
         Get: (function (questionID) {
-            return $http.get(serviceBase + '/api/surveys/questions/' + questionID || '');
+            return $http.get(serviceBase + '/api/surveys/questions/' + questionID || '').then(function (response) {
+                return response;
+            });
         }),
 
         Post: (function (answeredQuestion) {
-            return $http.post(serviceBase + '/api/surveys/answers/', answeredQuestion);
+            return $http.post(serviceBase + '/api/surveys/answers/', answeredQuestion).then(function (response) {
+                return response;
+            });
         })
-
 
     }
 

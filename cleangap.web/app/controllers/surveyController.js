@@ -1,9 +1,9 @@
 'use strict';
 app.controller('surveyController', surveyController);
 
-surveyController.$inject = ['$scope', '$http', '$location', 'authService', '$routeParams', 'questionService'];
+surveyController.$inject = ['$scope', '$q', '$http', '$location', 'authService', '$routeParams', 'questionService'];
 
-function surveyController($scope, $http, $location, authService, $routeParams, questionService) {
+function surveyController($scope, $q, $http, $location, authService, $routeParams, questionService) {
 
     $scope.user = JSON.parse(window.localStorage.getItem("ls.authorizationData"));
 
@@ -162,7 +162,10 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
      *  Fields Validations - End
      ******************************/
 
-    $scope.saveAnswer = function () {
+    $scope.saveAnswer = function (logOut) {
+
+        logOut = logOut === undefined ? false : logOut;
+
         var response = $scope.currentAnswer.map(function (answer, index) {
             var currentAnswerReturn = {
                 questionOptionId: index,
@@ -182,9 +185,23 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
             return currentAnswerReturn;
         });
 
+        var deferred = $q.defer();
+        var allPromises = [];
+
         response.forEach(function (obj) {
-            questionService.Post(obj);
+            console.log(logOut);
+            var currentPromise = questionService.Post(obj).then(function (result) {
+                return deferred.resolve(result);
+            }, function (err) {
+                return deferred.reject(err);
+            });
+
+            allPromises.push(currentPromise);
         });
+
+        
+        return $q.all(allPromises);
+
     };
 
     $scope.next = function () {
@@ -198,7 +215,9 @@ function surveyController($scope, $http, $location, authService, $routeParams, q
     };
 
     $scope.saveAndExit = function () {
-        $scope.saveAnswer();
-        authService.logOut();
+        $scope.saveAnswer().then(function (result) {
+            $scope.logOut();
+        });
+        
     };
 }
