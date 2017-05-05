@@ -18,6 +18,7 @@ namespace cleangap.api.Controllers
         /// List question structure, given a page number
         /// </summary>
         /// <param name="PageNum">Question's Page / Ster number</param>
+        /// <returns>Questions list with options</returns>
         [HttpGet, Route("questions/{PageNum}")]
         public SurveyModel ListQuestions(int PageNum = 1)
         {
@@ -28,10 +29,23 @@ namespace cleangap.api.Controllers
         }
 
         /// <summary>
+        /// Get last section when user logins back
+        /// </summary>
+        /// <returns>Questions list with options</returns>
+        [HttpGet, Route("resume")]
+        public SurveyModel GetLastQuestions()
+        {
+            
+            SurveysBO sBO = new SurveysBO();            
+
+            return sBO.ResumeLast();
+        }
+
+        /// <summary>
         /// Save answer
         /// </summary>
-        /// <param name="pAnswer"></param>
-        /// <returns></returns>
+        /// <param name="pAnswer">Answer model</param>
+        /// <returns>Response with operation status</returns>
         [HttpPost, Route("answers")]
         public ApiResponse AnswerQuestions(AnswersModel pAnswer)
         {

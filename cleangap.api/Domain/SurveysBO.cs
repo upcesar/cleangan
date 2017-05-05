@@ -15,13 +15,38 @@ namespace cleangap.api.Domain
     public interface ISurveysBO
     {
         SurveyModel ListQuestions(int? pageNum);
+        SurveyModel ResumeLast();
         bool HasAnswer(int pageNum);
         bool SaveAnswer(AnswersModel pAnswer, string currentUserId);
+        int LastSectionId { get; }
+
     }
 
     public class SurveysBO : ISurveysBO
     {
         private int intQtySubSection;
+
+        public int LastSectionId
+        {
+            get
+            {
+                int maxPage = 1;
+                int? idCustomer = AccountIdentity.GetCurrentUserInt();
+                using (var db = new CleanGapDataContext())
+                {
+                    var query = from a in db.answers
+                                join qo in db.question_options on a.id_question_option equals qo.id
+                                join q in db.questions on qo.id_question equals q.id
+                                where a.id_customer == idCustomer
+                                select new { LastPage = q.page};
+
+                    maxPage = query.Max(f => f.LastPage) ?? 1;
+                }
+
+                return maxPage;
+            }
+        }
+        
         public SurveysBO()
         {
             intQtySubSection = 1;
@@ -269,6 +294,12 @@ namespace cleangap.api.Domain
             return saved;
         }
 
+        public SurveyModel ResumeLast() {
+
+            int PageNum = LastSectionId;
+            return ListQuestions(PageNum);
+        }
+
         public SurveyModel ListQuestions(int? pageNum)
         {
             if (pageNum != null)
@@ -320,5 +351,6 @@ namespace cleangap.api.Domain
 
             return saved;
         }
+
     }
 }

@@ -80,5 +80,13 @@ namespace cleangap.api.test
 
             Assert.IsTrue(x);
         }
+        [Test]
+        public void TestLastsectionId()
+        {
+            ISurveysBO qsBO = new SurveysBO();
+
+            Assert.AreEqual(qsBO.LastSectionId, 5);
+
+        }
     }
 }

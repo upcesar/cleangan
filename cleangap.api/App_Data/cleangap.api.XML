@@ -501,13 +501,20 @@
             List question structure, given a page number
             </summary>
             <param name="PageNum">Question's Page / Ster number</param>
+            <returns>Questions list with options</returns>
+        </member>
+        <member name="M:cleangap.api.Controllers.SurveyController.GetLastQuestions">
+            <summary>
+            Get last section when user logins back
+            </summary>
+            <returns>Questions list with options</returns>
         </member>
         <member name="M:cleangap.api.Controllers.SurveyController.AnswerQuestions(cleangap.api.Models.Domain.AnswersModel)">
             <summary>
             Save answer
             </summary>
-            <param name="pAnswer"></param>
-            <returns></returns>
+            <param name="pAnswer">Answer model</param>
+            <returns>Response with operation status</returns>
         </member>
         <member name="T:cleangap.api.Models.Domain.SurveyModel">
             <summary>
