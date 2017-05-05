@@ -18,14 +18,15 @@ namespace cleangap.api.Controllers
         /// List question structure, given a page number
         /// </summary>
         /// <param name="PageNum">Question's Page / Ster number</param>
+        /// <param name="BoundToMax">Navigation is going backward</param>
         /// <returns>Questions list with options</returns>
-        [HttpGet, Route("questions/{PageNum}")]
-        public SurveyModel ListQuestions(int PageNum = 1)
+        [HttpGet, Route(""), Route("questions/{PageNum?}")]
+        public SurveyModel ListQuestions(int PageNum = 1, string BoundToMax = "")
         {
 
             SurveysBO sBO = new SurveysBO();
 
-            return sBO.ListQuestions(PageNum);
+            return sBO.ListQuestions(PageNum, BoundToMax.ToLower() == "true");
         }
 
         /// <summary>

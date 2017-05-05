@@ -201,7 +201,7 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
         var allPromises = [];
 
         response.forEach(function (obj) {
-            console.log(logOut);
+
             var currentPromise = questionService.Post(obj).then(function (result) {
                 return deferred.resolve(result);
             }, function (err) {
@@ -219,7 +219,6 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
     $scope.next = function () {
         $scope.saveAnswer();
         $location.path('/survey/' + $scope.nextPage);
-
     };
 
     $scope.back = function () {

@@ -6,8 +6,9 @@ angular.module("cleangap")
 function questionService($http) {
 
     return {
-        Get: (function (questionID) {
-            return $http.get(serviceBase + '/api/surveys/questions/' + questionID || '').then(function (response) {
+        Get: (function (questionID, boundToMax) {
+            boundToMax = boundToMax ? '?boundToMax=true' : '';
+            return $http.get(serviceBase + '/api/surveys/questions/' + questionID + boundToMax || '').then(function (response) {
                 return response;
             });
         }),

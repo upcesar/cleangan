@@ -14,7 +14,7 @@ namespace cleangap.api.Domain
 
     public interface ISurveysBO
     {
-        SurveyModel ListQuestions(int? pageNum);
+        SurveyModel ListQuestions(int? pageNum, bool BoundToMax);
         SurveyModel ResumeLast();
         bool HasAnswer(int pageNum);
         bool SaveAnswer(AnswersModel pAnswer, string currentUserId);
@@ -38,7 +38,7 @@ namespace cleangap.api.Domain
                                 join qo in db.question_options on a.id_question_option equals qo.id
                                 join q in db.questions on qo.id_question equals q.id
                                 where a.id_customer == idCustomer
-                                select new { LastPage = q.page};
+                                select new { LastPage = q.page };
 
                     maxPage = query.Max(f => f.LastPage) ?? 1;
                 }
@@ -46,7 +46,7 @@ namespace cleangap.api.Domain
                 return maxPage;
             }
         }
-        
+
         public SurveysBO()
         {
             intQtySubSection = 1;
@@ -294,19 +294,40 @@ namespace cleangap.api.Domain
             return saved;
         }
 
-        public SurveyModel ResumeLast() {
+        private int? CheckPageSection(CleanGapDataContext db, int? pageNum, bool BoundToMax)
+        {
+            if (BoundToMax)
+            {
+                bool hasAnswer = db.answers.Where(x => x.id_customer == 1).Any();
+                int varSectionPage = LastSectionId;
 
+                if (hasAnswer && pageNum >= varSectionPage)
+                {
+                    return varSectionPage;
+                }
+                return 1;
+            }
+
+            return pageNum;
+                
+        }
+
+        public SurveyModel ResumeLast()
+        {
             int PageNum = LastSectionId;
             return ListQuestions(PageNum);
         }
 
-        public SurveyModel ListQuestions(int? pageNum)
+        public SurveyModel ListQuestions(int? pageNum, bool BoundToMax = false)
         {
             if (pageNum != null)
             {
                 SurveyModel s = new SurveyModel();
+                
                 using (var db = new CleanGapDataContext())
                 {
+                    pageNum = CheckPageSection(db, pageNum, BoundToMax);
+
                     var tblQuestion = db.questions.Where(q => q.page == pageNum).ToList();
                     var maxPage = db.questions.Max(x => x.page);
 
