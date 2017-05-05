@@ -12,6 +12,12 @@ function questionService($http) {
             });
         }),
 
+        GetLast: (function () {
+            return $http.get(serviceBase + '/api/surveys/resume' || '').then(function (response) {
+                return response;
+            });
+        }),
+
         Post: (function (answeredQuestion) {
             return $http.post(serviceBase + '/api/surveys/answers/', answeredQuestion).then(function (response) {
                 return response;

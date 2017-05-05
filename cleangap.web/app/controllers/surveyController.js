@@ -25,19 +25,31 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
     $scope.isValidated = false;
     $scope.qtyChildrenHidden = 0;
 
-    var getQuestions = function (questionID) {
-        return questionService.Get(questionID)
-            .then(function (surveys) {
-                $scope.survey = surveys.data
-                $scope.surveys = $scope.survey.questions;
-                $scope.index = 0;
-                $scope.prevPage = (parseInt($scope.survey.page, 10) - 1);
-                $scope.nextPage = (parseInt($scope.survey.page, 10) + 1);
+    var populateSurveyData = function (surveys) {
+        $scope.survey = surveys.data;
+        $scope.surveys = $scope.survey.questions;
+        $scope.index = 0;
+        $scope.prevPage = (parseInt($scope.survey.page, 10) - 1);
+        $scope.nextPage = (parseInt($scope.survey.page, 10) + 1);
 
-                convertAnswerToCurrent(surveys.data);
-                $scope.checkForm();
-                $scope.isValidated = false;
-            });
+        convertAnswerToCurrent(surveys.data);
+        $scope.checkForm();
+        $scope.isValidated = false;
+    };
+
+    var getQuestions = function (questionID) {
+
+        if (questionID === undefined) {
+            return questionService.GetLast()
+                .then(function (surveys) {
+                    populateSurveyData(surveys);
+                });
+        } else {
+            return questionService.Get(questionID)
+                .then(function (surveys) {
+                    populateSurveyData(surveys);
+                });
+        }
     };
 
     //Set dependent question map for showing / hiding in HTML
