@@ -80,7 +80,7 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
     };
 
     $scope.dropdownChanged = function (optionId) {
-        $scope.currentAnswer[optionId] = $scope.dropDownElement[optionId].id;
+        $scope.currentAnswer[optionId] = $scope.dropDownElement[optionId] !== null ? $scope.dropDownElement[optionId].id : null;
         $scope.checkForm();
     };
 

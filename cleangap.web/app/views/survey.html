@@ -54,7 +54,7 @@
                                     </label>
                                     <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">{{currentValidationMsg[option.optionId]}}</div>
                                 </div>
-                                <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" ng-change="checkForm()" type="{{currentValidationType[option.optionId]}}" />
+                                <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" class="form-control" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" ng-change="checkForm()" type="{{currentValidationType[option.optionId]}}" />
                             </div>
 
                             <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'drop-down'">
@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
 
-                                <select ng-model="dropDownElement[option.optionId]" ng-options="selectableOption.description for selectableOption in option.questionChoices track by selectableOption.id" ng-change="dropdownChanged(option.optionId)">
+                                <select ng-model="dropDownElement[option.optionId]" class="form-control" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" ng-options="selectableOption.description for selectableOption in option.questionChoices track by selectableOption.id" ng-change="dropdownChanged(option.optionId)">
                                     <option value="">Select Option</option>
                                 </select>
                             </div>
@@ -80,7 +80,7 @@
                                         This answer cannot be empty
                                     </div>
                                 </div>
-                                <textarea ng-model="currentAnswer[option.optionId]" cols="50" ng-change="checkForm()"> {{option.uniqueAnswer}} </textarea>
+                                <textarea ng-model="currentAnswer[option.optionId]" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" class="form-control" cols="50" ng-change="checkForm()"> {{option.uniqueAnswer}} </textarea>
                             </div>
                         </div>
 

@@ -4,7 +4,7 @@
   <form class="form-signin" id="form" name="form" novalidate >
     <h2 class="form-signin-heading">Login</h2>
     <hr>
-		<div data-ng-hide="message == ''" class="alert alert-danger">{{message}}</div>
+		<div data-ng-hide="message == ''" class="alert alert-danger"><i class="fa fa-times-circle fa-lg fa-fw"></i> {{message}}</div>
     <label for="" class="">Email:</label>
     <input type="text" id="inputEmail" class="form-control" placeholder="" data-ng-model="loginData.username" required autofocus>
     <label for="inputPassword" class="">Password:</label>
