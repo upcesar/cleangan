@@ -16,8 +16,11 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
 
     $scope.authentication = authService.authentication;
 
-    $scope.currentAnswer = [];
+    $scope.currentAnswer = [];    
     $scope.childrenQuestionUI = [];
+
+    $scope.currentValidationMsg = [];
+    $scope.currentValidationType = [];
 
     $scope.dropDownElement = [];
 
@@ -112,6 +115,8 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
 
                     default:
                         currentAnswers[option.optionId] = option.uniqueAnswer;
+                        $scope.currentValidationMsg[option.optionId] = option.optionText === "E-Mail" ? "Invalid E-Mail" : "This answer cannot be empty";
+                        $scope.currentValidationType[option.optionId] = option.optionText === "E-Mail" ? "email" : "text";
                         break;
                 }
 
@@ -143,7 +148,8 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
      *  Fields Validations
      ******************************/
 
-    $scope.validateUniqueAnswer = function (optionObj) {
+    $scope.validateUniqueAnswer = function (optionObj, isEmail) {
+        isEmail = isEmail !== undefined ? isEmail : false;
         var answerText = $scope.currentAnswer[optionObj.optionId];
         return answerText != null && answerText != "";
     };

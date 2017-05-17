@@ -355,6 +355,7 @@ table.table {
 }
 
     .survey-card input[type="text"],
+    .survey-card input[type="email"],
     .survey-card select,
     .survey-card textarea {
         width: 100%;

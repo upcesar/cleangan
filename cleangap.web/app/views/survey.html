@@ -52,9 +52,9 @@
                                     <label class="col-xs-6" for="{{option.optionText}}:">
                                         {{option.optionText}}
                                     </label>
-                                    <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">This answer cannot be empty</div>
+                                    <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">{{currentValidationMsg[option.optionId]}}</div>
                                 </div>
-                                <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" ng-change="checkForm()" type="text" />
+                                <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" ng-change="checkForm()" type="{{currentValidationType[option.optionId]}}" />
                             </div>
 
                             <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'drop-down'">
