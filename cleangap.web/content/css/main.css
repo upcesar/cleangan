@@ -378,3 +378,15 @@ table.table {
 .mb1 {
     margin-bottom:1em;
 }
+
+.mb8 {
+    margin-bottom: 8em;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.lowercase {
+    text-transform: lowercase;
+}

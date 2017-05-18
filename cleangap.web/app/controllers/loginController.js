@@ -26,7 +26,7 @@ app.controller('loginController', ['$scope', '$window', '$location', 'authServic
             //Check for open questions
             questionService.Status().then(function (response) {
                 var data = response.data;
-                if (data.isSucess) {
+                if (data.isSuccess) {
                     $location.path('/survey/');
                 } else {
                     authService.logOut();
