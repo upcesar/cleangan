@@ -380,14 +380,8 @@ namespace cleangap.api.Domain
         }
         public bool CheckClosedSurvey(string CustomerId)
         {
-            /* TODO:
-             * 1. Create a new "Project" record for current customer ID.
-             * 2. Map just created project to NULL answers and current customer ID.
-             */
-
             int intCustomerId = 0;
-            bool FoundProject = false;
-            bool FoundOpenAnswer = false;
+            bool FoundProject = false, FoundOpenAnswer = false, HasAnswers = false;
 
             if (int.TryParse(CustomerId, out intCustomerId))
             {
@@ -395,9 +389,10 @@ namespace cleangap.api.Domain
                 {
                     FoundProject = db.projects.Where(p => p.id_customer == intCustomerId).Any();
                     FoundOpenAnswer = db.answers.Where(a => a.id_customer == intCustomerId && a.id_project != null).Any();
+                    HasAnswers = db.answers.Where(a => a.id_customer == intCustomerId).Any();
                 }
             }
-            return FoundProject && FoundOpenAnswer;
+            return FoundOpenAnswer && (FoundProject || !HasAnswers);
 
         }
         public bool CloseSurvey(string CustomerId, SignatureModel objSignature)

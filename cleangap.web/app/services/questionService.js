@@ -29,6 +29,12 @@ function questionService($http) {
             return $http.post(serviceBase + '/api/surveys/close/', signature).then(function (response) {
                 return response;
             });
+        }),
+
+        Status: (function () {
+            return $http.get(serviceBase + '/api/surveys/status/').then(function (response) {
+                return response;
+            });
         })
 
     }

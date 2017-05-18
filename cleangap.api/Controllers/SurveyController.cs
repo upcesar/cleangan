@@ -36,8 +36,8 @@ namespace cleangap.api.Controllers
         [HttpGet, Route("resume")]
         public SurveyModel GetLastQuestions()
         {
-            
-            SurveysBO sBO = new SurveysBO();            
+
+            SurveysBO sBO = new SurveysBO();
 
             return sBO.ResumeLast();
         }
@@ -60,6 +60,26 @@ namespace cleangap.api.Controllers
                 HttpCode = saved ? Ok().ToString() : InternalServerError().ToString(),
                 IsSuccess = saved,
                 Message = saved ? "Answers saved successfully" : "Failure on saving answers"
+            };
+        }
+
+        /// <summary>
+        /// Check Status for Surveys / GAP Document
+        /// </summary>
+        /// <returns>Response with operation status</returns>
+        [HttpGet, Route("status")]
+        public ApiResponse Status()
+        {
+            SurveysBO sBO = new SurveysBO();
+            string CurrentUserId = AccountIdentity.GetCurrentUser();
+
+            bool isClosedSurvey = sBO.CheckClosedSurvey(CurrentUserId);
+
+            return new ApiResponse()
+            {
+                HttpCode = Ok().ToString(),
+                IsSuccess = !isClosedSurvey,
+                Message = isClosedSurvey ? "Customer has finished the GAP document." : "Customer's GAP document is still open."
             };
         }
 

@@ -517,6 +517,12 @@
             <param name="pAnswer">Answer model</param>
             <returns>Response with operation status</returns>
         </member>
+        <member name="M:cleangap.api.Controllers.SurveyController.Status">
+            <summary>
+            Check Status for Surveys / GAP Document
+            </summary>
+            <returns>Response with operation status</returns>
+        </member>
         <member name="M:cleangap.api.Controllers.SurveyController.Close(cleangap.api.Models.Domain.SignatureModel)">
             <summary>
             Close Survey
