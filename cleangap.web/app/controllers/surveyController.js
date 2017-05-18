@@ -235,6 +235,28 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
         $scope.saveAnswer().then(function (result) {
             $scope.logOut();
         });
-        
     };
+
+    $scope.confirmFinish = {
+        back: {
+            label: "Back",
+            className: "btn-default"
+        },
+        confirm: {
+            label: "Confirm",
+            className: "btn-confirm btn-green disabled",
+            callback: function () {
+                var enabledBtn = !$(".btn-confirm").hasClass("disabled");
+
+                alert($scope.finishing);
+
+                if (enabledBtn) {
+                    
+                }
+
+                return enabledBtn;
+            }
+        }
+    };
+
 }

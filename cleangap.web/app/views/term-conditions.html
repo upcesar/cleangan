@@ -1,0 +1,44 @@
+﻿<div ng-controller="finishSurveyController">
+    <p>
+        RepSpark Systems provides a robust and streamlined application fully encompassing the needs of the footwear and apparel manufacturer’s executives, management, sales reps and retail users.
+        With the RepSpark solution, your company will accomplish and realize new efficiencies in the sales process. RepSpark will work directly with the your team to ensure that all business logic,
+        integration and functions are designed and delivered in a timely and precise manner. Again, our key goal is your success and ROI.
+    </p>
+    <form class="form-close-survey" id="frmCloseSurvey" name="frmCloseSurvey" novalidate>
+        <div class="row">
+            <div class="form-group-sm col-md-12">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="checkAgree" data-ng-model="finishSurvey.agree" ng-change="validateTermCondition()"> I accept the terms and conditions of RepSpark
+                    </label>
+                    <div class="text-danger" ng-show="!finishSurvey.agree">
+                        You must accept the term
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group-sm col-md-6">
+                <label for="" class="">Name:</label>
+                <span class="text-danger pull-right" ng-show="!validateName()">
+                    This field cannot be empty
+                </span>
+                <input type="text" id="inputName" class="form-control" placeholder="" data-ng-model="finishSurvey.name" ng-change="validateTermCondition()" required autofocus>
+            </div>
+            <div class="form-group-sm col-md-6">
+                <label for="" class="">Date:</label>
+                <span class="text-danger pull-right" ng-show="!validateDate()">
+                    This field cannot be empty
+                </span>
+                <input type="text" id="inputName" class="form-control" placeholder="" data-ng-model="finishSurvey.date" ng-change="validateTermCondition()" required>
+            </div>
+            <div class="form-group-sm col-md-12">
+                <label for="" class="">Signature:</label>
+                <div class="text-danger pull-right" ng-show="!validateSignature()">
+                    This field cannot be empty
+                </div>
+                <input type="text" id="inputName" class="form-control" placeholder="" data-ng-model="finishSurvey.signature" ng-change="validateTermCondition()" required>
+            </div>
+        </div>
+    </form>
+    <div class="text-center" ng-show="finishing"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Closing GAP document...</div>
+</div>
