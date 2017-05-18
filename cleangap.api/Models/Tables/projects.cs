@@ -19,6 +19,9 @@ namespace cleangap.api.Models.Tables
         public int? id_customer { get; set; }
         public bool? is_open { get; set; }
         public int? project_status { get; set; }
+        public string full_name { get; set; }
+        public DateTime? sign_date { get; set; }
+        public string digital_signature { get; set; }        
         public DateTime? creation_date { get; set; }
         public DateTime? edition_date { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

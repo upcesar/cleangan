@@ -20,7 +20,7 @@ namespace cleangap.api.test
             //Assert.Pass("Your first passing test");
 
             ISurveysBO qsBO = new SurveysBO();
-            var x = qsBO.ListQuestions(1);
+            var x = qsBO.ListQuestions(1, false);
 
             Assert.IsInstanceOf<SurveyModel>(x);
         }
@@ -38,7 +38,7 @@ namespace cleangap.api.test
         {
             ISurveysBO qsBO = new SurveysBO();
 
-            var x = qsBO.ListQuestions(1);
+            var x = qsBO.ListQuestions(1, false);
 
             Assert.AreEqual("My ERP is TOTVS", x.questions.FirstOrDefault().QuestionOption.FirstOrDefault().UniqueAnswer);
 

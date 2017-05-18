@@ -278,6 +278,10 @@
     <Compile Include="Migrations\201704242112123_RenameFieldDepQuestion.Designer.cs">
       <DependentUpon>201704242112123_RenameFieldDepQuestion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705181307427_AddedProjectFields.cs" />
+    <Compile Include="Migrations\201705181307427_AddedProjectFields.Designer.cs">
+      <DependentUpon>201705181307427_AddedProjectFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionDomain.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionOptions.cs" />
@@ -292,6 +296,7 @@
     <Compile Include="Models\Domain\QuestionOptionModel.cs" />
     <Compile Include="Models\Domain\QuestionsModel.cs" />
     <Compile Include="Models\Domain\ResetPasswordModel.cs" />
+    <Compile Include="Models\Domain\SignatureModel.cs" />
     <Compile Include="Models\Domain\SurveyModel.cs" />
     <Compile Include="Models\Tables\answers.cs" />
     <Compile Include="DAL\CleanGapDataContext.cs" />
@@ -420,6 +425,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704242112123_RenameFieldDepQuestion.resx">
       <DependentUpon>201704242112123_RenameFieldDepQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705181307427_AddedProjectFields.resx">
+      <DependentUpon>201705181307427_AddedProjectFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

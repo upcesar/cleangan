@@ -14,11 +14,15 @@ namespace cleangap.api.Domain
 
     public interface ISurveysBO
     {
-        SurveyModel ListQuestions(int? pageNum, bool BoundToMax);
+        SurveyModel ListQuestions(int? pageNum, bool BoundToMax = false);
         SurveyModel ResumeLast();
         bool HasAnswer(int pageNum);
         bool SaveAnswer(AnswersModel pAnswer, string currentUserId);
         int LastSectionId { get; }
+
+        bool CloseSurvey(string CustomerId, SignatureModel objSignature);
+
+        bool CheckClosedSurvey(string CustomerId);
 
     }
 
@@ -309,7 +313,7 @@ namespace cleangap.api.Domain
             }
 
             return pageNum;
-                
+
         }
 
         public SurveyModel ResumeLast()
@@ -323,7 +327,7 @@ namespace cleangap.api.Domain
             if (pageNum != null)
             {
                 SurveyModel s = new SurveyModel();
-                
+
                 using (var db = new CleanGapDataContext())
                 {
                     pageNum = CheckPageSection(db, pageNum, BoundToMax);
@@ -373,5 +377,59 @@ namespace cleangap.api.Domain
             return saved;
         }
 
+        public bool CheckClosedSurvey(string CustomerId)
+        {
+            /* TODO:
+             * 1. Create a new "Project" record for current customer ID.
+             * 2. Map just created project to NULL answers and current customer ID.
+             */
+
+            int intCustomerId = 0;
+            bool FoundProject = false;
+            bool FoundOpenAnswer = false;
+
+            if (int.TryParse(CustomerId, out intCustomerId))
+            {
+                using (var db = new CleanGapDataContext())
+                {
+                    FoundProject = db.projects.Where(p => p.id_customer == intCustomerId).Any();
+                    FoundOpenAnswer = db.answers.Where(a => a.id_customer == intCustomerId && a.id_project != null).Any();
+                }
+            }
+            return FoundProject && FoundOpenAnswer;
+
+        }
+
+        public bool CloseSurvey(string CustomerId, SignatureModel objSignature)
+        {
+            bool FoundProject = CheckClosedSurvey(CustomerId);
+            bool saved = false;
+            if (!FoundProject)
+            {
+                int intCustomerId = 0;
+                if (int.TryParse(CustomerId, out intCustomerId))
+                {
+                    using (var db = new CleanGapDataContext())
+                    {
+                        // Gets open answers by customer
+
+                        projects rowProject = new projects()
+                        {
+                            id_customer = intCustomerId,
+                            answers = db.answers.Where(a=>a.id_customer == intCustomerId).ToList(),
+                            is_open = false,
+                            project_status = null,
+                            full_name = objSignature.FullName.ToUpper(),
+                            sign_date = objSignature.SignDate,
+                            digital_signature = objSignature.DigitalSingature.ToUpper(),                            
+                            creation_date = DateTime.Now,
+                        };
+                        db.projects.Add(rowProject);
+                        saved = db.SaveChanges() > 0;
+                    }
+                }
+            }
+            return saved;
+        }
     }
 }
