@@ -28,6 +28,57 @@ namespace cleangap.api.Domain
         private Cryptography crypto = new Cryptography();
 
         #region Private Methods
+        private string EncodeMD5(string plainText)
+        {
+            Cryptography crypto = new Cryptography();
+            string passwordmd5 = crypto.EncodeMD5(plainText);
+            return passwordmd5;
+        }
+        private string GenerateToken(string email)
+        {
+            Cryptography crypto = new Cryptography();
+
+            string md5Email = crypto.EncodeMD5(email);
+            string md5Date = crypto.EncodeMD5(DateTime.Now.ToString());
+
+            string hashEmail = string.Format("{0}{1}", md5Email, md5Date);
+
+            return hashEmail;
+
+        }
+        private customers UpdateToken(CleanGapDataContext db, customers c)
+        {
+            c.token_forgot_pass = GenerateToken(c.email);
+            c.token_expire = DateTime.Now.AddHours(3);
+
+            db.Entry(c).State = EntityState.Modified;
+
+            db.SaveChanges();
+
+            return c;
+        }
+        private bool UpdateNewPassword(ResetPasswordModel data, CleanGapDataContext db, customers pCust)
+        {
+            db.Entry(pCust).State = EntityState.Modified;
+            pCust.password = EncodeMD5(data.NewPassword);
+            pCust.token_forgot_pass = null;
+            pCust.token_expire = null;
+
+            return db.SaveChanges() > 0;
+
+        }
+        private bool SetConfirmedUser(CleanGapDataContext db, customers pCust)
+        {
+            if (pCust.confirmation_date == null)
+            {
+                db.Entry(pCust).State = EntityState.Modified;
+                pCust.confirmation_date = DateTime.Now;
+                pCust.token_signin = null;
+
+                return db.SaveChanges() > 0;
+            }
+            return false;
+        }
         private void SendConfirmationMail(CustomerModel data)
         {
             MailingService m = new MailingService();
@@ -50,38 +101,6 @@ namespace cleangap.api.Domain
             sbBody.AppendLine("RepSpark Customer Care");
 
             m.SendMail(data.email, sbBody.ToString(), "Clean Gap Welcome E-Mail");
-        }
-
-        private string EncodeMD5(string plainText)
-        {
-            Cryptography crypto = new Cryptography();
-            string passwordmd5 = crypto.EncodeMD5(plainText);
-            return passwordmd5;
-        }
-
-        private string GenerateToken(string email)
-        {
-            Cryptography crypto = new Cryptography();
-
-            string md5Email = crypto.EncodeMD5(email);
-            string md5Date = crypto.EncodeMD5(DateTime.Now.ToString());
-
-            string hashEmail = string.Format("{0}{1}", md5Email, md5Date);
-
-            return hashEmail;
-
-        }
-
-        private customers UpdateToken(CleanGapDataContext db, customers c)
-        {
-            c.token_forgot_pass = GenerateToken(c.email);
-            c.token_expire = DateTime.Now.AddHours(3);
-
-            db.Entry(c).State = EntityState.Modified;
-
-            db.SaveChanges();
-
-            return c;
         }
         private void SendTokenRecoveryMail(customers pCust)
         {
@@ -112,27 +131,26 @@ namespace cleangap.api.Domain
 
             m.SendMail(pCust.email, sbBody.ToString(), "Password reset instructions");
         }
-        private bool UpdateNewPassword(ResetPasswordModel data, CleanGapDataContext db, customers pCust)
+        private void SendClosureMail(customers pCust)
         {
-            db.Entry(pCust).State = EntityState.Modified;
-            pCust.password = EncodeMD5(data.NewPassword);
-            pCust.token_forgot_pass = null;
-            pCust.token_expire = null;
+            MailingService m = new MailingService();
 
-            return db.SaveChanges() > 0;
+            StringBuilder sbBody = new StringBuilder();
 
-        }
-        private bool SetConfirmedUser(CleanGapDataContext db, customers pCust)
-        {
-            if (pCust.confirmation_date == null)
-            {
-                db.Entry(pCust).State = EntityState.Modified;
-                pCust.confirmation_date = DateTime.Now;
-                pCust.token_signin = null;
+            sbBody.AppendFormat("Hi, {0}", pCust.name.ToUpper());
+            sbBody.AppendLine();
+            sbBody.AppendLine();
+            sbBody.AppendLine("Welcome to RepSpark! Thanks so much for joining us. You’re on your way to super-productivity and beyond!");
+            sbBody.AppendLine();
+            sbBody.AppendLine("RepSpark is the industry’s only B2B selling system built for Total Order Life Cycle Management.");
+            sbBody.AppendLine();
+            sbBody.Append("Have any questions? Just login to Service Desk at https://repspark.tpondemand.com/helpdesk and create a ticket ");
+            sbBody.AppendLine("and we will get back to you as soon as possible! We’re always here to help");
+            sbBody.AppendLine();
+            sbBody.AppendLine("Cheerfully yours,");
+            sbBody.AppendLine("RepSpark Team");
 
-                return db.SaveChanges() > 0;
-            }
-            return false;
+            m.SendMail(pCust.email, sbBody.ToString(), "RepSpark Welcome Message");
         }
         #endregion
         #region Public Methods
@@ -171,7 +189,6 @@ namespace cleangap.api.Domain
 
             return success;
         }
-
         public bool SendTokenEmail(CustomerModel data)
         {
             bool success = false;
@@ -196,7 +213,6 @@ namespace cleangap.api.Domain
 
             return success;
         }
-
         public CustomerModel FindByToken(string token)
         {
             CustomerModel register = null;
@@ -217,7 +233,6 @@ namespace cleangap.api.Domain
 
             return register;
         }
-
         public bool ResetPassword(ResetPasswordModel data)
         {
             bool success = false;
@@ -263,6 +278,18 @@ namespace cleangap.api.Domain
             }
 
             return response;
+        }
+        public void SendWelcomeEMail(int CustomerId)
+        {
+            using (var db = new CleanGapDataContext())
+            {
+                customers cust = db.customers.Find(CustomerId);
+
+                if (cust != null && cust.id > 0)
+                {
+                    SendClosureMail(cust);
+                }
+            }
         }
         #endregion
 

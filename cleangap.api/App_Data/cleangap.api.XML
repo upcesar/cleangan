@@ -519,9 +519,9 @@
         </member>
         <member name="M:cleangap.api.Controllers.SurveyController.Close(cleangap.api.Models.Domain.SignatureModel)">
             <summary>
-            Save answer
+            Close Survey
             </summary>
-            <param name="pAnswer">Answer model</param>
+            <param name="pSignature">Signature object with Full Name, Date and Digital Signature</param>
             <returns>Response with operation status</returns>
         </member>
         <member name="T:cleangap.api.Models.Domain.SurveyModel">

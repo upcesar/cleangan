@@ -11,7 +11,7 @@ using System.Web;
 
 namespace cleangap.api.Domain
 {
-
+    #region Interfaces
     public interface ISurveysBO
     {
         SurveyModel ListQuestions(int? pageNum, bool BoundToMax = false);
@@ -25,7 +25,7 @@ namespace cleangap.api.Domain
         bool CheckClosedSurvey(string CustomerId);
 
     }
-
+    #endregion
     public class SurveysBO : ISurveysBO
     {
         private int intQtySubSection;
@@ -50,7 +50,7 @@ namespace cleangap.api.Domain
                 return maxPage;
             }
         }
-
+        #region Constructors
         public SurveysBO()
         {
             intQtySubSection = 1;
@@ -59,6 +59,8 @@ namespace cleangap.api.Domain
         {
             intQtySubSection = qtySubSections;
         }
+        #endregion
+        #region Private Methods
         private bool ShowParentQuestion(questions depItem, string dependentAnswerValue)
         {
             List<QuestionOptionModel> options = AddQuestionOptions(depItem);
@@ -297,7 +299,6 @@ namespace cleangap.api.Domain
 
             return saved;
         }
-
         private int? CheckPageSection(CleanGapDataContext db, int? pageNum, bool BoundToMax)
         {
             if (BoundToMax)
@@ -316,12 +317,13 @@ namespace cleangap.api.Domain
 
         }
 
+        #endregion
+        #region Public Methods
         public SurveyModel ResumeLast()
         {
             int PageNum = LastSectionId;
             return ListQuestions(PageNum);
         }
-
         public SurveyModel ListQuestions(int? pageNum, bool BoundToMax = false)
         {
             if (pageNum != null)
@@ -376,7 +378,6 @@ namespace cleangap.api.Domain
 
             return saved;
         }
-
         public bool CheckClosedSurvey(string CustomerId)
         {
             /* TODO:
@@ -399,7 +400,6 @@ namespace cleangap.api.Domain
             return FoundProject && FoundOpenAnswer;
 
         }
-
         public bool CloseSurvey(string CustomerId, SignatureModel objSignature)
         {
             bool FoundProject = CheckClosedSurvey(CustomerId);
@@ -416,20 +416,27 @@ namespace cleangap.api.Domain
                         projects rowProject = new projects()
                         {
                             id_customer = intCustomerId,
-                            answers = db.answers.Where(a=>a.id_customer == intCustomerId).ToList(),
+                            answers = db.answers.Where(a => a.id_customer == intCustomerId).ToList(),
                             is_open = false,
                             project_status = null,
                             full_name = objSignature.FullName.ToUpper(),
                             sign_date = objSignature.SignDate,
-                            digital_signature = objSignature.DigitalSingature.ToUpper(),                            
+                            digital_signature = objSignature.DigitalSingature.ToUpper(),
                             creation_date = DateTime.Now,
                         };
                         db.projects.Add(rowProject);
                         saved = db.SaveChanges() > 0;
+
+                        if (saved)
+                        {
+                            CustomersBO custBO = new CustomersBO();
+                            custBO.SendWelcomeEMail(intCustomerId);
+                        }
                     }
                 }
             }
             return saved;
         }
+        #endregion
     }
 }
