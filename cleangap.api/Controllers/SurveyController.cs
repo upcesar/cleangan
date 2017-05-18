@@ -62,6 +62,27 @@ namespace cleangap.api.Controllers
                 Message = saved ? "Answers saved successfully" : "Failure on saving answers"
             };
         }
+
+        /// <summary>
+        /// Close Survey
+        /// </summary>
+        /// <param name="pSignature">Signature object with Full Name, Date and Digital Signature</param>
+        /// <returns>Response with operation status</returns>
+        [HttpPost, Route("close")]
+        public ApiResponse Close(SignatureModel pSignature)
+        {
+            SurveysBO sBO = new SurveysBO();
+            string CurrentUserId = AccountIdentity.GetCurrentUser();
+
+            bool saved = sBO.CloseSurvey(CurrentUserId, pSignature);
+
+            return new ApiResponse()
+            {
+                HttpCode = saved ? Ok().ToString() : InternalServerError().ToString(),
+                IsSuccess = saved,
+                Message = saved ? "Survey closed successfully" : "Failure on closing survey"
+            };
+        }
     }
 
 }

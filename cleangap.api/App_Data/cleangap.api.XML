@@ -517,6 +517,13 @@
             <param name="pAnswer">Answer model</param>
             <returns>Response with operation status</returns>
         </member>
+        <member name="M:cleangap.api.Controllers.SurveyController.Close(cleangap.api.Models.Domain.SignatureModel)">
+            <summary>
+            Save answer
+            </summary>
+            <param name="pAnswer">Answer model</param>
+            <returns>Response with operation status</returns>
+        </member>
         <member name="T:cleangap.api.Models.Domain.SurveyModel">
             <summary>
             Survey's Model
