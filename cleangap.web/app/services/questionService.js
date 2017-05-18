@@ -23,6 +23,12 @@ function questionService($http) {
             return $http.post(serviceBase + '/api/surveys/answers/', answeredQuestion).then(function (response) {
                 return response;
             });
+        }),
+
+        Finish: (function (signature) {
+            return $http.post(serviceBase + '/api/surveys/close/', signature).then(function (response) {
+                return response;
+            });
         })
 
     }

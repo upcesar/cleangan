@@ -237,26 +237,54 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
         });
     };
 
-    $scope.confirmFinish = {
-        back: {
-            label: "Back",
-            className: "btn-default"
-        },
-        confirm: {
-            label: "Confirm",
-            className: "btn-confirm btn-green disabled",
-            callback: function () {
-                var enabledBtn = !$(".btn-confirm").hasClass("disabled");
+    $scope.finishSignature = {
+        agree: false,
+        fullName: "",
+        signDate: new Date(),
+        digitalSingature: "",
+        valid: false
+    };
 
-                alert($scope.finishing);
+    $scope.finishingSurvey = false;
 
-                if (enabledBtn) {
-                    
+    $scope.confirmFinishOptions = {
+        title: "Terms & Conditions",
+        templateUrl: 'app/views/term-conditions.html',
+        scope: $scope,
+        buttons: {
+            back: {
+                label: "Back",
+                className: "btn-back btn-default"
+            },
+            confirm: {
+                label: "Confirm",
+                className: "btn-confirm btn-green disabled",
+                callback: function () {
+                    var x = $scope.$apply(function () {
+                        $scope.doFinish($scope.finishSignature);
+                    });
+
+                    return true;
                 }
-
-                return enabledBtn;
             }
         }
+    };
+
+    $scope.doFinish = function (obj) {
+        var isDisabledBtn = $(".btn-confirm").hasClass("disabled");
+        if (!($scope.finishingSurvey || isDisabledBtn)) {
+            $scope.finishingSurvey = true;
+
+            var result = questionService.Finish(obj).then(function (response) {
+                var data = response.data;
+                if (response.data.isSuccess) {
+                    $scope.finishingSurvey = false;
+                    $scope.logOut();
+                }                
+            }, function (err) {
+                $scope.finishingSurvey = false;
+            });            
+        }        
     };
 
 }

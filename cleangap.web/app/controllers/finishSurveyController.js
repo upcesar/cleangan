@@ -5,36 +5,26 @@ finishSurveyController.$inject = ['$scope', '$q', '$http', '$location', 'authSer
 
 function finishSurveyController($scope, $q, $http, $location, authService, $routeParams, questionService) {
 
-    $scope.finishSurvey = {
-        agree : false,
-        name: "",
-        date: "",
-        signature: "",
-        valid : false
-    };
-
-    $scope.finishing = false;
-
     $scope.validateName = function () {
-        return ($scope.finishSurvey.name !== undefined && $scope.finishSurvey.name !== null && $scope.finishSurvey.name !== "");
+        return ($scope.finishSignature.fullName !== undefined && $scope.finishSignature.fullName !== null && $scope.finishSignature.fullName !== "");
     };
 
     $scope.validateDate = function () {
-        return ($scope.finishSurvey.date !== undefined && $scope.finishSurvey.date !== null && $scope.finishSurvey.date !== "");
+        return ($scope.finishSignature.signDate !== undefined && $scope.finishSignature.signDate !== null && $scope.finishSignature.signDate !== "");
     };
 
     $scope.validateSignature = function () {
-        return ($scope.finishSurvey.signature !== undefined && $scope.finishSurvey.signature !== null && $scope.finishSurvey.signature !== "");
+        return ($scope.finishSignature.digitalSingature !== undefined && $scope.finishSignature.digitalSingature !== null && $scope.finishSignature.digitalSingature !== "");
     };
 
     $scope.validateTermCondition = function () {
 
-        $scope.finishSurvey.valid = $scope.finishSurvey.agree
+        $scope.finishSignature.valid = $scope.finishSignature.agree
                                  && $scope.validateName()
                                  && $scope.validateDate()
                                  && $scope.validateSignature();
 
-        if ($scope.finishSurvey.valid) {
+        if ($scope.finishSignature.valid) {
             $(".btn-confirm").removeClass("disabled");
         } else {
             $(".btn-confirm").addClass("disabled");

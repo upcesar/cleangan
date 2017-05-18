@@ -88,17 +88,15 @@
                 </div>
             </div>
 
+            <div class="text-right mb1" ng-show="finishingSurvey"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Closing GAP document...</div>
             <a href="/" class="btn btn-lg btn-green pull-right" ng-class="isValidForm ? '' : 'disabled'" ng-click="saveAndExit()" type="submit">Save & Exit</a>
-            <a href="#" class="btn btn-lg btn-goto pull-right" 
+            <a href="#" class="btn btn-lg btn-goto pull-right"
                         ng-show="survey.page === survey.pageTotal" ng-class="isValidForm ? '' : 'disabled'" 
                         ng-click="finish()"
-                        ng-bootbox-title="Terms & Conditions"
                         ng-bootbox-custom-dialog
-                        ng-bootbox-custom-dialog-template="app/views/term-conditions.html"
-                        ng-bootbox-buttons="confirmFinish">Finish <i class="glyphicon glyphicon-ok"></i></a>
+                        ng-bootbox-options="confirmFinishOptions">Finish <i class="glyphicon glyphicon-ok"></i></a>
             <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page < survey.pageTotal" ng-class="isValidForm ? '' : 'disabled'" ng-click="next()">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
-            <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page <= survey.pageTotal && survey.page > 1" ng-click="back()"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
-        </div>
-
+            <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page <= survey.pageTotal && survey.page > 1" ng-click="back()"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>            
+        </div>        
     </div>
 </section>
