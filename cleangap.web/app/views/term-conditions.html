@@ -22,21 +22,21 @@
                 <span class="text-danger pull-right" ng-show="!validateName()">
                     This field cannot be empty
                 </span>
-                <input type="text" id="inputName" class="form-control" placeholder="" data-ng-model="finishSurvey.name" ng-change="validateTermCondition()" required autofocus>
+                <input type="text" id="inputName" class="form-control" placeholder="Type Full Name" data-ng-model="finishSurvey.name" ng-change="validateTermCondition()" required autofocus>
             </div>
             <div class="form-group-sm col-md-6">
                 <label for="" class="">Date:</label>
                 <span class="text-danger pull-right" ng-show="!validateDate()">
                     This field cannot be empty
                 </span>
-                <input type="text" id="inputName" class="form-control" placeholder="" data-ng-model="finishSurvey.date" ng-change="validateTermCondition()" required>
+                <input type="date" id="inputDate" class="form-control" ui-mask="99/99/9999" placeholder="MM/DD/YYYY" data-ng-model="finishSurvey.date" ng-change="validateTermCondition()" required>
             </div>
             <div class="form-group-sm col-md-12">
                 <label for="" class="">Signature:</label>
                 <div class="text-danger pull-right" ng-show="!validateSignature()">
                     This field cannot be empty
                 </div>
-                <input type="text" id="inputName" class="form-control" placeholder="" data-ng-model="finishSurvey.signature" ng-change="validateTermCondition()" required>
+                <input type="text" id="inputSignature" class="form-control" placeholder="" data-ng-model="finishSurvey.signature" ng-change="validateTermCondition()" required>
             </div>
         </div>
     </form>
