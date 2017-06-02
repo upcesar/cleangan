@@ -1,0 +1,13 @@
+﻿<div ng-controller="editAnswerController">
+    <form class="form-edit-answer" id="frmEditAnswer" name="frmEditAnswer" novalidate>
+        <div class="row">
+            <div class="form-group-sm col-md-12">
+                <label for="" class="">What is your ERP?</label>
+                <span class="text-danger pull-right" ng-show="!validateName()">
+                    This field cannot be empty
+                </span>
+                <input type="text" id="inputName" class="form-control" placeholder="Type Answer" ng-model="summaryData.newAnswer" ng-change="validateTermCondition()" required autofocus>
+            </div>
+        </div>
+    </form>
+</div>
