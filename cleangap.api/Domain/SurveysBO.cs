@@ -303,7 +303,8 @@ namespace cleangap.api.Domain
         {
             if (BoundToMax)
             {
-                bool hasAnswer = db.answers.Where(x => x.id_customer == 1).Any();
+                int? idCustomer = AccountIdentity.GetCurrentUserInt();
+                bool hasAnswer = db.answers.Where(x => x.id_customer == idCustomer).Any();
                 int varSectionPage = LastSectionId;
 
                 if (hasAnswer && pageNum >= varSectionPage)
