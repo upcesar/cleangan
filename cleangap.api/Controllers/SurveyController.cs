@@ -103,6 +103,18 @@ namespace cleangap.api.Controllers
                 Message = saved ? "Survey closed successfully" : "Failure on closing survey"
             };
         }
+
+        /// <summary>
+        /// Get All questions answered by the user
+        /// </summary>
+        /// <returns>List of questions answered</returns>
+        [HttpGet, Route("summary")]
+        public List<SurveyModel> Summary()
+        {
+            SurveysBO sBO = new SurveysBO();
+
+            return sBO.ListSummary();
+        }
     }
 
 }

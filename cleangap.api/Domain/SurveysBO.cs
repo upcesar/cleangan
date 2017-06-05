@@ -24,6 +24,8 @@ namespace cleangap.api.Domain
 
         bool CheckClosedSurvey(string CustomerId);
 
+        List<SurveyModel> ListSummary();
+
     }
     #endregion
     public class SurveysBO : ISurveysBO
@@ -340,7 +342,6 @@ namespace cleangap.api.Domain
 
                     if (maxPage != null && tblQuestion.Count > 0)
                     {
-
                         s.Page = (int)pageNum;
                         s.PageTotal = (int)maxPage;
 
@@ -356,6 +357,24 @@ namespace cleangap.api.Domain
             }
             throw new NullReferenceException("Page Num cannot be empty");
         }
+
+        public List<SurveyModel> ListSummary()
+        {
+            List<SurveyModel> listSurvey = new List<SurveyModel>();
+            using (var db = new CleanGapDataContext())
+            {
+                var maxPage = db.questions.Max(x => x.page);
+
+                for (int i = 1; i <= maxPage; i++)
+                {
+                    var survey = ListQuestions(i);
+                    listSurvey.Add(survey);
+                }
+
+            }
+            return listSurvey.Count > 0 ? listSurvey : null;
+        }
+
         public bool HasAnswer(int pageNum)
         {
             SurveyModel s = ListQuestions(pageNum);

@@ -530,6 +530,12 @@
             <param name="pSignature">Signature object with Full Name, Date and Digital Signature</param>
             <returns>Response with operation status</returns>
         </member>
+        <member name="M:cleangap.api.Controllers.SurveyController.Summary">
+            <summary>
+            Get All questions answered by the user
+            </summary>
+            <returns>List of questions answered</returns>
+        </member>
         <member name="T:cleangap.api.Models.Domain.SurveyModel">
             <summary>
             Survey's Model
