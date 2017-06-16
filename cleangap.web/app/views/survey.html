@@ -22,7 +22,7 @@
                 </ul>
                 <div class="myclearfix"></div>
                 <div class="nav navbar-nav navbar-right number-survey">
-                    <p>Progress Status: <strong>Step {{ survey.page }} of {{ survey.pageTotal }}</strong></p>
+                    <p>Progress Status: <strong><span ng-show="comingFromSummary()">Editing</span> Step {{ survey.page }} of {{ survey.pageTotal }}</strong></p>
                 </div>
             </div>
         </div><!-- /.navbar-collapse -->
@@ -90,18 +90,18 @@
 
             <div class="mb8">
                 <div class="text-right mb1" ng-show="finishingSurvey"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Closing GAP document...</div>
-                <a href="/" class="btn btn-lg btn-green pull-right" ng-class="!finishingSurvey && isValidForm ? '' : 'disabled'" ng-click="saveAndExit()" type="submit">Save & Exit</a>
-                <a href="#" class="btn btn-lg btn-goto pull-right"
-                   ng-show="survey.page === survey.pageTotal" ng-class="!finishingSurvey && isValidForm ? '' : 'disabled'"
-                   ng-click="finish()"
-                   ng-bootbox-custom-dialog
-                   ng-bootbox-options="confirmFinishOptions">Finish<i class="glyphicon glyphicon-ok"></i></a>
-                <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page < survey.pageTotal" ng-class="!finishingSurvey && isValidForm ? '' : 'disabled'" ng-click="next()">
+                <a href="/" class="btn btn-lg btn-green pull-right" ng-class="!finishingSurvey && isValidForm ? '' : 'disabled'" ng-hide= "comingFromSummary()" ng-click="saveAndExit()" type="submit">Save & Exit</a>
+                <a href="#" class="btn btn-lg btn-goto pull-right" ng-hide= "comingFromSummary()" ng-click="next()">
                     Next <i class="glyphicon glyphicon-chevron-right"></i>
                 </a>
-                <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page <= survey.pageTotal && survey.page > 1" ng-click="back()" ng-class="!finishingSurvey ? '' : 'disabled'">
+                
+                <a href="/" class="btn btn-lg btn-green pull-right" ng-class="!finishingSurvey && isValidForm ? '' : 'disabled'" ng-show="comingFromSummary()" ng-click="saveGoSummary()" type="submit">Update</a>
+
+                <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page <= survey.pageTotal && survey.page > 1 || !comingFromSummary()" ng-click="back()" ng-class="!finishingSurvey ? '' : 'disabled'">
                     <i class="glyphicon glyphicon-chevron-left"></i> Back
                 </a>
+
+                
             </div>
         </div>        
     </div>

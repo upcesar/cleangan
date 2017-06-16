@@ -12,6 +12,16 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
         $location.path('/');
     }
 
+    /*********************************************************************** 
+     *  Get route whether it is coming from summary to edit the answer     * 
+     ***********************************************************************/
+
+    $scope.comingFromSummary = function () {
+        var url = $location.url();
+
+        return (url.toLowerCase().indexOf("/survey/edit/") > -1);
+    };
+
     $scope.questionID = $routeParams.questionID;
 
     $scope.authentication = authService.authentication;
@@ -224,11 +234,13 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
 
     $scope.next = function () {
         $scope.saveAnswer();
-        $location.path('/survey/' + $scope.nextPage);
+        var nextPage = $scope.survey.page == $scope.survey.pageTotal ? 'summary' : $scope.nextPage;
+        $location.path('/survey/' + nextPage);
     };
 
     $scope.back = function () {
-        $location.path('/survey/' + $scope.prevPage);
+        var prevPage = $scope.comingFromSummary() ? 'summary' : $scope.prevPage;
+        $location.path('/survey/' + prevPage);
     };
 
     $scope.saveAndExit = function () {
@@ -237,54 +249,9 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
         });
     };
 
-    $scope.finishSignature = {
-        agree: false,
-        fullName: "",
-        signDate: new Date(),
-        digitalSingature: "",
-        valid: false
-    };
-
-    $scope.finishingSurvey = false;
-
-    $scope.confirmFinishOptions = {
-        title: "Terms & Conditions",
-        templateUrl: 'app/views/term-conditions.html',
-        scope: $scope,
-        buttons: {
-            back: {
-                label: "Back",
-                className: "btn-back btn-default"
-            },
-            confirm: {
-                label: "Confirm",
-                className: "btn-confirm btn-green disabled",
-                callback: function () {
-                    var x = $scope.$apply(function () {
-                        $scope.doFinish($scope.finishSignature);
-                    });
-
-                    return true;
-                }
-            }
-        }
-    };
-
-    $scope.doFinish = function (obj) {
-        var isDisabledBtn = $(".btn-confirm").hasClass("disabled");
-        if (!($scope.finishingSurvey || isDisabledBtn)) {
-            $scope.finishingSurvey = true;
-
-            var result = questionService.Finish(obj).then(function (response) {
-                var data = response.data;
-                if (response.data.isSuccess) {
-                    $scope.finishingSurvey = false;
-                    $scope.logOut();
-                }                
-            }, function (err) {
-                $scope.finishingSurvey = false;
-            });            
-        }        
-    };
+    $scope.saveGoSummary = function () {
+        $scope.saveAnswer();
+        $location.path('/survey/summary');
+    }
 
 }

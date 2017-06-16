@@ -17,12 +17,12 @@
             <div class="pull-right">
                 <ul class="nav navbar-nav navbar-right primary">
                     <li><a href="">{{ user.username }}</a></li>
-                    <hr>
+                    <hr />
                     <li><a data-ng-click="logOut()" style="cursor:pointer">Sign out</a></li>
                 </ul>
                 <div class="myclearfix"></div>
                 <ul class="nav navbar-nav navbar-right number-survey">
-                    <p>Progress Status: <strong>Step {{ survey.page }} of {{ survey.pageTotal }}</strong></p>
+                    <p>Progress Status: <strong>Answers Confirmation</strong></p>
                 </ul>
             </div>
         </div><!-- /.navbar-collapse -->
@@ -33,118 +33,52 @@
     <div class="container-fluid">
         <h1 class="title">Summary</h1>
         <div class="col-lg-10 col-lg-offset-1 col-md-12">
-            <h2 class="question">Section 1: ERP Questions</h2>
-            <div class="survey-card">
-                <ul>
-                    <li>
-                        <label>What is your ERP?</label>
-                        <span>{{summaryData.currentAnswer}}</span>
-                        <a href="#" ng-bootbox-custom-dialog ng-bootbox-options="editAnswerDialog" ng-click="getNewValue()">Edit Answer</a>
-                    </li>
-                    <li>
-                        <label>How is data going to be transferred for the following entities?</label>
+
+            <div ng-repeat="s in summaryData">
+                <h2 class="question">Step {{s.page}}: {{s.section_name}}</h2>
+                <div class="survey-card">
+                    <div ng-repeat="q in s.questions">
                         <ul>
                             <li>
-                                <label>Order Entry Data:</label>
-                                <span> My order data</span>
-                                <a href="#" ng-bootbox-custom-dialog ng-bootbox-options="editAnswerDialog">Edit Answer</a>
-                            </li>
-                            <li>
-                                <label>Order Export to ERP:</label>
-                                <span> My order ERP</span>
-                                <a href="#" ng-bootbox-custom-dialog ng-bootbox-options="editAnswerDialog">Edit Answer</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <label>Who is responsible for providing data access?</label>
-                        <ul>
-                            <li>
-                                <label>Name:</label>
-                                <span> César Urdaneta</span>
-                            </li>
-                            <li>
-                                <label>E-Mail:</label>
-                                <span> upcesar@gmail.com</span>
-                                <a href="#" ng-bootbox-custom-dialog ng-bootbox-options="editAnswerDialog">Edit Answer</a>
+                                <label>{{q.description}}</label>
+                                <div ng-if="q.questionOption.length === 1">
+                                    <span>{{q.questionOption[0].uniqueAnswer}}</span>
+                                </div>
+
+                                <div ng-if="q.questionOption.length > 1">
+                                    <div ng-repeat="qo in q.questionOption">
+                                        <ul>
+                                            <li>
+                                                <label>{{qo.optionText}}<br /></label>
+                                                <span ng-show="qo.optionType !== 'radio'">{{qo.uniqueAnswer}}</span>
+                                                <span ng-show="qo.optionType === 'radio' && qo.uniqueAnswer === qo.optionText"><i class="glyphicon glyphicon-ok-circle"></i></span>                                                
+                                            </li>
+                                        </ul>
+                                        
+                                    </div>
+                                </div>
+
                             </li>
                         </ul>
-                    </li>
-                </ul>
+                    </div>
+                    <hr />
+                    <a ng-href="/survey/edit/{{s.page}}" class="btn btn-lg btn-goto btn-green pull-right"><i class="glyphicon glyphicon-edit"></i> Edit Answers</a>
+
+                </div>
 
             </div>
-            <!--<div ng-repeat="question in survey.questions">
-                <div id="question{{question.id}}" ng-show="childrenQuestionUI[question.id] || childrenQuestionUI[question.id] == null">
-                    <h2 class="question">{{question.description}}</h2>
-                    <div class="survey-card">
-                        <div ng-repeat="option in question.questionOption">
-
-                            <div ng-if="option.optionType == 'radio'">
-                                <div ng-show="$index == 0 && !currentAnswer[question.id] && !saved" class="text-danger">Select an answer</div>
-                                <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'">
-                                    <input ng-model="currentAnswer[question.id]" ng-value="option" type="radio" name="{{question.id}}" ng-change="radioChanged(question, currentAnswer)"> {{option.optionText}} <br />
-                                </div>
-                            </div>
-
-                            <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'input-text'">
-                                <div class="row">
-                                    <label class="col-xs-6" for="{{option.optionText}}:">
-                                        {{option.optionText}}
-                                    </label>
-                                    <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">{{currentValidationMsg[option.optionId]}}</div>
-                                </div>
-                                <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" class="form-control" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" ng-change="checkForm()" type="{{currentValidationType[option.optionId]}}" />
-                            </div>
-
-                            <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'drop-down'">
-                                <div class="row">
-                                    <label class="col-xs-6">{{option.optionText}}: </label>
-                                    <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">
-                                        Select an answer from the list
-                                    </div>
-                                </div>
-
-                                <select ng-model="dropDownElement[option.optionId]" class="form-control" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" ng-options="selectableOption.description for selectableOption in option.questionChoices track by selectableOption.id" ng-change="dropdownChanged(option.optionId)">
-                                    <option value="">Select Option</option>
-                                </select>
-                            </div>
-
-
-                            <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'textarea'">
-                                <div class="row">
-                                    <label class="col-xs-6" for="{{option.optionText}}">
-                                        {{option.optionText}}
-                                    </label>
-                                    <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">
-                                        This answer cannot be empty
-                                    </div>
-                                </div>
-                                <textarea ng-model="currentAnswer[option.optionId]" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" class="form-control" cols="50" ng-change="checkForm()"> {{option.uniqueAnswer}} </textarea>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>-->
 
             <div class="mb8">
                 <div class="text-right mb1" ng-show="finishingSurvey"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Closing GAP document...</div>
-                <a href="/" class="btn btn-lg btn-green pull-right" ng-class="!finishingSurvey && isValidForm ? '' : 'disabled'" ng-click="saveAndExit()" type="submit">
-                    Save & Exit
-                </a>
-
-                <a href="#" class="btn btn-lg btn-goto pull-right"
-                   ng-show="survey.page === survey.pageTotal" ng-class="!finishingSurvey && isValidForm ? '' : 'disabled'"
-                   ng-click="finish()"
+                <a href="#" class="btn btn-lg btn-goto btn-green pull-right"
                    ng-bootbox-custom-dialog
                    ng-bootbox-options="confirmFinishOptions">Finish<i class="glyphicon glyphicon-ok"></i></a>
-                <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page < survey.pageTotal" ng-class="!finishingSurvey && isValidForm ? '' : 'disabled'" ng-click="next()">
-                    Next <i class="glyphicon glyphicon-chevron-right"></i>
-                </a>
-                <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="survey.page <= survey.pageTotal && survey.page > 1" ng-click="back()" ng-class="!finishingSurvey ? '' : 'disabled'">
+
+                <a href="#" class="btn btn-lg btn-goto pull-right" ng-click="back()">
                     <i class="glyphicon glyphicon-chevron-left"></i> Back
                 </a>
             </div>
         </div>
     </div>
+
 </section>

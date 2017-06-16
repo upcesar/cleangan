@@ -35,6 +35,12 @@ function questionService($http) {
             return $http.get(serviceBase + '/api/surveys/status/').then(function (response) {
                 return response;
             });
+        }),
+
+        GetSummary: (function () {
+            return $http.get(serviceBase + '/api/surveys/summary/').then(function (response) {
+                return response;
+            });
         })
 
     }

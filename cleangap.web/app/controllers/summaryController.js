@@ -5,34 +5,42 @@ summaryController.$inject = ['$scope', '$q', '$http', '$location', 'authService'
 
 function summaryController($scope, $q, $http, $location, authService, $routeParams, questionService) {
 
-    $scope.summaryData = {
-        currentAnswer : "Sap",
-        newAnswer : ""
+    $scope.user = JSON.parse(window.localStorage.getItem("ls.authorizationData"));
+
+    $scope.summaryData = [];
+
+    var getSummaryData = function () {
+        return questionService.GetSummary()
+                .then(function (surveySummary) {
+                    $scope.summaryData = surveySummary.data;
+                });
     };
 
-    $scope.setNewValues = function (newValue) {
-        $scope.summaryData.currentAnswer = newValue;
+    $scope.finishSignature = {
+        agree: false,
+        fullName: "",
+        signDate: new Date(),
+        digitalSingature: "",
+        valid: false
     };
 
-    $scope.getNewValue = function () {
-        $scope.summaryData.newAnswer = $scope.summaryData.currentAnswer;
-    }
+    $scope.finishingSurvey = false;
 
-    $scope.editAnswerDialog = {
-        title: "Edit Answer",
-        templateUrl: 'app/views/edit-answer.html',
+    $scope.confirmFinishOptions = {
+        title: "Terms & Conditions",
+        templateUrl: 'app/views/term-conditions.html',
         scope: $scope,
         buttons: {
-            cancel: {
-                label: "Cancel",
+            back: {
+                label: "Back",
                 className: "btn-back btn-default"
             },
-            ok: {
-                label: "Ok",
-                className: "btn-confirm btn-green",
+            confirm: {
+                label: "Confirm",
+                className: "btn-confirm btn-green disabled",
                 callback: function () {
                     var x = $scope.$apply(function () {
-                        $scope.setNewValues($scope.summaryData.newAnswer);                        
+                        $scope.doFinish($scope.finishSignature);
                     });
 
                     return true;
@@ -40,5 +48,34 @@ function summaryController($scope, $q, $http, $location, authService, $routePara
             }
         }
     };
+
+    $scope.doFinish = function (obj) {
+        var isDisabledBtn = $(".btn-confirm").hasClass("disabled");
+        if (!($scope.finishingSurvey || isDisabledBtn)) {
+            $scope.finishingSurvey = true;
+
+            var result = questionService.Finish(obj).then(function (response) {
+                var data = response.data;
+                if (response.data.isSuccess) {
+                    $scope.finishingSurvey = false;
+                    $scope.logOut();
+                }
+            }, function (err) {
+                $scope.finishingSurvey = false;
+            });
+        }
+    };
+
+    $scope.back = function () {
+        var lastPage = $scope.summaryData.length > 0 ? $scope.summaryData[0].pageTotal : 1;
+        $location.path('/survey/' + lastPage);
+    };
+
+    $scope.logOut = function () {
+        authService.logOut();
+        $location.path('/');
+    }
+
+    getSummaryData();
 
 }
