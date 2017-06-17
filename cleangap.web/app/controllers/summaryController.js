@@ -39,11 +39,11 @@ function summaryController($scope, $q, $http, $location, authService, $routePara
                 label: "Confirm",
                 className: "btn-confirm btn-green disabled",
                 callback: function () {
-                    var x = $scope.$apply(function () {
+                    $scope.$apply(function () {
                         $scope.doFinish($scope.finishSignature);
                     });
 
-                    return true;
+                    return !$(".btn-confirm").hasClass("disabled");
                 }
             }
         }
@@ -51,6 +51,7 @@ function summaryController($scope, $q, $http, $location, authService, $routePara
 
     $scope.doFinish = function (obj) {
         var isDisabledBtn = $(".btn-confirm").hasClass("disabled");
+
         if (!($scope.finishingSurvey || isDisabledBtn)) {
             $scope.finishingSurvey = true;
 
