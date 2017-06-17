@@ -7,6 +7,12 @@ function summaryController($scope, $q, $http, $location, authService, $routePara
 
     $scope.user = JSON.parse(window.localStorage.getItem("ls.authorizationData"));
 
+    $scope.loadingData = true;
+
+    $scope.showData = function () {
+        $scope.loadingData = false;
+    };
+
     $scope.summaryData = [];
 
     var getSummaryData = function () {

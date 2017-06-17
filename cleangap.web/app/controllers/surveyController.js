@@ -7,6 +7,12 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
 
     $scope.user = JSON.parse(window.localStorage.getItem("ls.authorizationData"));
 
+    $scope.loadingData = true;
+
+    $scope.showData = function () {
+        $scope.loadingData = false;
+    };
+
     $scope.logOut = function () {
         authService.logOut();
         $location.path('/');

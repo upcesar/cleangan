@@ -34,7 +34,7 @@
         <h1 class="title">Section {{ survey.section_id }}: {{ survey.section_name }}</h1>
         <!-- <h2 class="sub-title">Question {{index+1}} (Out of {{surveys.length}})</h2> -->
         <div class="col-lg-10 col-lg-offset-1 col-md-12">
-            <div ng-repeat="question in survey.questions">
+            <div ng-repeat="question in survey.questions" repeat-done="showData()">
                 <div id="question{{question.id}}" ng-show="childrenQuestionUI[question.id] || childrenQuestionUI[question.id] == null">
                     <h2 class="question">{{question.description}}</h2>
                     <div class="survey-card">                    
@@ -88,8 +88,9 @@
                 </div>
             </div>
 
-            <div class="mb8">
-                <div class="text-right mb1" ng-show="finishingSurvey"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Closing GAP document...</div>
+            <h4 class="text-center mb1" ng-show="loadingData"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Loading surveys...</h4>
+
+            <div class="mb8" ng-hide = "loadingData">
                 <a href="/" class="btn btn-lg btn-green pull-right" ng-class="!finishingSurvey && isValidForm ? '' : 'disabled'" ng-hide= "comingFromSummary()" ng-click="saveAndExit()" type="submit">Save & Exit</a>
                 <a href="#" class="btn btn-lg btn-goto pull-right" ng-hide= "comingFromSummary()" ng-click="next()">
                     Next <i class="glyphicon glyphicon-chevron-right"></i>

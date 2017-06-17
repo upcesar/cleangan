@@ -34,7 +34,7 @@
         <h1 class="title">Summary</h1>
         <div class="col-lg-10 col-lg-offset-1 col-md-12">
 
-            <div ng-repeat="s in summaryData">
+            <div ng-repeat="s in summaryData" repeat-done="showData()">
                 <h2 class="question">Step {{s.page}}: {{s.section_name}}</h2>
                 <div class="survey-card">
                     <div ng-repeat="q in s.questions">
@@ -68,7 +68,9 @@
 
             </div>
 
-            <div class="mb8">
+            <h4 class="text-center mb1" ng-show="loadingData"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Loading summary list...</h4>
+
+            <div class="mb8" ng-hide="loadingData">
                 <div class="text-right mb1" ng-show="finishingSurvey"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Closing GAP document...</div>
                 <a href="#" class="btn btn-lg btn-goto btn-green pull-right"
                    ng-bootbox-custom-dialog
