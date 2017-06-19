@@ -47,6 +47,12 @@
                                 </div>
                             </div>
 
+                            <div ng-if="option.optionType == 'checkbox'">
+                                <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'">
+                                    <input type="{{option.optionType}}" ng-checked="currentAnswer[option.optionId] ==='true'" name="{{option.optionId}}" ng-model="currentAnswer[option.optionId]"> {{option.optionText}} <br />
+                                </div>
+                            </div>
+
                             <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'input-text'">
                                 <div class="row">
                                     <label class="col-xs-6" for="{{option.optionText}}:">
@@ -69,7 +75,6 @@
                                     <option value="">Select Option</option>
                                 </select>
                             </div>
-
 
                             <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'textarea'">
                                 <div class="row">

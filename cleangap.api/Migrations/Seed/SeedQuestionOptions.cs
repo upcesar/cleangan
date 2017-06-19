@@ -90,22 +90,32 @@
                     // Are lookups (colors, genders, sales reps, shipping options) brand specific?
                     new question_options() { id = 33, id_question = 12, input_type = "radio", option_text = "Yes", order = 1 },
                     new question_options() { id = 34, id_question = 12, input_type = "radio", option_text = "No", order = 2 },
-                                        
+
+                    //Please mark what option below might be different per brand
+                    new question_options() { id = 35, id_question = 13, input_type = "checkbox", option_text = "Gender", order = 1 },
+                    new question_options() { id = 36, id_question = 13, input_type = "checkbox", option_text = "Color", order = 2 },
+                    new question_options() { id = 37, id_question = 13, input_type = "checkbox", option_text = "Product Category", order = 3 },
+                    new question_options() { id = 38, id_question = 13, input_type = "checkbox", option_text = "Season", order = 4 },
+                    new question_options() { id = 39, id_question = 13, input_type = "checkbox", option_text = "Shipping Methods", order = 5 },
+                    new question_options() { id = 40, id_question = 13, input_type = "checkbox", option_text = "Customer Terms", order = 6 },
+                    new question_options() { id = 41, id_question = 13, input_type = "checkbox", option_text = "Salespeople", order = 7 },
+                    new question_options() { id = 42, id_question = 13, input_type = "checkbox", option_text = "Divisions", order = 8 },
+
                     // Are there separate divisions within a brand?
-                    new question_options() { id = 35, id_question = 13, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 36, id_question = 13, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 43, id_question = 14, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 44, id_question = 14, input_type = "radio", option_text = "No", order = 2 },
 
                     // Can divisions be combined on one order?
-                    new question_options() { id = 37, id_question = 14, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 38, id_question = 14, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 45, id_question = 15, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 46, id_question = 15, input_type = "radio", option_text = "No", order = 2 },
 
                     // Do you want a division filter?
-                    new question_options() { id = 39, id_question = 15, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 40, id_question = 15, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 47, id_question = 16, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 48, id_question = 16, input_type = "radio", option_text = "No", order = 2 },
 
                     // Are some sales reps limited to what divisions they can sell?
-                    new question_options() { id = 41, id_question = 16, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 42, id_question = 16, input_type = "radio", option_text = "No", order = 2 }
+                    new question_options() { id = 49, id_question = 17, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 50, id_question = 17, input_type = "radio", option_text = "No", order = 2 }
 
             );
         }

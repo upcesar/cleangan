@@ -117,6 +117,9 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
                         }
                         currentAnswers[question.id] = currentAnswers[question.id] === undefined ? null : currentAnswers[question.id];
                         break;
+                    case 'checkbox':
+                        currentAnswers[option.optionId] = option.uniqueAnswer;
+                        break;
                     case 'drop-down':
 
                         currentAnswers[option.optionId] = option.uniqueAnswer;
