@@ -282,6 +282,10 @@
     <Compile Include="Migrations\201705181307427_AddedProjectFields.Designer.cs">
       <DependentUpon>201705181307427_AddedProjectFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706200046036_RedirectSummary.cs" />
+    <Compile Include="Migrations\201706200046036_RedirectSummary.Designer.cs">
+      <DependentUpon>201706200046036_RedirectSummary.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionDomain.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionOptions.cs" />
@@ -428,6 +432,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705181307427_AddedProjectFields.resx">
       <DependentUpon>201705181307427_AddedProjectFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706200046036_RedirectSummary.resx">
+      <DependentUpon>201706200046036_RedirectSummary.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

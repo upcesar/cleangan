@@ -44,29 +44,41 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
     $scope.isValidated = false;
     $scope.qtyChildrenHidden = 0;
 
-    var populateSurveyData = function (surveys) {
-        $scope.survey = surveys.data;
+    var populateSurveyData = function () {
+        
         $scope.surveys = $scope.survey.questions;
         $scope.index = 0;
         $scope.prevPage = (parseInt($scope.survey.page, 10) - 1);
         $scope.nextPage = (parseInt($scope.survey.page, 10) + 1);
 
-        convertAnswerToCurrent(surveys.data);
+        convertAnswerToCurrent($scope.survey);
         $scope.checkForm();
         $scope.isValidated = false;
     };
+
+    var checkSteps = function (surveys) {
+        $scope.survey = surveys.data;
+
+        if ($scope.survey.redirectSummary) {
+            $location.path('/survey/summary/');
+        } else {
+            populateSurveyData();
+        }
+
+    };
+
 
     var getQuestions = function (questionID) {
 
         if (questionID === undefined) {
             return questionService.GetLast()
-                .then(function (surveys) {
-                    populateSurveyData(surveys);
+                .then(function (surveys) {                    
+                    checkSteps(surveys);
                 });
         } else {
             return questionService.Get(questionID)
                 .then(function (surveys) {
-                    populateSurveyData(surveys);
+                    checkSteps(surveys);
                 });
         }
     };

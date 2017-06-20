@@ -6,8 +6,14 @@ namespace cleangap.api.Models.Tables
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    /// <summary>
+    /// Customer Table Model
+    /// </summary>
     public partial class customers
     {
+        /// <summary>
+        /// Constructor for setting up child objects.
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public customers()
         {
@@ -15,6 +21,9 @@ namespace cleangap.api.Models.Tables
             projects = new HashSet<projects>();
         }
 
+        /// <summary>
+        /// Customer Id
+        /// </summary>
         public int id { get; set; }
 
         [StringLength(100)]
@@ -25,6 +34,8 @@ namespace cleangap.api.Models.Tables
 
         [StringLength(32)]
         public string password { get; set; }
+
+        public bool redirect_summary { get; set; }
 
         [StringLength(64)]
         public string token_signin { get; set; }

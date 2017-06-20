@@ -13,6 +13,7 @@ namespace cleangap.api.Models.Domain
         public int id { get; set; }
         public int Page { get; set; }
         public int PageTotal { get; set; }
+        public bool RedirectSummary { get; set; }
 
         public List<QuestionsModel> questions { get; set; }
         public int section_id { get; internal set; }
@@ -22,6 +23,7 @@ namespace cleangap.api.Models.Domain
         {
             section_id = 0;
             section_name = "Uncategorized";
+            RedirectSummary = false;
             questions = new List<QuestionsModel>();
         }
 

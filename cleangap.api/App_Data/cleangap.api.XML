@@ -541,5 +541,20 @@
             Survey's Model
             </summary>
         </member>
+        <member name="T:cleangap.api.Models.Tables.customers">
+            <summary>
+            Customer Table Model
+            </summary>
+        </member>
+        <member name="M:cleangap.api.Models.Tables.customers.#ctor">
+            <summary>
+            Constructor for setting up child objects.
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Tables.customers.id">
+            <summary>
+            Customer Id
+            </summary>
+        </member>
     </members>
 </doc>

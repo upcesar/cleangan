@@ -320,11 +320,44 @@ namespace cleangap.api.Domain
 
         }
 
+        private bool GoToSummary()
+        {
+            int? idCustomer = AccountIdentity.GetCurrentUserInt();
+            bool goSummary = false;
+            using (var db = new CleanGapDataContext())
+            {
+                var rowCustomer = db.customers.Find(idCustomer);
+                if (rowCustomer != null && rowCustomer.id > 0)
+                {
+                    goSummary = rowCustomer.redirect_summary;
+                }
+            }
+
+            return goSummary;
+        }
+        private void SetUserSummary(CleanGapDataContext db, int CountList)
+        {
+            int? idCustomer = AccountIdentity.GetCurrentUserInt();
+            var tbCustomer = db.customers.Find(idCustomer);
+
+            if (tbCustomer != null && tbCustomer.id > 0 && CountList > 0)
+            {
+                tbCustomer.redirect_summary = true;
+                db.Entry(tbCustomer).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
         #endregion
         #region Public Methods
         public SurveyModel ResumeLast()
         {
             int PageNum = LastSectionId;
+            bool boolGoToSummary = GoToSummary();
+            if (boolGoToSummary)
+            {
+                return new SurveyModel() { RedirectSummary = true };
+            }
+
             return ListQuestions(PageNum);
         }
         public SurveyModel ListQuestions(int? pageNum, bool BoundToMax = false)
@@ -370,8 +403,9 @@ namespace cleangap.api.Domain
                     var survey = ListQuestions(i);
                     listSurvey.Add(survey);
                 }
-
+                SetUserSummary(db, listSurvey.Count);
             }
+
             return listSurvey.Count > 0 ? listSurvey : null;
         }
 
