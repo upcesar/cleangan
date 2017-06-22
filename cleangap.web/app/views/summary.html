@@ -62,7 +62,7 @@
                         </ul>
                     </div>
                     <hr />
-                    <a ng-href="/survey/edit/{{s.page}}" class="btn btn-lg btn-goto btn-green pull-right"><i class="glyphicon glyphicon-edit"></i> Edit Answers</a>
+                    <a ng-href="/survey/edit/{{s.page}}" class="btn btn-lg btn-goto pull-right"><i class="glyphicon glyphicon-edit"></i> Edit Answers</a>
 
                 </div>
 
@@ -72,7 +72,7 @@
 
             <div class="mb8" ng-hide="loadingData">
                 <div class="text-right mb1" ng-show="finishingSurvey"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Closing GAP document...</div>
-                <a href="#" class="btn btn-lg btn-goto btn-green pull-right"
+                <a href="#" class="btn btn-lg btn-finish-summary btn-green pull-right"
                    ng-bootbox-custom-dialog
                    ng-bootbox-options="confirmFinishOptions">Accept & Finish <i class="glyphicon glyphicon-ok"></i></a>
             </div>

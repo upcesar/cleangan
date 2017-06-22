@@ -30,4 +30,7 @@ function finishSurveyController($scope, $q, $http, $location, authService, $rout
             $(".btn-confirm").addClass("disabled");
         }
     };
+
+    $scope.validateTermCondition();
+
 }

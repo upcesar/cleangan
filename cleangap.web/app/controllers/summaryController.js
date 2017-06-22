@@ -22,24 +22,37 @@ function summaryController($scope, $q, $http, $location, authService, $routePara
                 });
     };
 
-    $scope.finishSignature = {
-        agree: false,
-        fullName: "",
-        signDate: new Date(),
-        digitalSingature: "",
-        valid: false
-    };
+    $scope.initSignature = function () {
+        $scope.finishSignature = {
+            agree: false,
+            fullName: "",
+            signDate: new Date(),
+            digitalSingature: "",
+            valid: false
+        };
+    }
+
+    $scope.initSignature();
+    
 
     $scope.finishingSurvey = false;
 
     $scope.confirmFinishOptions = {
         title: "Terms & Conditions",
         templateUrl: 'app/views/term-conditions.html',
+        controller: 'finishSurveyController',
         scope: $scope,
         buttons: {
-            back: {
-                label: "Back",
-                className: "btn-back btn-default"
+            cancel: {
+                label: "Cancel",
+                className: "btn-back btn-default",
+                callback: function () {
+                    $scope.$apply(function () {
+                        $scope.initSignature();
+                    });
+
+                    return true;
+                }
             },
             confirm: {
                 label: "Confirm",

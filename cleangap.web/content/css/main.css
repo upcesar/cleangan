@@ -107,6 +107,9 @@ label {
 	margin-right: 10px;
 	font-size: 16px;
 }
+.btn-finish-summary {
+    margin-right: 21px;
+}
 .header {
 	width: 100%;
 	height: 15px;
