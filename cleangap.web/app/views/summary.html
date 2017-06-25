@@ -50,8 +50,8 @@
                                         <ul>
                                             <li>
                                                 <label>{{qo.optionText}}<br /></label>
-                                                <span ng-show="qo.optionType !== 'radio'">{{qo.uniqueAnswer}}</span>
-                                                <span ng-show="qo.optionType === 'radio' && qo.uniqueAnswer === qo.optionText"><i class="glyphicon glyphicon-ok-circle"></i></span>                                                
+                                                <span ng-show="qo.optionType !== 'radio' && qo.optionType !== 'checkbox'">{{qo.uniqueAnswer}}</span>
+                                                <span ng-show="(qo.optionType === 'radio' && qo.uniqueAnswer === qo.optionText) || ( qo.optionType === 'checkbox' && qo.uniqueAnswer ===  'true')"><i class="glyphicon glyphicon-ok-circle"></i></span>                                                
                                             </li>
                                         </ul>
                                         
