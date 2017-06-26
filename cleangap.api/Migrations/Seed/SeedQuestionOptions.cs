@@ -115,7 +115,18 @@
 
                     // Are some sales reps limited to what divisions they can sell?
                     new question_options() { id = 49, id_question = 17, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 50, id_question = 17, input_type = "radio", option_text = "No", order = 2 }
+                    new question_options() { id = 50, id_question = 17, input_type = "radio", option_text = "No", order = 2 },
+
+                    // Please list our brand names as entered ERP
+                    new question_options() { id = 51, id_question = 18, input_type = "input-text", option_text = "Brand Name", order = 1 },
+                    new question_options() { id = 52, id_question = 18, input_type = "input-text", option_text = "Address 1", order = 2 },
+                    new question_options() { id = 53, id_question = 18, input_type = "input-text", option_text = "Address 2", order = 3 },
+                    new question_options() { id = 54, id_question = 18, input_type = "input-text", option_text = "City", order = 4 },
+                    new question_options() { id = 55, id_question = 18, input_type = "input-text", option_text = "State", order = 5 },
+                    new question_options() { id = 56, id_question = 18, input_type = "input-text", option_text = "Zip", order = 6 },
+                    new question_options() { id = 57, id_question = 18, input_type = "input-text", option_text = "Country", order = 7 },
+                    new question_options() { id = 58, id_question = 18, input_type = "input-text", option_text = "E-Mail", order = 8 },
+                    new question_options() { id = 59, id_question = 18, input_type = "input-file", option_text = "Upload Logo", order = 9 }
 
             );
         }

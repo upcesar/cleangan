@@ -45,7 +45,8 @@
         {
             questions qSepDiv = context.questions.Find(14);  // Are there separate divisions within a brand? Yes
             context.questions.AddOrUpdate(
-                        new questions() { id = 15, name = "brand_div_combined", description = "Can divisions be combined on one order?", page = 6, parent_question_id = qSepDiv.id, parent_answer_value = "Yes", id_section = qsBrands.id }
+                        new questions() { id = 15, name = "brand_div_combined", description = "Can divisions be combined on one order?", page = 6, parent_question_id = qSepDiv.id, parent_answer_value = "Yes", id_section = qsBrands.id },
+                        new questions() { id = 18, name = "brand_list_erp", description = "Please list our brand names as entered ERP", page = 6, parent_question_id = qSepDiv.id, parent_answer_value = "Yes", id_section = qsBrands.id, has_repeater = true }
             );
             SeedDependentQtnDivCombBrands(context, qsBrands);
         }
@@ -55,7 +56,7 @@
             context.questions
                    .AddOrUpdate(
                         new questions() { id = 16, name = "brand_division", description = "Do you want a division filter?", page = 6, parent_question_id = qDivCombBrand.id, parent_answer_value = "Yes", id_section = qsBrands.id },
-                        new questions() { id = 17, name = "brand_reps_div", description = "Are some sales reps limited to what divisions they can sell?", page = 6, parent_question_id = qDivCombBrand.id, parent_answer_value = "Yes", id_section = qsBrands.id }                        
+                        new questions() { id = 17, name = "brand_reps_div", description = "Are some sales reps limited to what divisions they can sell?", page = 6, parent_question_id = qDivCombBrand.id, parent_answer_value = "Yes", id_section = qsBrands.id }
             );
         }
     }

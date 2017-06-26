@@ -286,6 +286,10 @@
     <Compile Include="Migrations\201706200046036_RedirectSummary.Designer.cs">
       <DependentUpon>201706200046036_RedirectSummary.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706252129265_RepeaterQuestion.cs" />
+    <Compile Include="Migrations\201706252129265_RepeaterQuestion.Designer.cs">
+      <DependentUpon>201706252129265_RepeaterQuestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionDomain.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionOptions.cs" />
@@ -435,6 +439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706200046036_RedirectSummary.resx">
       <DependentUpon>201706200046036_RedirectSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706252129265_RepeaterQuestion.resx">
+      <DependentUpon>201706252129265_RepeaterQuestion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

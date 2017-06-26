@@ -536,6 +536,56 @@
             </summary>
             <returns>List of questions answered</returns>
         </member>
+        <member name="T:cleangap.api.Models.Domain.QuestionsModel">
+            <summary>
+            Question Model for business logic
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.QuestionsModel.id">
+            <summary>
+            Question Id
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.QuestionsModel.description">
+            <summary>
+            Question Description
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.QuestionsModel.QuestionOption">
+            <summary>
+            Question Options List
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.QuestionsModel.ParentQuestionId">
+            <summary>
+            Parent Question Id for questions related with logic
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.QuestionsModel.ParentAnswerValue">
+            <summary>
+            Parent Question's answer value that triggers the related questions 
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.QuestionsModel.ParentSelected">
+            <summary>
+            Set If Parent Question has the answers that triggers the related questions
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.QuestionsModel.HasRepeater">
+            <summary>
+            Check if current question should use a repeater control
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.QuestionsModel.ChildrenQuestion">
+            <summary>
+            List of Children Quesiton 
+            </summary>
+        </member>
+        <member name="M:cleangap.api.Models.Domain.QuestionsModel.#ctor">
+            <summary>
+            Queston initialization (constructor)
+            </summary>
+        </member>
         <member name="T:cleangap.api.Models.Domain.SurveyModel">
             <summary>
             Survey's Model
@@ -554,6 +604,76 @@
         <member name="P:cleangap.api.Models.Tables.customers.id">
             <summary>
             Customer Id
+            </summary>
+        </member>
+        <member name="T:cleangap.api.Models.Tables.questions">
+            <summary>
+            Question Entity Model
+            </summary>
+        </member>
+        <member name="M:cleangap.api.Models.Tables.questions.#ctor">
+            <summary>
+            Question Entity Model Constructor
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Tables.questions.id">
+            <summary>
+            Question ID
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Tables.questions.name">
+            <summary>
+            Question Short Name
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Tables.questions.description">
+            <summary>
+            Question Description
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Tables.questions.id_section">
+            <summary>
+            Foreign Key Id for Sections Entity
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Tables.questions.parent_question_id">
+            <summary>
+            Foreign Key for mapping Parent Question row
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Tables.questions.parent_answer_value">
+            <summary>
+            Parent answer value for showing
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Tables.questions.has_repeater">
+            <summary>
+            Set repeated for mapped Question Option
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Tables.questions.page">
+            <summary>
+            Question Page
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Tables.questions.question_options">
+            <summary>
+            Question Options collection
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Tables.questions.parent_question">
+            <summary>
+            Parent Question Object
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Tables.questions.children_question">
+            <summary>
+            Children Question List
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Tables.questions.question_sections">
+            <summary>
+            Question section Obeject
             </summary>
         </member>
     </members>

@@ -109,6 +109,7 @@ namespace cleangap.api.Domain
                     id = item.id,
                     description = item.description,
                     ParentAnswerValue = item.parent_answer_value,
+                    HasRepeater = item.has_repeater,
                     QuestionOption = options,
                     ParentSelected = true,
                     ChildrenQuestion = GetChilderQuestions(item.children_question),

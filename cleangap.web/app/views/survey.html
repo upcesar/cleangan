@@ -63,6 +63,16 @@
                                 <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" class="form-control" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" ng-change="checkForm()" type="{{currentValidationType[option.optionId]}}" />
                             </div>
 
+                            <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'input-file'">
+                                <div class="row">
+                                    <label class="col-xs-6" for="{{option.optionText}}:">
+                                        {{option.optionText}}
+                                    </label>
+                                    <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">{{currentValidationMsg[option.optionId]}}</div>
+                                </div>
+                                <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" class="" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" ng-change="checkForm()" type="file" />
+                            </div>
+
                             <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'drop-down'">
                                 <div class="row">
                                     <label class="col-xs-6">{{option.optionText}}: </label>
@@ -87,6 +97,10 @@
                                 </div>
                                 <textarea ng-model="currentAnswer[option.optionId]" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" class="form-control" cols="50" ng-change="checkForm()"> {{option.uniqueAnswer}} </textarea>
                             </div>
+                        </div>
+
+                        <div class="clearfix pull-right" ng-if="question.hasRepeater">
+                            <a href="#" class="btn btn-default">Add</a>
                         </div>
 
                     </div>
