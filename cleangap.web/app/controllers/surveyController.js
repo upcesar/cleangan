@@ -111,6 +111,8 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
         $scope.currentAnswer[optionId] = $scope.dropDownElement[optionId] !== null ? $scope.dropDownElement[optionId].id : null;
         $scope.checkForm();
     };
+    
+    $scope.templateRepeater = [];
 
 
     var convertAnswerToCurrent = function (serverAnswer) {
@@ -119,6 +121,10 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
         $scope.qtyChildrenHidden = 0;
 
         serverAnswer.questions.forEach(function (question) {
+
+            if (question.hasRepeater) {
+                angular.copy(question.questionOption, $scope.templateRepeater);
+            }
 
             question.questionOption.forEach(function (option) {
 
@@ -209,6 +215,21 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
 
     /******************************
      *  Fields Validations - End
+     ******************************/
+
+    /******************************
+     *  Repeater sections
+     ******************************/
+    $scope.addRepeater = function (key) {
+        
+        $scope.templateRepeater.forEach(function (item) {
+            $scope.survey.questions[key].questionOption.push(item);            
+        });
+    }
+
+
+    /******************************
+     *  END: Repeater sections
      ******************************/
 
     $scope.saveAnswer = function (logOut) {

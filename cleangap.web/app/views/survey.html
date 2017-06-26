@@ -38,8 +38,7 @@
                 <div id="question{{question.id}}" ng-show="childrenQuestionUI[question.id] || childrenQuestionUI[question.id] == null">
                     <h2 class="question">{{question.description}}</h2>
                     <div class="survey-card">                    
-                        <div ng-repeat="option in question.questionOption">
-
+                        <div ng-repeat="option in question.questionOption track by $index">                            
                             <div ng-if="option.optionType == 'radio'">                            
                                 <div ng-show="$index == 0 && !currentAnswer[question.id] && !saved" class="text-danger">Select an answer</div>
                                 <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'">
@@ -63,7 +62,7 @@
                                 <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" class="form-control" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" ng-change="checkForm()" type="{{currentValidationType[option.optionId]}}" />
                             </div>
 
-                            <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'input-file'">
+                            <div class="col-xs-12" ng-if="option.optionType === 'input-file'">
                                 <div class="row">
                                     <label class="col-xs-6" for="{{option.optionText}}:">
                                         {{option.optionText}}
@@ -100,7 +99,7 @@
                         </div>
 
                         <div class="clearfix pull-right" ng-if="question.hasRepeater">
-                            <a href="#" class="btn btn-default">Add</a>
+                            <a href="#" class="btn btn-default" ng-click="addRepeater($parent.$index)"><i class="glyphicon glyphicon-plus-sign"></i> Add</a>
                         </div>
 
                     </div>
