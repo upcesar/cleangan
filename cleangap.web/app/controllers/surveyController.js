@@ -16,7 +16,7 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
     $scope.logOut = function () {
         authService.logOut();
         $location.path('/');
-    }
+    };
 
     /*********************************************************************** 
      *  Get route whether it is coming from summary to edit the answer     * 
@@ -25,7 +25,7 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
     $scope.comingFromSummary = function () {
         var url = $location.url();
 
-        return (url.toLowerCase().indexOf("/survey/edit/") > -1);
+        return url.toLowerCase().indexOf("/survey/edit/") > -1;
     };
 
     $scope.questionID = $routeParams.questionID;
@@ -48,8 +48,8 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
         
         $scope.surveys = $scope.survey.questions;
         $scope.index = 0;
-        $scope.prevPage = (parseInt($scope.survey.page, 10) - 1);
-        $scope.nextPage = (parseInt($scope.survey.page, 10) + 1);
+        $scope.prevPage = parseInt($scope.survey.page, 10) - 1;
+        $scope.nextPage = parseInt($scope.survey.page, 10) + 1;
 
         convertAnswerToCurrent($scope.survey);
         $scope.checkForm();
@@ -87,20 +87,20 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
     var showChildrenQuestionMap = function (question, currentAnswers) {
 
         var sizeChildrenQuestionUI = $scope.childrenQuestionUI.filter(function (value) {
-            return value !== undefined && value != null;
+            return value !== undefined && value !== null;
         }).length;
 
         question.childrenQuestion.forEach(function (childQuestion) {
 
-            $scope.childrenQuestionUI[childQuestion.id] = currentAnswers[question.id] != null &&
+            $scope.childrenQuestionUI[childQuestion.id] = currentAnswers[question.id] !== null &&
                                                           currentAnswers.length > 0 &&                                                          
-                                                          childQuestion != null &&
+                                                          childQuestion !== null &&
                                                           childQuestion.parentAnswerValue === currentAnswers[question.id].optionText;     
 
         });
 
         var qtyChildrenHidden = $scope.childrenQuestionUI.filter(function (value) {
-            return value !== undefined && (value == null || !value);
+            return value !== undefined && (value === null || !value);
         }).length;
 
         $scope.qtyChildrenHidden = qtyChildrenHidden;
@@ -145,7 +145,7 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
 
                 switch (option.optionType) {
                     case 'radio':
-                        if (option.optionText == option.uniqueAnswer) {
+                        if (option.optionText === option.uniqueAnswer) {
                             currentAnswers[question.id] = option;
                         }
                         currentAnswers[question.id] = currentAnswers[question.id] === undefined ? null : currentAnswers[question.id];
@@ -158,7 +158,7 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
                         currentAnswers[option.optionId] = option.uniqueAnswer;
 
                         option.questionChoices.forEach(function (dropdownList) {
-                            if (option.uniqueAnswer == dropdownList.id) {
+                            if (option.uniqueAnswer === dropdownList.id) {
                                 $scope.dropDownElement[option.optionId] = dropdownList;
                                 return;
                             }
@@ -183,9 +183,12 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
 
     getQuestions($scope.questionID);
 
-    /******************************
-     *  Events
-     ******************************/
+    /**
+     * Radio changed event.
+     * @param {question} Question object.
+     * @param {currentAnswer} The current Answer.
+     */
+
     $scope.radioChanged = function (question, currentAnswer) {
         showChildrenQuestionMap(question, currentAnswer);
         $scope.checkForm();
@@ -203,7 +206,7 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
     $scope.validateUniqueAnswer = function (optionObj, isEmail) {
         isEmail = isEmail !== undefined ? isEmail : false;
         var answerText = $scope.currentAnswer[optionObj.optionId];
-        return answerText != null && answerText != "";
+        return answerText !== null && answerText !== "";
     };
 
     $scope.sizeCurrentAnswer = 0;
@@ -212,7 +215,7 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
 
     $scope.checkForm = function () {
         var sizeCurrentAnswer = $scope.currentAnswer.filter(function (value) {
-            return value !== undefined && value != null && value != "";
+            return value !== undefined && value !== null && value !== "";
         }).length;
 
         var sizeAllAnswer = $scope.currentAnswer.filter(function (value) {
@@ -223,10 +226,10 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
         $scope.sizeAllAnswer = sizeAllAnswer;
 
 
-        $scope.isValidForm = (sizeAllAnswer <= sizeCurrentAnswer);
-        
+        $scope.isValidForm = sizeAllAnswer <= sizeCurrentAnswer;
+
         $scope.isValidated = true;
-    }
+    };
 
     /******************************
      *  Fields Validations - End
@@ -235,6 +238,12 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
     /******************************
      *  Repeater sections
      ******************************/
+
+    /**
+     * Add reapeater.
+     * @param {key} key Index.
+     */
+
     $scope.addRepeater = function (key) {
 
         var copyRepeater = [];
@@ -246,8 +255,8 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
             $scope.survey.questions[key].questionOption.push(item);
             $scope.templateRepeaterList[index] = item;
         });
-        
-    }
+
+    };
 
 
     /******************************
@@ -264,7 +273,7 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
                 hasMultipleAnswer: false
             };
 
-            if (answer != null) {
+            if (answer !== null) {
                 currentAnswerReturn.hasMultipleAnswer = !!answer['pop'];
                 var prop = currentAnswerReturn.hasMultipleAnswer ? 'multipleValues' : 'uniqueValue';
                 // For input radio, set {optionId, optionText}. Otherwise, {index, answer}
@@ -298,7 +307,7 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
 
     $scope.next = function () {
         $scope.saveAnswer();
-        var nextPage = $scope.survey.page == $scope.survey.pageTotal ? 'summary' : $scope.nextPage;
+        var nextPage = $scope.survey.page === $scope.survey.pageTotal ? 'summary' : $scope.nextPage;
         $location.path('/survey/' + nextPage);
     };
 
@@ -316,6 +325,6 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
     $scope.saveGoSummary = function () {
         $scope.saveAnswer();
         $location.path('/survey/summary');
-    }
+    };
 
 }
