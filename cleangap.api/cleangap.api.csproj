@@ -290,6 +290,10 @@
     <Compile Include="Migrations\201706252129265_RepeaterQuestion.Designer.cs">
       <DependentUpon>201706252129265_RepeaterQuestion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707110259175_AnswerIdxRepeaterField.cs" />
+    <Compile Include="Migrations\201707110259175_AnswerIdxRepeaterField.Designer.cs">
+      <DependentUpon>201707110259175_AnswerIdxRepeaterField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionDomain.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionOptions.cs" />
@@ -442,6 +446,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706252129265_RepeaterQuestion.resx">
       <DependentUpon>201706252129265_RepeaterQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707110259175_AnswerIdxRepeaterField.resx">
+      <DependentUpon>201707110259175_AnswerIdxRepeaterField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
