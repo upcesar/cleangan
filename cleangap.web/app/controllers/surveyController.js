@@ -112,8 +112,23 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
         $scope.checkForm();
     };
     
-    $scope.templateRepeater = [];
+    $scope.templateRepeaterList = [];
 
+    
+    $scope.setRepeaterValues = function (option) {
+        var templateRepeater = {
+            "optionId" : option.optionId,
+            "optionText" : option.optionText,
+            "optionType" : option.optionType,
+            "questionChoices" : option.questionChoices,
+            "hasMultipleAnswer" : false,
+            "uniqueAnswer" : "",
+            "multipleAnswers" : [],
+            "repeaterIndex" : 0 
+        };
+
+        $scope.templateRepeaterList.push(templateRepeater);
+    };
 
     var convertAnswerToCurrent = function (serverAnswer) {
         var currentAnswers = [];
@@ -121,12 +136,12 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
         $scope.qtyChildrenHidden = 0;
 
         serverAnswer.questions.forEach(function (question) {
-
-            if (question.hasRepeater) {
-                angular.copy(question.questionOption, $scope.templateRepeater);
-            }
-
+                        
             question.questionOption.forEach(function (option) {
+
+                if (question.hasRepeater) {
+                    $scope.setRepeaterValues(option);
+                }
 
                 switch (option.optionType) {
                     case 'radio':
@@ -221,10 +236,17 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
      *  Repeater sections
      ******************************/
     $scope.addRepeater = function (key) {
-        
-        $scope.templateRepeater.forEach(function (item) {
-            $scope.survey.questions[key].questionOption.push(item);            
+
+        var copyRepeater = [];
+        angular.copy($scope.templateRepeaterList, copyRepeater);
+
+        copyRepeater.forEach(function (item, index) {
+            item.optionId += $scope.templateRepeaterList.length - 1;
+            item.repeaterIndex++;
+            $scope.survey.questions[key].questionOption.push(item);
+            $scope.templateRepeaterList[index] = item;
         });
+        
     }
 
 
