@@ -1,9 +1,9 @@
 'use strict';
 app.controller('surveyController', surveyController);
 
-surveyController.$inject = ['$scope', '$q', '$http', '$location', 'authService', '$routeParams', 'questionService'];
+surveyController.$inject = ['$scope', '$q', '$http', '$filter', '$location', 'authService', '$routeParams', 'questionService'];
 
-function surveyController($scope, $q, $http, $location, authService, $routeParams, questionService) {
+function surveyController($scope, $q, $http, $filter, $location, authService, $routeParams, questionService) {
 
     $scope.user = JSON.parse(window.localStorage.getItem("ls.authorizationData"));
 
@@ -117,14 +117,15 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
     
     $scope.setRepeaterValues = function (option) {
         var templateRepeater = {
-            "optionId" : option.optionId,
-            "optionText" : option.optionText,
-            "optionType" : option.optionType,
-            "questionChoices" : option.questionChoices,
+            "optionIdBase"      : option.optionId,
+            "optionId"          : option.optionId,
+            "optionText"        : option.optionText,
+            "optionType"        : option.optionType,
+            "questionChoices"   : option.questionChoices,
             "hasMultipleAnswer" : false,
-            "uniqueAnswer" : "",
-            "multipleAnswers" : [],
-            "repeaterIndex" : 0 
+            "uniqueAnswer"      : "",
+            "multipleAnswers"   : [],
+            "repeaterIndex"     : 0 
         };
 
         $scope.templateRepeaterList.push(templateRepeater);
@@ -136,8 +137,12 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
         $scope.qtyChildrenHidden = 0;
 
         serverAnswer.questions.forEach(function (question) {
-                        
+            
+            question.qtyRepeaters = 0;
+
             question.questionOption.forEach(function (option) {
+
+                option.optionIdBase = null;
 
                 if (question.hasRepeater) {
                     $scope.setRepeaterValues(option);
@@ -253,6 +258,7 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
             item.optionId += $scope.templateRepeaterList.length - 1;
             item.repeaterIndex++;
             $scope.survey.questions[key].questionOption.push(item);
+            $scope.survey.questions[key].qtyRepeaters++;
             $scope.templateRepeaterList[index] = item;
         });
 
@@ -279,6 +285,13 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
                 // For input radio, set {optionId, optionText}. Otherwise, {index, answer}
                 currentAnswerReturn[prop] = answer.optionId ? answer.optionText : answer;
                 currentAnswerReturn.questionOptionId = answer.optionId ? answer.optionId : index;
+
+                //Check questionOptionId for its respective questionOptionIdBase (Repeater).
+                var filteredRepeater = $filter("filter")($scope.templateRepeaterList, { optionId: currentAnswerReturn.questionOptionId });
+                if (filteredRepeater.length > 0) {
+                    currentAnswerReturn.questionOptionId = filteredRepeater[0].optionIdBase;
+                }
+
             } else {
                 currentAnswerReturn.uniqueValue = null;
             }
@@ -288,6 +301,10 @@ function surveyController($scope, $q, $http, $location, authService, $routeParam
 
         var deferred = $q.defer();
         var allPromises = [];
+
+        var getOptionIdRepeater = function (response, questionOptionId) {
+            
+        };
 
         response.forEach(function (obj) {
 
