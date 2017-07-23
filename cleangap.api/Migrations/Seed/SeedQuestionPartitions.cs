@@ -14,7 +14,20 @@
             question_sections qsBrands = context.question_sections.Find(3);
             context.questions.AddOrUpdate(
                     new questions() { id = 9, name = "brands_multiple", description = "Are there multiple brands?", page = 5, id_section = qsBrands.id },
-                    new questions() { id = 14, name = "brand_separeted", description = "Are there separate divisions within a brand?", page = 6, id_section = qsBrands.id }
+                    new questions() { id = 14, name = "brand_separeted", description = "Are there separate divisions within a brand?", page = 6, id_section = qsBrands.id },
+
+                    new questions() { id = 19, name = "brand_separeted", description = "Are customers limited to a division in the ERP?", page = 7, id_section = qsBrands.id },
+                    new questions() { id = 20, name = "brand_lookup_attr", description = "Are lookups (colors, genders, sales reps, shipping options) brand specific? IE: is there a potential for the same lookup code to exist in multiple divisions with different descriptions.", page = 7, id_section = qsBrands.id },
+                    new questions() { id = 21, name = "brand_opt_diff_div", description = "Please mark what option below might be different per division. Please check if different per brand", page = 7, id_section = qsBrands.id },
+                    
+                    new questions() { id = 22, name = "brand_whs_inv", description = "Does RepSpark need to be made aware of the warehouses that inventory is stored in?", page = 8, id_section = qsBrands.id },
+                    new questions() { id = 23, name = "brand_whs_inv", description = "Are customers limited in the ERP to what warehouses they can order from?", page = 8, id_section = qsBrands.id },
+                    
+                    new questions() { id = 24, name = "brand_mult_season", description = "Are there multiple seasons?", page = 9, id_section = qsBrands.id },
+                    new questions() { id = 25, name = "brand_season_combined", description = "Can seasons be combined on one order?", page = 9, id_section = qsBrands.id },
+                    new questions() { id = 26, name = "brand_season_filter", description = "Do you want a season filter?", page = 9, id_section = qsBrands.id },
+                    new questions() { id = 27, name = "brand_season_sel", description = "Do you want the sales person selecting the season of the order on the header?", page = 9, id_section = qsBrands.id }
+
             );
             SeedDependentQtnMultBrands(context, qsBrands);
             SeedDependentQtnSepDivBrand(context, qsBrands);
