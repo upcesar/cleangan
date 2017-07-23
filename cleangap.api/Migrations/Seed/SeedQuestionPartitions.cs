@@ -24,8 +24,8 @@
 
                     new questions() { id = 24, name = "brand_mult_season", description = "Are there multiple seasons?", page = 9, id_section = qsBrands.id },
                     new questions() { id = 25, name = "brand_season_combined", description = "Can seasons be combined on one order?", page = 9, id_section = qsBrands.id },
-                    new questions() { id = 26, name = "brand_season_filter", description = "Do you want a season filter?", page = 9, id_section = qsBrands.id },
-                    new questions() { id = 27, name = "brand_season_sel", description = "Do you want the sales person selecting the season of the order on the header?", page = 9, id_section = qsBrands.id }
+                    new questions() { id = 26, name = "brand_season_filter", description = "Do you want a season filter?", page = 9, parent_question_id = 25, parent_answer_value = "Yes", id_section = qsBrands.id },
+                    new questions() { id = 27, name = "brand_season_sel", description = "Do you want the sales person selecting the season of the order on the header?", page = 9, parent_question_id = 26, parent_answer_value = "No", id_section = qsBrands.id }
 
             );
             SeedDependentQtnMultBrands(context, qsBrands);
