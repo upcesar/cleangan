@@ -17,12 +17,11 @@
                     new questions() { id = 14, name = "brand_separeted", description = "Are there separate divisions within a brand?", page = 6, id_section = qsBrands.id },
 
                     new questions() { id = 19, name = "brand_separeted", description = "Are customers limited to a division in the ERP?", page = 7, id_section = qsBrands.id },
-                    new questions() { id = 20, name = "brand_lookup_attr", description = "Are lookups (colors, genders, sales reps, shipping options) brand specific? IE: is there a potential for the same lookup code to exist in multiple divisions with different descriptions.", page = 7, id_section = qsBrands.id },
-                    new questions() { id = 21, name = "brand_opt_diff_div", description = "Please mark what option below might be different per division. Please check if different per brand", page = 7, id_section = qsBrands.id },
+                    new questions() { id = 20, name = "brand_lookup_attr", description = "Are lookups (colors, genders, sales reps, shipping options) brand specific? IE: is there a potential for the same lookup code to exist in multiple divisions with different descriptions.", page = 7, parent_question_id = 19, parent_answer_value = "Yes", id_section = qsBrands.id },
                     
                     new questions() { id = 22, name = "brand_whs_inv", description = "Does RepSpark need to be made aware of the warehouses that inventory is stored in?", page = 8, id_section = qsBrands.id },
                     new questions() { id = 23, name = "brand_whs_inv", description = "Are customers limited in the ERP to what warehouses they can order from?", page = 8, id_section = qsBrands.id },
-                    
+
                     new questions() { id = 24, name = "brand_mult_season", description = "Are there multiple seasons?", page = 9, id_section = qsBrands.id },
                     new questions() { id = 25, name = "brand_season_combined", description = "Can seasons be combined on one order?", page = 9, id_section = qsBrands.id },
                     new questions() { id = 26, name = "brand_season_filter", description = "Do you want a season filter?", page = 9, id_section = qsBrands.id },
@@ -31,6 +30,7 @@
             );
             SeedDependentQtnMultBrands(context, qsBrands);
             SeedDependentQtnSepDivBrand(context, qsBrands);
+            SeedDependentQtnLookUpSpecific(context, qsBrands);
         }
 
         private void SeedDependentQtnMultBrands(DAL.CleanGapDataContext context, question_sections qsBrands)
@@ -50,7 +50,7 @@
             questions qBrandLookup = context.questions.Find(12);  //Are lookups (colors, genders, sales reps, shipping options) brand specific?
             context.questions
                    .AddOrUpdate(
-                        new questions() { id = 13, name = "options_per_brand", description = "Please mark what option below might be different per brand", page = 5, parent_question_id = qBrandLookup.id, parent_answer_value = "Yes", id_section = qsBrands.id }                        
+                        new questions() { id = 13, name = "options_per_brand", description = "Please mark what option below might be different per brand", page = 5, parent_question_id = qBrandLookup.id, parent_answer_value = "Yes", id_section = qsBrands.id }
             );
         }
 
@@ -72,5 +72,15 @@
                         new questions() { id = 17, name = "brand_reps_div", description = "Are some sales reps limited to what divisions they can sell?", page = 6, parent_question_id = qDivCombBrand.id, parent_answer_value = "Yes", id_section = qsBrands.id }
             );
         }
+
+        private void SeedDependentQtnLookUpSpecific(DAL.CleanGapDataContext context, question_sections qsBrands)
+        {
+            questions qLookupBrands = context.questions.Find(20);  // Are lookups (colors, genders, sales reps, shipping options) brand specific? Yes
+            context.questions.AddOrUpdate(
+                        new questions() { id = 21, name = "brand_opt_diff_div", description = "Please mark what option below might be different per division. Please check if different per brand", page = 7, parent_question_id = qLookupBrands.id, parent_answer_value = "Yes", id_section = qsBrands.id }
+            );
+
+        }
+
     }
 }

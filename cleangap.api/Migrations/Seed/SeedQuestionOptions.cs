@@ -117,7 +117,7 @@
                     new question_options() { id = 49, id_question = 17, input_type = "radio", option_text = "Yes", order = 1 },
                     new question_options() { id = 50, id_question = 17, input_type = "radio", option_text = "No", order = 2 },
 
-                    // Please list our brand names as entered ERP
+                    // Please list our brand names as entered ERP (Repeater)
                     new question_options() { id = 51, id_question = 18, input_type = "input-text", option_text = "Brand Name", order = 1 },
                     new question_options() { id = 52, id_question = 18, input_type = "input-text", option_text = "Address 1", order = 2 },
                     new question_options() { id = 53, id_question = 18, input_type = "input-text", option_text = "Address 2", order = 3 },
