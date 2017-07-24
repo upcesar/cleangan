@@ -199,6 +199,7 @@
     <Content Include="app\views\tokens.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="content\css\angular-datepicker.min.css" />
     <Content Include="content\css\bootstrap-select.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -291,6 +292,7 @@
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Properties\PublishProfiles\Virtual Machine.pubxml" />
     <Content Include="scripts\angular-bootbox.min.js" />
+    <Content Include="scripts\angular-datepicker.min.js" />
     <Content Include="scripts\angular-recaptcha.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

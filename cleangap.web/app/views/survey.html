@@ -32,14 +32,15 @@
 <section class="main-content">
     <div class="container-fluid">
         <h1 class="title">Section {{ survey.section_id }}: {{ survey.section_name }}</h1>
-        <!-- <h2 class="sub-title">Question {{index+1}} (Out of {{surveys.length}})</h2> -->
+
         <div class="col-lg-10 col-lg-offset-1 col-md-12">
+
             <div ng-repeat="question in survey.questions" repeat-done="showData()">
                 <div id="question{{question.id}}" ng-show="childrenQuestionUI[question.id] || childrenQuestionUI[question.id] == null">
                     <h2 class="question">{{question.description}}</h2>
-                    <div class="survey-card">                    
-                        <div ng-repeat="option in question.questionOption track by $index">                            
-                            <div ng-if="option.optionType == 'radio'">                            
+                    <div class="survey-card">
+                        <div ng-repeat="option in question.questionOption track by $index">
+                            <div ng-if="option.optionType == 'radio'">
                                 <div ng-show="$index == 0 && !currentAnswer[question.id] && !saved" class="text-danger">Select an answer</div>
                                 <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'">
                                     <input ng-model="currentAnswer[question.id]" ng-value="option" type="radio" name="{{question.id}}" ng-change="radioChanged(question, currentAnswer)"> {{option.optionText}} <br />
@@ -75,7 +76,7 @@
                             <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'drop-down'">
                                 <div class="row">
                                     <label class="col-xs-6">{{option.optionText}}: </label>
-                                    <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated" >
+                                    <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">
                                         Select an answer from the list
                                     </div>
                                 </div>
@@ -96,6 +97,20 @@
                                 </div>
                                 <textarea ng-model="currentAnswer[option.optionId]" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" class="form-control" cols="50" ng-change="checkForm()"> {{option.uniqueAnswer}} </textarea>
                             </div>
+
+                            <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'input-date'">
+                                <div class="row">
+                                    <label class="col-xs-6" for="{{option.optionText}}:">
+                                        {{option.optionText}}
+                                    </label>
+                                    <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">{{currentValidationMsg[option.optionId]}}</div>
+                                </div>
+                                <datepicker date-format="MM/dd/yyyy">
+                                    <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" type="text" placeholder="Choose a date" class="form-control" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" ng-change="checkForm()" />
+                                </datepicker>                                
+                            </div>
+
+
                         </div>
 
                         <div class="clearfix pull-right" ng-if="question.hasRepeater">
@@ -108,20 +123,20 @@
 
             <h4 class="text-center mb1" ng-show="loadingData"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Loading surveys...</h4>
 
-            <div class="mb8" ng-hide = "loadingData">
-                <a href="/" class="btn btn-lg btn-green pull-right" ng-class="!finishingSurvey && isValidForm ? '' : 'disabled'" ng-hide= "comingFromSummary()" ng-click="saveAndExit()" type="submit">Save & Exit</a>
-                <a href="#" class="btn btn-lg btn-goto pull-right" ng-hide= "comingFromSummary()" ng-click="next()">
+            <div class="mb8" ng-hide="loadingData">
+                <a href="/" class="btn btn-lg btn-green pull-right" ng-class="!finishingSurvey && isValidForm ? '' : 'disabled'" ng-hide="comingFromSummary()" ng-click="saveAndExit()" type="submit">Save & Exit</a>
+                <a href="#" class="btn btn-lg btn-goto pull-right" ng-hide="comingFromSummary()" ng-click="next()">
                     Next <i class="glyphicon glyphicon-chevron-right"></i>
                 </a>
-                
+
                 <a href="/" class="btn btn-lg btn-green pull-right" ng-class="!finishingSurvey && isValidForm ? '' : 'disabled'" ng-show="comingFromSummary()" ng-click="saveGoSummary()" type="submit">Update</a>
 
                 <a href="#" class="btn btn-lg btn-goto pull-right" ng-show="comingFromSummary() || survey.page <= survey.pageTotal && survey.page > 1" ng-click="back()" ng-class="!finishingSurvey ? '' : 'disabled'">
                     <i class="glyphicon glyphicon-chevron-left"></i> Back
                 </a>
 
-                
+
             </div>
-        </div>        
+        </div>
     </div>
 </section>
