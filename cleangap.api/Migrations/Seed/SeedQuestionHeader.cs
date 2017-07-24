@@ -106,11 +106,11 @@
                    .AddOrUpdate(
 
                         new questions() { id = 62, name = "header_comments", description = "Comments", page = 18, question_sections = qsHeader, id_section = qsHeader.id },
-                        new questions() { id = 63, name = "header_comments_en", description = "Ship Via", page = 18, question_sections = qsHeader, id_section = qsHeader.id },
-                        new questions() { id = 64, name = "header_comments_b2b", description = "For B2B", page = 18, question_sections = qsHeader, parent_question_id = 62, parent_answer_value = "Yes", id_section = qsHeader.id },
-                        new questions() { id = 65, name = "header_comments_reps", description = "For Reps", page = 18, question_sections = qsHeader, parent_question_id = 62, parent_answer_value = "Yes", id_section = qsHeader.id },
-                        new questions() { id = 66, name = "header_comments_admin", description = "For Admins", page = 18, question_sections = qsHeader, parent_question_id = 62, parent_answer_value = "Yes", id_section = qsHeader.id },
-                        new questions() { id = 67, name = "header_comments_managers", description = "For Managers / CS", page = 18, question_sections = qsHeader, parent_question_id = 62, parent_answer_value = "Yes", id_section = qsHeader.id }
+                        new questions() { id = 63, name = "header_one_time_ship", description = "One time ship to option", page = 18, question_sections = qsHeader, id_section = qsHeader.id },
+                        new questions() { id = 64, name = "header_in_hand_date", description = "In-Hand Date", page = 18, question_sections = qsHeader, id_section = qsHeader.id },
+                        new questions() { id = 65, name = "header_value_added_srvc", description = "Is there any value added service (customer specific) information that you want displayed in a popup on this page?", page = 18, question_sections = qsHeader, id_section = qsHeader.id },
+                        new questions() { id = 66, name = "header_value_added_field", description = "Fields:", page = 18, question_sections = qsHeader, parent_question_id = 65, parent_answer_value = "Yes", id_section = qsHeader.id },
+                        new questions() { id = 67, name = "header_values_order", description = "Are there values that must be set on the header in order for the user to proceed in the order process?", page = 18, question_sections = qsHeader, parent_question_id = 62, parent_answer_value = "Yes", id_section = qsHeader.id }
 
             );
         }

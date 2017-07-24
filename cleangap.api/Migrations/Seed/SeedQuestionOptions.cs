@@ -312,26 +312,31 @@
                     new question_options() { id = 153, id_question = 62, input_type = "radio", option_text = "Display", order = 1 },
                     new question_options() { id = 154, id_question = 62, input_type = "radio", option_text = "Hide", order = 2 },
 
-                    //Comments (Options)
-                    new question_options() { id = 155, id_question = 63, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 156, id_question = 63, input_type = "radio", option_text = "No", order = 2 },
+                    //One time ship to option
+                    new question_options() { id = 155, id_question = 63, input_type = "radio", option_text = "Display", order = 1 },
+                    new question_options() { id = 156, id_question = 63, input_type = "radio", option_text = "Hide", order = 2 },
 
-                    //Comments - For B2B
-                    new question_options() { id = 157, id_question = 64, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 158, id_question = 64, input_type = "radio", option_text = "No", order = 2 },
+                    //In-Hand Date
+                    new question_options() { id = 157, id_question = 64, input_type = "radio", option_text = "Display", order = 1 },
+                    new question_options() { id = 158, id_question = 64, input_type = "radio", option_text = "Hide", order = 2 },
 
-                    //Comments - For Reps
+                    //Is there any value added service (customer specific) information that you want displayed in a popup
                     new question_options() { id = 159, id_question = 65, input_type = "radio", option_text = "Yes", order = 1 },
                     new question_options() { id = 160, id_question = 65, input_type = "radio", option_text = "No", order = 2 },
 
-                    //Comments - For Admins
-                    new question_options() { id = 161, id_question = 66, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 162, id_question = 66, input_type = "radio", option_text = "No", order = 2 },
+                    //Fields - there any value added service (if yes). 
+                    new question_options() { id = 161, id_question = 66, input_type = "checkbox", option_text = "Customer Type", order = 1 },
+                    new question_options() { id = 162, id_question = 66, input_type = "checkbox", option_text = "Contact Name", order = 2 },
+                    new question_options() { id = 163, id_question = 66, input_type = "checkbox", option_text = "Email", order = 3 },
+                    new question_options() { id = 164, id_question = 66, input_type = "checkbox", option_text = "Phone", order = 4 },
 
-                    //Comments Managers / CS
-                    new question_options() { id = 163, id_question = 67, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 164, id_question = 67, input_type = "radio", option_text = "No", order = 2 }
-                    
+                    //Are there values that must be set on the header in order for the user to proceed in the order process?
+                    new question_options() { id = 165, id_question = 67, input_type = "checkbox", option_text = "Selecting a customer", order = 1 },
+                    new question_options() { id = 166, id_question = 67, input_type = "checkbox", option_text = "Selecting order type", order = 2 },
+                    new question_options() { id = 167, id_question = 67, input_type = "checkbox", option_text = "Entering a purchase order", order = 3 },
+                    new question_options() { id = 168, id_question = 67, input_type = "checkbox", option_text = "Selecting an order type", order = 4 }
+
+
             );
         }
 
