@@ -247,8 +247,91 @@
 
                     //Dating: For Managers / CS
                     new question_options() { id = 122, id_question = 46, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 123, id_question = 46, input_type = "radio", option_text = "No", order = 2 }
+                    new question_options() { id = 123, id_question = 46, input_type = "radio", option_text = "No", order = 2 },
 
+                    //Terms
+                    new question_options() { id = 124, id_question = 47, input_type = "radio", option_text = "Display", order = 1 },
+                    new question_options() { id = 125, id_question = 47, input_type = "radio", option_text = "Hide", order = 2 },
+
+                    //Terms Locks
+                    new question_options() { id = 126, id_question = 48, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 127, id_question = 48, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Terms Locks
+                    new question_options() { id = 128, id_question = 49, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 129, id_question = 49, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Terms Locks - For B2B
+                    new question_options() { id = 130, id_question = 50, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 131, id_question = 50, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Terms Locks - For Reps
+                    new question_options() { id = 132, id_question = 51, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 133, id_question = 51, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Terms Locks - For Admins
+                    new question_options() { id = 134, id_question = 52, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 135, id_question = 52, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Terms Locks - For Managers / CS
+                    new question_options() { id = 136, id_question = 53, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 137, id_question = 53, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Do all customers have default terms?
+                    new question_options() { id = 138, id_question = 54, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 139, id_question = 54, input_type = "radio", option_text = "No", order = 2 },
+
+                    //What term code should we default to?
+                    new question_options() { id = 140, id_question = 55, input_type = "textarea", option_text = "", order = 1 },
+
+                    //Ship Via
+                    new question_options() { id = 141, id_question = 56, input_type = "radio", option_text = "Display", order = 1 },
+                    new question_options() { id = 142, id_question = 56, input_type = "radio", option_text = "Hide", order = 2 },
+
+                    //Ship Via (Options)
+                    new question_options() { id = 143, id_question = 57, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 144, id_question = 57, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Ship Via - For B2B
+                    new question_options() { id = 145, id_question = 58, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 146, id_question = 58, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Ship Via - For Reps
+                    new question_options() { id = 147, id_question = 59, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 148, id_question = 59, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Ship Via - For Admins
+                    new question_options() { id = 149, id_question = 60, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 150, id_question = 60, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Ship Via Managers / CS
+                    new question_options() { id = 151, id_question = 61, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 152, id_question = 61, input_type = "radio", option_text = "No", order = 2 },
+                    
+                    //Comments
+                    new question_options() { id = 153, id_question = 62, input_type = "radio", option_text = "Display", order = 1 },
+                    new question_options() { id = 154, id_question = 62, input_type = "radio", option_text = "Hide", order = 2 },
+
+                    //Comments (Options)
+                    new question_options() { id = 155, id_question = 63, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 156, id_question = 63, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Comments - For B2B
+                    new question_options() { id = 157, id_question = 64, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 158, id_question = 64, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Comments - For Reps
+                    new question_options() { id = 159, id_question = 65, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 160, id_question = 65, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Comments - For Admins
+                    new question_options() { id = 161, id_question = 66, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 162, id_question = 66, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Comments Managers / CS
+                    new question_options() { id = 163, id_question = 67, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 164, id_question = 67, input_type = "radio", option_text = "No", order = 2 }
+                    
             );
         }
 

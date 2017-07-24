@@ -17,6 +17,9 @@
             SeedQuestionHeaderCustomer(context, qsHeader);
             SeedQuestionHeaderOrderType(context, qsHeader);
             SeedQuestionHeaderDating(context, qsHeader);
+            SeedQuestionHeaderTerms(context, qsHeader);
+            SeedQuestionHeaderShipVia(context, qsHeader);
+            SeedQuestionHeaderComments(context, qsHeader);
 
         }
 
@@ -63,7 +66,53 @@
             );
         }
 
+        private void SeedQuestionHeaderTerms(CleanGapDataContext context, question_sections qsHeader)
+        {
+            context.questions
+                   .AddOrUpdate(
+                        new questions() { id = 47, name = "header_terms", description = "Terms", page = 15, question_sections = qsHeader, id_section = qsHeader.id },
+                        new questions() { id = 48, name = "header_terms_lock", description = "Terms Lock", page = 15, question_sections = qsHeader, id_section = qsHeader.id },
+                        
+                        new questions() { id = 49, name = "header_terms_lock", description = "Terms Lock", page = 15, question_sections = qsHeader, id_section = qsHeader.id },
+                        new questions() { id = 50, name = "header_terms_lock_b2b", description = "For B2B", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id },
+                        new questions() { id = 51, name = "header_terms_lc_reps", description = "For Reps", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id },
+                        new questions() { id = 52, name = "header_terms_lc_admin", description = "For Admins", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id },
+                        new questions() { id = 53, name = "header_terms_lc_managers", description = "For Managers / CS", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id },
 
+                        new questions() { id = 54, name = "header_terms_default", description = "Do all customers have default terms?", page = 16, id_section = qsHeader.id },
+                        new questions() { id = 55, name = "header_terms_custom", description = "What term code should we default to?", page = 16, question_sections = qsHeader, parent_question_id = 54, parent_answer_value = "No", id_section = qsHeader.id }                        
+                        
+            );
+        }
 
+        private void SeedQuestionHeaderShipVia(CleanGapDataContext context, question_sections qsHeader)
+        {
+            context.questions
+                   .AddOrUpdate(
+
+                        new questions() { id = 56, name = "header_ship_via", description = "Ship Via", page = 17, question_sections = qsHeader, id_section = qsHeader.id },
+                        new questions() { id = 57, name = "header_ship_via_en", description = "Ship Via", page = 17, question_sections = qsHeader, id_section = qsHeader.id },
+                        new questions() { id = 58, name = "header_ship_via_b2b", description = "For B2B", page = 17, question_sections = qsHeader, parent_question_id = 57, parent_answer_value = "Yes", id_section = qsHeader.id },
+                        new questions() { id = 59, name = "header_ship_via_reps", description = "For Reps", page = 17, question_sections = qsHeader, parent_question_id = 57, parent_answer_value = "Yes", id_section = qsHeader.id },
+                        new questions() { id = 60, name = "header_ship_via_admin", description = "For Admins", page = 17, question_sections = qsHeader, parent_question_id = 57, parent_answer_value = "Yes", id_section = qsHeader.id },
+                        new questions() { id = 61, name = "header_ship_via_managers", description = "For Managers / CS", page = 17, question_sections = qsHeader, parent_question_id = 57, parent_answer_value = "Yes", id_section = qsHeader.id }
+
+            );
+        }
+
+        private void SeedQuestionHeaderComments(CleanGapDataContext context, question_sections qsHeader)
+        {
+            context.questions
+                   .AddOrUpdate(
+
+                        new questions() { id = 62, name = "header_comments", description = "Comments", page = 18, question_sections = qsHeader, id_section = qsHeader.id },
+                        new questions() { id = 63, name = "header_comments_en", description = "Ship Via", page = 18, question_sections = qsHeader, id_section = qsHeader.id },
+                        new questions() { id = 64, name = "header_comments_b2b", description = "For B2B", page = 18, question_sections = qsHeader, parent_question_id = 62, parent_answer_value = "Yes", id_section = qsHeader.id },
+                        new questions() { id = 65, name = "header_comments_reps", description = "For Reps", page = 18, question_sections = qsHeader, parent_question_id = 62, parent_answer_value = "Yes", id_section = qsHeader.id },
+                        new questions() { id = 66, name = "header_comments_admin", description = "For Admins", page = 18, question_sections = qsHeader, parent_question_id = 62, parent_answer_value = "Yes", id_section = qsHeader.id },
+                        new questions() { id = 67, name = "header_comments_managers", description = "For Managers / CS", page = 18, question_sections = qsHeader, parent_question_id = 62, parent_answer_value = "Yes", id_section = qsHeader.id }
+
+            );
+        }
     }
 }
