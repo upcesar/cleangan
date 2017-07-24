@@ -168,8 +168,86 @@
 
                     //Do you want the sales person selecting the season of the order on the header ?
                     new question_options() { id = 81, id_question = 27, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 82, id_question = 27, input_type = "radio", option_text = "No", order = 2 }
+                    new question_options() { id = 82, id_question = 27, input_type = "radio", option_text = "No", order = 2 },
 
+                    //Customer: Is there a billing address with different stores (shippingaddresses)?
+                    new question_options() { id = 83, id_question = 28, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 84, id_question = 28, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Customer: confirm each address in the ERP is both the billing and shipping address
+                    new question_options() { id = 85, id_question = 29, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 86, id_question = 29, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Does customer have default terms?
+                    new question_options() { id = 87, id_question = 30, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 88, id_question = 30, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Do you want to apply customer specific discounts?
+                    new question_options() { id = 89, id_question = 31, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 90, id_question = 31, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Order Type: What are the order types available?
+                    new question_options() { id = 91, id_question = 32, input_type = "input-text", option_text = "Name", order = 1 },
+                    new question_options() { id = 92, id_question = 32, input_type = "input-date", option_text = "Start Date Default - Days from today", order = 2 },
+                    new question_options() { id = 93, id_question = 32, input_type = "input-date", option_text = "Start Date: What is the Max number of Days from today?", order = 3 },
+                    new question_options() { id = 94, id_question = 32, input_type = "input-date", option_text = "Cancel Date Default", order = 4 },
+                    new question_options() { id = 95, id_question = 32, input_type = "input-date", option_text = "Cancel date: What is the Max number days from start date?", order = 5 },
+                    new question_options() { id = 96, id_question = 32, input_type = "input-date", option_text = "Cancel date: What is the Min number days from start date?", order = 6 },
+
+                    //order Type available por B2B?
+                    new question_options() { id = 97, id_question = 33, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 98, id_question = 33, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Order type: Is Default?
+                    new question_options() { id = 99, id_question = 34, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 100, id_question = 34, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Any product limitations limited by order type *Could add custom development work.
+                    new question_options() { id = 101, id_question = 35, input_type = "textarea", option_text = "*Could add custom development work", order = 1 },
+
+                    //Dating: Lock Start Date
+                    new question_options() { id = 102, id_question = 36, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 103, id_question = 36, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Dating: For B2B
+                    new question_options() { id = 104, id_question = 37, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 105, id_question = 37, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Dating: For Reps
+                    new question_options() { id = 106, id_question = 38, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 107, id_question = 38, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Dating: For Admins
+                    new question_options() { id = 108, id_question = 39, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 109, id_question = 39, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Dating: For Managers / CS
+                    new question_options() { id = 110, id_question = 40, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 111, id_question = 40, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Cancel Date
+                    new question_options() { id = 112, id_question = 41, input_type = "radio", option_text = "Show", order = 1 },
+                    new question_options() { id = 113, id_question = 41, input_type = "radio", option_text = "Hide", order = 2 },
+
+                    //Dating: Lock Cancel Date
+                    new question_options() { id = 114, id_question = 42, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 115, id_question = 42, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Dating: For B2B
+                    new question_options() { id = 116, id_question = 43, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 117, id_question = 43, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Dating: For Reps
+                    new question_options() { id = 118, id_question = 44, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 119, id_question = 44, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Dating: For Admins
+                    new question_options() { id = 120, id_question = 45, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 121, id_question = 45, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Dating: For Managers / CS
+                    new question_options() { id = 122, id_question = 46, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 123, id_question = 46, input_type = "radio", option_text = "No", order = 2 }
 
             );
         }

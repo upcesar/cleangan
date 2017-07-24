@@ -6,6 +6,7 @@ namespace cleangap.api.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using DAL;
 
     internal sealed partial class Configuration : DbMigrationsConfiguration<cleangap.api.DAL.CleanGapDataContext>
     {
@@ -20,8 +21,10 @@ namespace cleangap.api.Migrations
             SeedQuestionsERP(context);
             SeedQuestionsDomain(context);
             SeedQuestionPartitions(context);
+            SeedQuestionHeader(context);
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT questions OFF");
         }
+
         protected override void Seed(cleangap.api.DAL.CleanGapDataContext context)
         {
             //  This method will be called after migrating to the latest version.
