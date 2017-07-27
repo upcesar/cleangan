@@ -296,6 +296,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionDomain.cs" />
+    <Compile Include="Migrations\Seed\SeedQuestionLines.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionSelections.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionOptions.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionHeader.cs" />

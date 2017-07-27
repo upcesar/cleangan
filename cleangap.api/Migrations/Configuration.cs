@@ -23,6 +23,7 @@ namespace cleangap.api.Migrations
             SeedQuestionPartitions(context);
             SeedQuestionHeader(context);
             SeedQuestionSelections(context);
+            SeedQuestionLines(context);
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT questions OFF");
         }
 
