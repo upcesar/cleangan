@@ -295,14 +295,14 @@
       <DependentUpon>201707110259175_AnswerIdxRepeaterField.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Migrations\Seed\SeedQuestionReview.cs" />
-    <Compile Include="Migrations\Seed\SeedQuestionDomain.cs" />
-    <Compile Include="Migrations\Seed\SeedQuestionLines.cs" />
-    <Compile Include="Migrations\Seed\SeedQuestionSelections.cs" />
+    <Compile Include="Migrations\Seed\Questions\SeedQuestionReview.cs" />
+    <Compile Include="Migrations\Seed\Questions\SeedQuestionDomain.cs" />
+    <Compile Include="Migrations\Seed\Questions\SeedQuestionLines.cs" />
+    <Compile Include="Migrations\Seed\Questions\SeedQuestionSelections.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionOptions.cs" />
-    <Compile Include="Migrations\Seed\SeedQuestionHeader.cs" />
-    <Compile Include="Migrations\Seed\SeedQuestionsERP.cs" />
-    <Compile Include="Migrations\Seed\SeedQuestionPartitions.cs" />
+    <Compile Include="Migrations\Seed\Questions\SeedQuestionHeader.cs" />
+    <Compile Include="Migrations\Seed\Questions\SeedQuestionsERP.cs" />
+    <Compile Include="Migrations\Seed\Questions\SeedQuestionPartitions.cs" />
     <Compile Include="Migrations\Seed\SeedSections.cs" />
     <Compile Include="Models\ApiResponse.cs" />
     <Compile Include="Models\Domain\AnswersModel.cs" />
