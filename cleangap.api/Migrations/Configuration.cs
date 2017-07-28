@@ -26,6 +26,8 @@ namespace cleangap.api.Migrations
             SeedQuestionSelections(context);
             SeedQuestionLines(context);
             SeedQuestionReviews(context);
+            SeedQuestionInsignia(context);
+            SeedQuestionValidation(context);
 
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT questions OFF");
         }

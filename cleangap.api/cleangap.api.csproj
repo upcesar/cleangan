@@ -295,11 +295,20 @@
       <DependentUpon>201707110259175_AnswerIdxRepeaterField.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsReviews.cs" />
+    <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsLines.cs" />
+    <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsSelections.cs" />
+    <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsHeaders.cs" />
+    <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsBrands.cs" />
+    <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsDomain.cs" />
+    <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsERP.cs" />
+    <Compile Include="Migrations\Seed\Questions\SeedQuestionInsignia.cs" />
+    <Compile Include="Migrations\Seed\Questions\SeedQuestionValidation.cs" />
     <Compile Include="Migrations\Seed\Questions\SeedQuestionReview.cs" />
     <Compile Include="Migrations\Seed\Questions\SeedQuestionDomain.cs" />
     <Compile Include="Migrations\Seed\Questions\SeedQuestionLines.cs" />
     <Compile Include="Migrations\Seed\Questions\SeedQuestionSelections.cs" />
-    <Compile Include="Migrations\Seed\SeedQuestionOptions.cs" />
+    <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptions.cs" />
     <Compile Include="Migrations\Seed\Questions\SeedQuestionHeader.cs" />
     <Compile Include="Migrations\Seed\Questions\SeedQuestionsERP.cs" />
     <Compile Include="Migrations\Seed\Questions\SeedQuestionPartitions.cs" />
