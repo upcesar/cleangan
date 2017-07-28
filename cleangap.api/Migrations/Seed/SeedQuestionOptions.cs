@@ -11,11 +11,17 @@
     {
         private void SeedQuestionOptions(DAL.CleanGapDataContext context)
         {
+            
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_options ON");
             SeedQuestionOptionsERP(context);
             SeedQuestionOptionsDomain(context);
             SeedQuestionOptionsBrands(context);
+            SeedQuestionOptionsHeaders(context);
+            SeedQuestionOptionsSelections(context);
+            SeedQuestionOptionsLines(context);
+            SeedQuestionOptionsReviews(context);
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_options OFF");
+            
         }
 
         private void SeedQuestionOptionsERP(DAL.CleanGapDataContext context)
@@ -168,7 +174,15 @@
 
                     //Do you want the sales person selecting the season of the order on the header ?
                     new question_options() { id = 81, id_question = 27, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 82, id_question = 27, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 82, id_question = 27, input_type = "radio", option_text = "No", order = 2 }
+
+            );
+        }
+
+        private void SeedQuestionOptionsHeaders(DAL.CleanGapDataContext context)
+        {
+            context.question_options
+                   .AddOrUpdate(qo => qo.id,
 
                     //Customer: Is there a billing address with different stores (shippingaddresses)?
                     new question_options() { id = 83, id_question = 28, input_type = "radio", option_text = "Yes", order = 1 },
@@ -307,7 +321,7 @@
                     //Ship Via Managers / CS
                     new question_options() { id = 151, id_question = 61, input_type = "radio", option_text = "Yes", order = 1 },
                     new question_options() { id = 152, id_question = 61, input_type = "radio", option_text = "No", order = 2 },
-                    
+
                     //Comments
                     new question_options() { id = 153, id_question = 62, input_type = "radio", option_text = "Display", order = 1 },
                     new question_options() { id = 154, id_question = 62, input_type = "radio", option_text = "Hide", order = 2 },
@@ -339,7 +353,14 @@
                     //Default Selections page view for Rep Users?
                     new question_options() { id = 169, id_question = 68, input_type = "checkbox", option_text = "Grid", order = 1 },
                     new question_options() { id = 170, id_question = 68, input_type = "checkbox", option_text = "Lines Quick Add", order = 2 },
-                    new question_options() { id = 171, id_question = 68, input_type = "checkbox", option_text = "Lines Size Entry", order = 3 },
+                    new question_options() { id = 171, id_question = 68, input_type = "checkbox", option_text = "Lines Size Entry", order = 3 }
+            );
+        }
+
+        private void SeedQuestionOptionsSelections(DAL.CleanGapDataContext context)
+        {
+            context.question_options
+                   .AddOrUpdate(qo => qo.id,
 
                     //Default Selections page view for Customer/B2B?
                     new question_options() { id = 172, id_question = 69, input_type = "checkbox", option_text = "Grid", order = 1 },
@@ -430,7 +451,15 @@
 
                     //Misc Filters defaulting: Only Available Products
                     new question_options() { id = 219, id_question = 90, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 220, id_question = 90, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 220, id_question = 90, input_type = "radio", option_text = "No", order = 2 }
+
+            );
+        }
+
+        private void SeedQuestionOptionsLines(DAL.CleanGapDataContext context)
+        {
+            context.question_options
+                   .AddOrUpdate(qo => qo.id,
 
                     //Do you allow percentage discounting of lines?
                     new question_options() { id = 221, id_question = 91, input_type = "radio", option_text = "Yes", order = 1 },
@@ -497,6 +526,63 @@
                     new question_options() { id = 250, id_question = 105, input_type = "radio", option_text = "No", order = 2 }
 
             );
+        }
+
+        private void SeedQuestionOptionsReviews(DAL.CleanGapDataContext context) {
+
+            context.question_options
+                   .AddOrUpdate(qo => qo.id,
+
+                    //Do you want to display Contact Details at the bottom of the page?
+                    new question_options() { id = 251, id_question = 106, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 252, id_question = 106, input_type = "radio", option_text = "No", order = 2 },
+
+                    // Will we display the contact address ?
+                    new question_options() { id = 253, id_question = 107, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 254, id_question = 107, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Email as stated above in question 2 in the brand section?
+                    new question_options() { id = 255, id_question = 108, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 256, id_question = 108, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Does your ERP have rep email addresses?
+                    new question_options() { id = 257, id_question = 109, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 258, id_question = 109, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Would you rather display the email of each rep at the bottom of the review page
+                    new question_options() { id = 259, id_question = 110, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 260, id_question = 110, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Do you want to show the original wholesale price along with the discounted price if you allow discounting?
+                    new question_options() { id = 261, id_question = 111, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 262, id_question = 111, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Standard Additional Columns: Show Retail Price?
+                    new question_options() { id = 263, id_question = 112, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 264, id_question = 112, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Standard Additional Columns: Show Season?
+                    new question_options() { id = 265, id_question = 113, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 266, id_question = 113, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Standard Additional Columns: Show Dimension?
+                    new question_options() { id = 267, id_question = 114, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 268, id_question = 114, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Standard Additional Columns: Show Product Group?
+                    new question_options() { id = 269, id_question = 115, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 270, id_question = 115, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Standard Additional Columns: Show Warehouse?
+                    new question_options() { id = 271, id_question = 116, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 272, id_question = 116, input_type = "radio", option_text = "No", order = 2 },
+
+                    //Standard Additional Columns: Show Product Type?
+                    new question_options() { id = 273, id_question = 117, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 274, id_question = 117, input_type = "radio", option_text = "No", order = 2 }
+
+            );
+
         }
 
     }

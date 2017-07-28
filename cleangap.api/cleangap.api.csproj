@@ -295,6 +295,7 @@
       <DependentUpon>201707110259175_AnswerIdxRepeaterField.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Seed\SeedQuestionReview.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionDomain.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionLines.cs" />
     <Compile Include="Migrations\Seed\SeedQuestionSelections.cs" />

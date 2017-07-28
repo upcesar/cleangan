@@ -18,12 +18,15 @@ namespace cleangap.api.Migrations
         private void SeedQuestions(DAL.CleanGapDataContext context)
         {
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT questions ON");
+
             SeedQuestionsERP(context);
             SeedQuestionsDomain(context);
             SeedQuestionPartitions(context);
             SeedQuestionHeader(context);
             SeedQuestionSelections(context);
             SeedQuestionLines(context);
+            SeedQuestionReviews(context);
+
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT questions OFF");
         }
 
