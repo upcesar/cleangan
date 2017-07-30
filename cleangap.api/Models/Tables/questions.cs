@@ -37,11 +37,15 @@ namespace cleangap.api.Models.Tables
         /// </summary>
         public int? id_section { get; set; }
         /// <summary>
+        /// Foreign Key Id for SubSections Entity
+        /// </summary>
+        public int? id_subsection { get; set; }
+        /// <summary>
         /// Foreign Key for mapping Parent Question row
         /// </summary>
         public int? parent_question_id { get; set; }
         /// <summary>
-        /// Parent answer value for showing
+        /// Parent answer value for showing the related answers
         /// </summary>
         public string parent_answer_value { get; set; }
         /// <summary>
@@ -69,9 +73,14 @@ namespace cleangap.api.Models.Tables
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<questions> children_question { get; set; }
         /// <summary>
-        /// Question section Obeject
+        /// Question section Object
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual question_sections question_sections { get; set; }
+        /// <summary>
+        /// Question subsection Object
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual question_sections questions_subsection { get; set; }
     }
 }
