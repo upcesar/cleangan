@@ -19,6 +19,7 @@
             SeedQuestionOptionsSelections(context);
             SeedQuestionOptionsLines(context);
             SeedQuestionOptionsReviews(context);
+            SeedQuestionOptionsInsignia(context);
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_options OFF");            
         }
 
