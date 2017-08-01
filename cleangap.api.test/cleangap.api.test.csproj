@@ -50,6 +50,7 @@
     <Compile Include="TestFinishSurvey.cs" />
     <Compile Include="TestGoogleCaptcha.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestSections.cs" />
     <Compile Include="TestSurveys.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -536,6 +536,41 @@
             </summary>
             <returns>List of questions answered</returns>
         </member>
+        <member name="T:cleangap.api.Domain.IQuestionsBO">
+            <summary>
+            Business rule's interface for Questions
+            </summary>
+        </member>
+        <member name="T:cleangap.api.Domain.QuestionsBO">
+            <summary>
+            Business rules for Questions
+            </summary>
+        </member>
+        <member name="M:cleangap.api.Domain.ISectionBO.GetChildren">
+            <summary>
+            Get childer section (subsetions)
+            </summary>
+        </member>
+        <member name="T:cleangap.api.Domain.SectionBO">
+            <summary>
+            Section Domain Class
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Domain.SectionBO.id">
+            <summary>
+            Section ID
+            </summary>
+        </member>
+        <member name="M:cleangap.api.Domain.SectionBO.#ctor(System.Int32)">
+            <summary>
+            Constructor with ID parameters (Section / Question depending on the method call)
+            </summary>
+        </member>
+        <member name="M:cleangap.api.Domain.SectionBO.GetChildren">
+            <summary>
+            Get childer section (subsetions)
+            </summary>
+        </member>
         <member name="T:cleangap.api.Models.Domain.QuestionsModel">
             <summary>
             Question Model for business logic
@@ -586,9 +621,69 @@
             Queston initialization (constructor)
             </summary>
         </member>
+        <member name="T:cleangap.api.Models.Domain.SectionModel">
+            <summary>
+            Section's Model
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.SectionModel.id">
+            <summary>
+            Section ID
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.SectionModel.name">
+            <summary>
+            Section Name
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.SectionModel.questions">
+            <summary>
+            Question's list related with the section / subsection
+            </summary>
+        </member>
         <member name="T:cleangap.api.Models.Domain.SurveyModel">
             <summary>
             Survey's Model
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.SurveyModel.Page">
+            <summary>
+            Page / Step of the survey
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.SurveyModel.PageTotal">
+            <summary>
+            Number of steps / pages
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.SurveyModel.RedirectSummary">
+            <summary>
+            When user is authenticated, rediret to a summery or not whether all questions are answered
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.SurveyModel.section_id">
+            <summary>
+            Section ID
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.SurveyModel.section_name">
+            <summary>
+            Section Name
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.SurveyModel.subsection">
+            <summary>
+            Subsection's List related to the main section
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.SurveyModel.questions">
+            <summary>
+            Question's list for surveys
+            </summary>
+        </member>
+        <member name="M:cleangap.api.Models.Domain.SurveyModel.#ctor">
+            <summary>
+            SurveyModel Construction for setting up initial values
             </summary>
         </member>
         <member name="T:cleangap.api.Models.Tables.customers">
@@ -636,6 +731,11 @@
             Foreign Key Id for Sections Entity
             </summary>
         </member>
+        <member name="P:cleangap.api.Models.Tables.questions.id_subsection">
+            <summary>
+            Foreign Key Id for SubSections Entity
+            </summary>
+        </member>
         <member name="P:cleangap.api.Models.Tables.questions.parent_question_id">
             <summary>
             Foreign Key for mapping Parent Question row
@@ -643,7 +743,7 @@
         </member>
         <member name="P:cleangap.api.Models.Tables.questions.parent_answer_value">
             <summary>
-            Parent answer value for showing
+            Parent answer value for showing the related answers
             </summary>
         </member>
         <member name="P:cleangap.api.Models.Tables.questions.has_repeater">
@@ -673,7 +773,12 @@
         </member>
         <member name="P:cleangap.api.Models.Tables.questions.question_sections">
             <summary>
-            Question section Obeject
+            Question section Object
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Tables.questions.questions_subsection">
+            <summary>
+            Question subsection Object
             </summary>
         </member>
     </members>

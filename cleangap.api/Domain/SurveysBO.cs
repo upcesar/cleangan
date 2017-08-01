@@ -30,7 +30,9 @@ namespace cleangap.api.Domain
     #endregion
     public class SurveysBO : ISurveysBO
     {
+        private QuestionsBO _questionBO = new QuestionsBO();
         private int intQtySubSection;
+        
 
         public int LastSectionId
         {
@@ -63,136 +65,38 @@ namespace cleangap.api.Domain
         }
         #endregion
         #region Private Methods
-        private bool ShowParentQuestion(questions depItem, string dependentAnswerValue)
+        private SurveyModel AddDefaultQuestion(SurveyModel s, List<QuestionsModel> listQuestion)
         {
-            List<QuestionOptionModel> options = AddQuestionOptions(depItem);
 
-            if (depItem != null)
-                return options.Where(x => x.UniqueAnswer == dependentAnswerValue).Any();
-
-            return true;
-
-        }
-        private List<QuestionsModel> GetChilderQuestions(ICollection<questions> childrenQuestions)
-        {
-            // item.children_question.Select(x => x.id).ToList<int>()
-            if (childrenQuestions != null)
+            if (s.subsection.Count == 0)
             {
-                List<QuestionsModel> childrenQuestionList = new List<QuestionsModel>();
-
-                foreach (var item in childrenQuestions)
+                s.subsection.Add(new SectionModel()
                 {
-                    childrenQuestionList.Add(new QuestionsModel()
-                    {
-                        id = item.id,
-                        ParentAnswerValue = item.parent_answer_value,
-                    });
-                }
-
-                return childrenQuestionList;
-
-            }
-
-
-            return null;
-        }
-        private SurveyModel AddQuestion(SurveyModel s, List<questions> tblQuestion)
-        {
-
-            foreach (var item in tblQuestion)
-            {
-
-                List<QuestionOptionModel> options = AddQuestionOptions(item);
-
-                QuestionsModel q = new QuestionsModel()
-                {
-                    id = item.id,
-                    description = item.description,
-                    ParentAnswerValue = item.parent_answer_value,
-                    HasRepeater = item.has_repeater,
-                    QuestionOption = options,
-                    ParentSelected = true,
-                    ChildrenQuestion = GetChilderQuestions(item.children_question),
-                };
-
-                if (item.parent_question != null)
-                {
-                    q.ParentQuestionId = item.parent_question.id;
-                    q.ParentSelected = ShowParentQuestion(item.parent_question, item.parent_answer_value);
-                }
-
-                s.questions.Add(q);
+                    id = 0,
+                    name = string.Empty,
+                    questions = listQuestion
+                });
             }
 
             return s;
         }
-        private List<QuestionChoicesModel> ListChoices(question_options pQuestionOption)
+        private void SetQuestionSection(SurveyModel s, List<QuestionsModel> listQuestion)
         {
-            List<QuestionChoicesModel> listChoice = new List<QuestionChoicesModel>();
-
-            if (!string.IsNullOrEmpty(pQuestionOption.values_list))
-            {
-                List<string> strChoiceValue = pQuestionOption.values_list.Split(',').ToList();
-
-
-                foreach (var item in strChoiceValue)
-                {
-                    string pattern = "[\\s+]|[\\-+]";
-                    string replacement = "_";
-                    Regex rgx = new Regex(pattern);
-                    string result_id = rgx.Replace(item, replacement).ToLower();
-
-                    listChoice.Add(new QuestionChoicesModel()
-                    {
-                        id = result_id,
-                        description = item,
-                    });
-                }
-
-            }
-
-            return listChoice;
-
-        }
-        private List<QuestionOptionModel> AddQuestionOptions(questions pQuestions)
-        {
-            List<QuestionOptionModel> OptionList = new List<QuestionOptionModel>();
-
-            List<question_options> tblOptions = pQuestions.question_options
-                                                          .OrderBy(x => x.order)
-                                                          .ToList();
-
-            int? idCustomer = AccountIdentity.GetCurrentUserInt();
-
-            foreach (var item in tblOptions)
-            {
-                List<string> MultAnswers = item.answers.Where(x => x.id_customer == idCustomer)
-                                                       .Select(x => x.answers_value)
-                                                       .ToList<string>();
-
-                OptionList.Add(new QuestionOptionModel()
-                {
-                    OptionId = item.id,
-                    OptionText = item.option_text != null ? item.option_text.Trim() : null,
-                    OptionType = item.input_type != null ? item.input_type.Trim() : null,
-                    QuestionChoices = ListChoices(item),
-                    HasMultipleAnswer = MultAnswers.Count > 1,
-                    UniqueAnswer = MultAnswers.FirstOrDefault(),
-                    MultipleAnswers = MultAnswers,
-                });
-            }
-
-            return OptionList;
-        }
-        private void SetQuestionSection(SurveyModel s, List<questions> tblQuestion)
-        {
-            var objSection = tblQuestion.FirstOrDefault();
+            QuestionsModel objQuestion = listQuestion.FirstOrDefault();
+            SectionBO _sectionBO = new SectionBO(objQuestion.id);
+            SectionModel objSection = _sectionBO.GetByQuestion();
 
             if (objSection != null)
             {
-                s.section_id = objSection.question_sections.id;
-                s.section_name = objSection.question_sections.name;
+                s.section_id = objSection.id;
+                s.section_name = objSection.name;
             }
+        }
+        private void SetSubSection(SurveyModel s)
+        {
+            SectionBO section = new SectionBO(s.section_id);
+            s.subsection = section.GetChildren();
+
         }
         private void ExcludeAnswerRadio(AnswersModel pAnswer, string currentCustomerId)
         {
@@ -320,7 +224,6 @@ namespace cleangap.api.Domain
             return pageNum;
 
         }
-
         private bool GoToSummary()
         {
             int? idCustomer = AccountIdentity.GetCurrentUserInt();
@@ -371,17 +274,23 @@ namespace cleangap.api.Domain
                 {
                     pageNum = CheckPageSection(db, pageNum, BoundToMax);
 
+                    /*
                     var tblQuestion = db.questions.Where(q => q.page == pageNum).ToList();
                     var maxPage = db.questions.Max(x => x.page);
+                    */
+                    var listQuestions = _questionBO.GetByPageNum(pageNum);
+                    var maxPage = _questionBO.MaxPage;
 
-                    if (maxPage != null && tblQuestion.Count > 0)
+                    if (maxPage != null && listQuestions.Count > 0)
                     {
                         s.Page = (int)pageNum;
                         s.PageTotal = (int)maxPage;
 
-                        SetQuestionSection(s, tblQuestion);
+                        SetQuestionSection(s, listQuestions);
 
-                        s = AddQuestion(s, tblQuestion);
+                        SetSubSection(s);
+
+                        s = AddDefaultQuestion(s, listQuestions);
                     }
 
                     return s;
@@ -391,7 +300,6 @@ namespace cleangap.api.Domain
             }
             throw new NullReferenceException("Page Num cannot be empty");
         }
-
         public List<SurveyModel> ListSummary()
         {
             List<SurveyModel> listSurvey = new List<SurveyModel>();
@@ -409,7 +317,6 @@ namespace cleangap.api.Domain
 
             return listSurvey.Count > 0 ? listSurvey : null;
         }
-
         public bool HasAnswer(int pageNum)
         {
             SurveyModel s = ListQuestions(pageNum);

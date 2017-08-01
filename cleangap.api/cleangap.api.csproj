@@ -245,6 +245,7 @@
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Domain\CustomersBO.cs" />
     <Compile Include="Domain\QuestionsBO.cs" />
+    <Compile Include="Domain\SectionBO.cs" />
     <Compile Include="Domain\SurveysBO.cs" />
     <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -325,6 +326,7 @@
     <Compile Include="Models\Domain\QuestionOptionModel.cs" />
     <Compile Include="Models\Domain\QuestionsModel.cs" />
     <Compile Include="Models\Domain\ResetPasswordModel.cs" />
+    <Compile Include="Models\Domain\SectionModel.cs" />
     <Compile Include="Models\Domain\SignatureModel.cs" />
     <Compile Include="Models\Domain\SurveyModel.cs" />
     <Compile Include="Models\Tables\answers.cs" />
