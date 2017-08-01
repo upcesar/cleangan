@@ -70,6 +70,7 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
 
     var getQuestions = function (questionID) {
 
+
         if (questionID === undefined) {
             return questionService.GetLast()
                 .then(function (surveys) {                    
@@ -132,54 +133,59 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
     };
 
     var convertAnswerToCurrent = function (serverAnswer) {
+
         var currentAnswers = [];
 
         $scope.qtyChildrenHidden = 0;
 
-        serverAnswer.questions.forEach(function (question) {
-            
-            question.qtyRepeaters = 0;
+        serverAnswer.subsection.forEach(function (currentSubSection) {
 
-            question.questionOption.forEach(function (option) {
+            currentSubSection.questions.forEach(function (question) {
 
-                option.optionIdBase = null;
+                question.qtyRepeaters = 0;
 
-                if (question.hasRepeater) {
-                    $scope.setRepeaterValues(option);
-                }
+                question.questionOption.forEach(function (option) {
 
-                switch (option.optionType) {
-                    case 'radio':
-                        if (option.optionText === option.uniqueAnswer) {
-                            currentAnswers[question.id] = option;
-                        }
-                        currentAnswers[question.id] = currentAnswers[question.id] === undefined ? null : currentAnswers[question.id];
-                        break;
-                    case 'checkbox':
-                        currentAnswers[option.optionId] = option.uniqueAnswer;
-                        break;
-                    case 'drop-down':
+                    option.optionIdBase = null;
 
-                        currentAnswers[option.optionId] = option.uniqueAnswer;
+                    if (question.hasRepeater) {
+                        $scope.setRepeaterValues(option);
+                    }
 
-                        option.questionChoices.forEach(function (dropdownList) {
-                            if (option.uniqueAnswer === dropdownList.id) {
-                                $scope.dropDownElement[option.optionId] = dropdownList;
-                                return;
+                    switch (option.optionType) {
+                        case 'radio':
+                            if (option.optionText === option.uniqueAnswer) {
+                                currentAnswers[question.id] = option;
                             }
-                        });
-                        break;
+                            currentAnswers[question.id] = currentAnswers[question.id] === undefined ? null : currentAnswers[question.id];
+                            break;
+                        case 'checkbox':
+                            currentAnswers[option.optionId] = option.uniqueAnswer;
+                            break;
+                        case 'drop-down':
 
-                    default:
-                        currentAnswers[option.optionId] = option.uniqueAnswer;
-                        $scope.currentValidationMsg[option.optionId] = option.optionText === "E-Mail" ? "Invalid E-Mail" : "This answer cannot be empty";
-                        $scope.currentValidationType[option.optionId] = option.optionText === "E-Mail" ? "email" : "text";
-                        break;
-                }
+                            currentAnswers[option.optionId] = option.uniqueAnswer;
+
+                            option.questionChoices.forEach(function (dropdownList) {
+                                if (option.uniqueAnswer === dropdownList.id) {
+                                    $scope.dropDownElement[option.optionId] = dropdownList;
+                                    return;
+                                }
+                            });
+                            break;
+
+                        default:
+                            currentAnswers[option.optionId] = option.uniqueAnswer;
+                            $scope.currentValidationMsg[option.optionId] = option.optionText === "E-Mail" ? "Invalid E-Mail" : "This answer cannot be empty";
+                            $scope.currentValidationType[option.optionId] = option.optionText === "E-Mail" ? "email" : "text";
+                            break;
+                    }
+
+                });
+
+                showChildrenQuestionMap(question, currentAnswers);
 
             });
-
-            showChildrenQuestionMap(question, currentAnswers);
 
         });
 
