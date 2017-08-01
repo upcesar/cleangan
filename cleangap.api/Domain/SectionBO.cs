@@ -15,6 +15,7 @@ namespace cleangap.api.Domain
         /// </summary>
         List<SectionModel> GetChildren();
         SectionModel GetByQuestion();
+        int? PageNum { get; set; }
 
     }
 
@@ -30,12 +31,16 @@ namespace cleangap.api.Domain
         /// </summary>
         public int id { get { return _id; } }
 
+        public int? PageNum { get; set; }
+
+
         /// <summary>
         /// Constructor with ID parameters (Section / Question depending on the method call)
         /// </summary>
         public SectionBO(int pId)
         {
             _id = pId;
+            PageNum = 1;
         }
 
 
@@ -45,12 +50,18 @@ namespace cleangap.api.Domain
             {
                 QuestionsBO qBO = new QuestionsBO();
 
-                listSection.Add(new SectionModel()
+                List<QuestionsModel> questionSubsection = qBO.GetBySubSection(item.id, PageNum);
+
+                if(questionSubsection.Count > 0)
                 {
-                    id = item.id,
-                    name = item.name,
-                    questions = qBO.GetBySubSection(item.id)
-                });
+                    listSection.Add(new SectionModel()
+                    {
+                        id = item.id,
+                        name = item.name,
+                        questions = questionSubsection
+                    });
+                }
+                
             }
 
         }

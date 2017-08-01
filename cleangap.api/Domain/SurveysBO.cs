@@ -95,6 +95,7 @@ namespace cleangap.api.Domain
         private void SetSubSection(SurveyModel s)
         {
             SectionBO section = new SectionBO(s.section_id);
+            section.PageNum = s.Page;
             s.subsection = section.GetChildren();
 
         }

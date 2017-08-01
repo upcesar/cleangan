@@ -15,7 +15,7 @@ namespace cleangap.api.Domain
     public interface IQuestionsBO
     {
         List<QuestionsModel> GetByPageNum(int? pageNum = 1);
-        List<QuestionsModel> GetBySubSection(int? pSubSectionId);
+        List<QuestionsModel> GetBySubSection(int? pSubSectionId = null, int? pageNum = 1);
     }
 
     /// <summary>
@@ -118,15 +118,16 @@ namespace cleangap.api.Domain
         }
 
         public int? MaxPage { get { return _maxPage;  } }
+        
 
-        public List<QuestionsModel> GetBySubSection(int? pSubSectionId = null)
+        public List<QuestionsModel> GetBySubSection(int? pSubSectionId = null, int? pageNum = 1)
         {
 
             List<QuestionsModel> qList = new List<QuestionsModel>();
 
             using (var db = new CleanGapDataContext())
             {
-                var tblQuestion = db.questions.Where(x => x.id_subsection == pSubSectionId);
+                var tblQuestion = db.questions.Where(x => x.id_subsection == pSubSectionId && x.page == pageNum);
                 PopulateQuestions(qList, tblQuestion);
             }
 
