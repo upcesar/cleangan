@@ -267,6 +267,12 @@ section h2.sub-title {
     font-weight: bold;
 }
 
+section h3.sub-title {
+    font-size: 16px;
+    text-align: left;
+    color: #555545;
+}
+
 .navbar > .container .navbar-brand,
 .navbar > .container-fluid .navbar-brand {
     margin-top: 5px;
@@ -345,7 +351,8 @@ table.table {
 
 .question {
 	font-size: 16px;
-	color: #444545;
+	color: #808080;
+    font-weight: bold;
 }
 
 .survey-card {

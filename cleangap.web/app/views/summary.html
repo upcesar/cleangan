@@ -33,39 +33,43 @@
     <div class="container-fluid">
         <h1 class="title">Summary</h1>
         <div class="col-lg-10 col-lg-offset-1 col-md-12">
-
-            <div ng-repeat="s in summaryData" repeat-done="showData()">
-                <h2 class="question">Step {{s.page}}: {{s.section_name}}</h2>
-                <div class="survey-card">
-                    <div ng-repeat="q in s.questions">
-                        <ul>
-                            <li>
-                                <label>{{q.description}}</label>
-                                <div ng-if="q.questionOption.length === 1">
-                                    <span>{{q.questionOption[0].uniqueAnswer}}</span>
-                                </div>
-
-                                <div ng-if="q.questionOption.length > 1">
-                                    <div ng-repeat="qo in q.questionOption">
-                                        <ul>
-                                            <li>
-                                                <label>{{qo.optionText}}<br /></label>
-                                                <span ng-show="qo.optionType !== 'radio' && qo.optionType !== 'checkbox'">{{qo.uniqueAnswer}}</span>
-                                                <span ng-show="(qo.optionType === 'radio' && qo.uniqueAnswer === qo.optionText) || ( qo.optionType === 'checkbox' && qo.uniqueAnswer ===  'true')"><i class="glyphicon glyphicon-ok-circle"></i></span>                                                
-                                            </li>
-                                        </ul>
-                                        
+            <div ng-repeat="summary in summaryData" repeat-done="showData()">
+                <h2 class="question">Step {{summary.page}}: {{summary.section_name}}</h2>
+                
+                <div ng-repeat="ss in summary.subsection">
+                    
+                    <h3 class="sub-title" ng-hide="ss.id === 0">Sub-Section: {{ss.name}}</h3>
+                    
+                    <div class="survey-card">
+                        <div ng-repeat="q in ss.questions">
+                            <ul>
+                                <li>
+                                    <label>{{q.description}}</label>
+                                    <div ng-if="q.questionOption.length === 1">
+                                        <span>{{q.questionOption[0].uniqueAnswer}}</span>
                                     </div>
-                                </div>
 
-                            </li>
-                        </ul>
+                                    <div ng-if="q.questionOption.length > 1">
+                                        <div ng-repeat="qo in q.questionOption">
+                                            <ul>
+                                                <li>
+                                                    <label>{{qo.optionText}}<br /></label>
+                                                    <span ng-show="qo.optionType !== 'radio' && qo.optionType !== 'checkbox'">{{qo.uniqueAnswer}}</span>
+                                                    <span ng-show="(qo.optionType === 'radio' && qo.uniqueAnswer === qo.optionText) || ( qo.optionType === 'checkbox' && qo.uniqueAnswer ===  'true')"><i class="glyphicon glyphicon-ok-circle"></i></span>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </div>
+                        <hr />
+                        <a ng-href="/survey/edit/{{s.page}}" class="btn btn-lg btn-goto pull-right"><i class="glyphicon glyphicon-edit"></i> Edit Answers</a>
+
                     </div>
-                    <hr />
-                    <a ng-href="/survey/edit/{{s.page}}" class="btn btn-lg btn-goto pull-right"><i class="glyphicon glyphicon-edit"></i> Edit Answers</a>
-
                 </div>
-
             </div>
 
             <h4 class="text-center mb1" ng-show="loadingData"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Loading summary list...</h4>
