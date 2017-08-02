@@ -21,6 +21,7 @@
             SeedQuestionOptionsReviews(context);
             SeedQuestionOptionsInsignia(context);
             SeedQuestionOptionsValidation(context);
+            SeedQuestionOptionsPricingPlan(context);
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_options OFF");            
         }
 

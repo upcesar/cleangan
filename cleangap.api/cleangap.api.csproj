@@ -300,6 +300,7 @@
       <DependentUpon>201707300455134_AddedSubSection.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsPricingPlan.cs" />
     <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsValidation.cs" />
     <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsInsignia.cs" />
     <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsReviews.cs" />
@@ -310,6 +311,7 @@
     <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsDomain.cs" />
     <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsERP.cs" />
     <Compile Include="Migrations\Seed\Questions\SeedQuestionInsignia.cs" />
+    <Compile Include="Migrations\Seed\Questions\SeedQuestionPricingPlans.cs" />
     <Compile Include="Migrations\Seed\Questions\SeedQuestionValidation.cs" />
     <Compile Include="Migrations\Seed\Questions\SeedQuestionReview.cs" />
     <Compile Include="Migrations\Seed\Questions\SeedQuestionDomain.cs" />
