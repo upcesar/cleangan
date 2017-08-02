@@ -300,6 +300,7 @@
       <DependentUpon>201707300455134_AddedSubSection.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsValidation.cs" />
     <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsInsignia.cs" />
     <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsReviews.cs" />
     <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsLines.cs" />
