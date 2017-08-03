@@ -15,8 +15,8 @@
                    .AddOrUpdate(qo => qo.id,
 
                     //Will you require RepSpark’s Insignnia module?
-                    new question_options() { id = 275, id_question = 118, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 276, id_question = 118, input_type = "radio", option_text = "No", order = 2 }
+                    new question_options() { id = 276, id_question = 118, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 277, id_question = 118, input_type = "radio", option_text = "No", order = 2 }
 
             );
         }

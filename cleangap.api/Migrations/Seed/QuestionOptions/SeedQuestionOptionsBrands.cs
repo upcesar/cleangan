@@ -68,46 +68,46 @@
                     new question_options() { id = 59, id_question = 18, input_type = "input-file", option_text = "Upload Logo", order = 9 },
 
                     //Are customers limited to a division in the ERP?
-                    new question_options() { id = 59, id_question = 19, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 60, id_question = 19, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 60, id_question = 19, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 61, id_question = 19, input_type = "radio", option_text = "No", order = 2 },
 
                     //Are lookups (colors, genders, sales reps, shipping options) brand specific?
-                    new question_options() { id = 61, id_question = 20, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 62, id_question = 20, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 62, id_question = 20, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 63, id_question = 20, input_type = "radio", option_text = "No", order = 2 },
 
                     //Please mark what option below might be different per division.Please check if different per brand
-                    new question_options() { id = 63, id_question = 21, input_type = "checkbox", option_text = "Gender", order = 1 },
-                    new question_options() { id = 64, id_question = 21, input_type = "checkbox", option_text = "Color", order = 2 },
-                    new question_options() { id = 65, id_question = 21, input_type = "checkbox", option_text = "Product Category", order = 3 },
-                    new question_options() { id = 66, id_question = 21, input_type = "checkbox", option_text = "Season", order = 4 },
-                    new question_options() { id = 67, id_question = 21, input_type = "checkbox", option_text = "Shipping Methods", order = 5 },
-                    new question_options() { id = 68, id_question = 21, input_type = "checkbox", option_text = "Customer Terms", order = 6 },
-                    new question_options() { id = 69, id_question = 21, input_type = "checkbox", option_text = "Salespeople", order = 7 },
-                    new question_options() { id = 70, id_question = 21, input_type = "checkbox", option_text = "Divisions", order = 8 },
+                    new question_options() { id = 64, id_question = 21, input_type = "checkbox", option_text = "Gender", order = 1 },
+                    new question_options() { id = 65, id_question = 21, input_type = "checkbox", option_text = "Color", order = 2 },
+                    new question_options() { id = 66, id_question = 21, input_type = "checkbox", option_text = "Product Category", order = 3 },
+                    new question_options() { id = 67, id_question = 21, input_type = "checkbox", option_text = "Season", order = 4 },
+                    new question_options() { id = 68, id_question = 21, input_type = "checkbox", option_text = "Shipping Methods", order = 5 },
+                    new question_options() { id = 69, id_question = 21, input_type = "checkbox", option_text = "Customer Terms", order = 6 },
+                    new question_options() { id = 70, id_question = 21, input_type = "checkbox", option_text = "Salespeople", order = 7 },
+                    new question_options() { id = 71, id_question = 21, input_type = "checkbox", option_text = "Divisions", order = 8 },
 
                     //Does RepSpark need to be made aware of the warehouses that inventory is stored in?
-                    new question_options() { id = 71, id_question = 22, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 72, id_question = 22, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 72, id_question = 22, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 73, id_question = 22, input_type = "radio", option_text = "No", order = 2 },
 
                     //Are customers limited in the ERP to what warehouses they can order from?
-                    new question_options() { id = 73, id_question = 23, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 74, id_question = 23, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 74, id_question = 23, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 75, id_question = 23, input_type = "radio", option_text = "No", order = 2 },
 
                     //Are there multiple seasons?
-                    new question_options() { id = 75, id_question = 24, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 76, id_question = 24, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 76, id_question = 24, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 77, id_question = 24, input_type = "radio", option_text = "No", order = 2 },
 
                     //Can seasons be combined on one order?
-                    new question_options() { id = 77, id_question = 25, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 78, id_question = 25, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 78, id_question = 25, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 79, id_question = 25, input_type = "radio", option_text = "No", order = 2 },
 
                     //Do you want a season filter?
-                    new question_options() { id = 79, id_question = 26, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 80, id_question = 26, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 80, id_question = 26, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 81, id_question = 26, input_type = "radio", option_text = "No", order = 2 },
 
                     //Do you want the sales person selecting the season of the order on the header ?
-                    new question_options() { id = 81, id_question = 27, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 82, id_question = 27, input_type = "radio", option_text = "No", order = 2 }
+                    new question_options() { id = 82, id_question = 27, input_type = "radio", option_text = "Yes", order = 1 },
+                    new question_options() { id = 83, id_question = 27, input_type = "radio", option_text = "No", order = 2 }
 
             );
         }
