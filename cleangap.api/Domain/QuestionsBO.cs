@@ -90,7 +90,7 @@ namespace cleangap.api.Domain
             return true;
 
         }
-        private void PopulateQuestions(List<QuestionsModel> qList, IQueryable<questions> tblQuestion)
+        private void PopulateQuestions(List<QuestionsModel> qList, List<questions> tblQuestion)
         {
             foreach (var item in tblQuestion)
             {
@@ -127,7 +127,7 @@ namespace cleangap.api.Domain
 
             using (var db = new CleanGapDataContext())
             {
-                var tblQuestion = db.questions.Where(x => x.id_subsection == pSubSectionId && x.page == pageNum);
+                var tblQuestion = db.questions.Where(x => x.id_subsection == pSubSectionId && x.page == pageNum).ToList();
                 PopulateQuestions(qList, tblQuestion);
             }
 
@@ -141,7 +141,7 @@ namespace cleangap.api.Domain
 
             using (var db = new CleanGapDataContext())
             {
-                var tblQuestion = db.questions.Where(q => q.page == pageNum);
+                var tblQuestion = db.questions.Where(q => q.page == pageNum).ToList();
                 _maxPage = db.questions.Max(x => x.page);
 
                 PopulateQuestions(qList, tblQuestion);
