@@ -108,8 +108,8 @@ namespace cleangap.api.Controllers
         /// Get All questions answered by the user
         /// </summary>
         /// <returns>List of questions answered</returns>
-        [HttpGet, Route("summary")]
-        public List<SurveyModel> Summary()
+        [HttpGet, Route("summary/{initialPage?}/{offsetPages?}")]
+        public List<SurveyModel> Summary(int initialPage = 1, int offsetPages = 5)
         {
             SurveysBO sBO = new SurveysBO();
 

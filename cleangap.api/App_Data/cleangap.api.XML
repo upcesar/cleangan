@@ -530,7 +530,7 @@
             <param name="pSignature">Signature object with Full Name, Date and Digital Signature</param>
             <returns>Response with operation status</returns>
         </member>
-        <member name="M:cleangap.api.Controllers.SurveyController.Summary">
+        <member name="M:cleangap.api.Controllers.SurveyController.Summary(System.Int32,System.Int32)">
             <summary>
             Get All questions answered by the user
             </summary>

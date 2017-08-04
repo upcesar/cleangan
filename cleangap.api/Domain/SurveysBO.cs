@@ -24,7 +24,7 @@ namespace cleangap.api.Domain
 
         bool CheckClosedSurvey(string CustomerId);
 
-        List<SurveyModel> ListSummary();
+        List<SurveyModel> ListSummary(int initialPage = 1, int offsetPages = 5);
 
     }
     #endregion
@@ -301,14 +301,19 @@ namespace cleangap.api.Domain
             }
             throw new NullReferenceException("Page Num cannot be empty");
         }
-        public List<SurveyModel> ListSummary()
+        public List<SurveyModel> ListSummary(int initialPage = 1, int offsetPages = 5)
         {
             List<SurveyModel> listSurvey = new List<SurveyModel>();
+
+            initialPage = initialPage < 1 ? 1 : initialPage;                        // InitialPage must not be less than the first page.
+            offsetPages = offsetPages < initialPage ? initialPage : offsetPages;    // OffsetPage must be greater or equal to initialPage
+
             using (var db = new CleanGapDataContext())
             {
                 var maxPage = db.questions.Max(x => x.page);
+                int finalPage = initialPage + offsetPages - 1;
 
-                for (int i = 1; i <= maxPage; i++)
+                for (int i = initialPage; i <= finalPage; i++)
                 {
                     var survey = ListQuestions(i);
                     listSurvey.Add(survey);
