@@ -15,7 +15,7 @@ namespace cleangap.api.Domain
     public interface IQuestionsBO
     {
         List<QuestionsModel> GetByPageNum(int? pageNum = 1);
-        List<QuestionsModel> GetBySubSection(int? pSubSectionId = null, int? pageNum = 1);
+        List<QuestionsModel> GetBySubSection(int? pSubSectionId = null, int? pageNum = 1);        
     }
 
     /// <summary>
@@ -149,7 +149,5 @@ namespace cleangap.api.Domain
 
             return qList;
         }
-
-
     }
 }

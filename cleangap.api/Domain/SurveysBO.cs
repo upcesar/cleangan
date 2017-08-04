@@ -305,9 +305,8 @@ namespace cleangap.api.Domain
         {
             List<SurveyModel> listSurvey = new List<SurveyModel>();
 
-            initialPage = initialPage < 1 ? 1 : initialPage;                        // InitialPage must not be less than the first page.
-            offsetPages = offsetPages < initialPage ? initialPage : offsetPages;    // OffsetPage must be greater or equal to initialPage
-
+            initialPage = initialPage < 1 ? 1 : ((initialPage - 1) * offsetPages) + 1;   // InitialPage must not be less than the first page.
+            
             using (var db = new CleanGapDataContext())
             {
                 var maxPage = db.questions.Max(x => x.page);
@@ -316,7 +315,10 @@ namespace cleangap.api.Domain
                 for (int i = initialPage; i <= finalPage; i++)
                 {
                     var survey = ListQuestions(i);
-                    listSurvey.Add(survey);
+                    if (survey.Page > 0)
+                        listSurvey.Add(survey);
+                    else
+                        break;
                 }
                 SetUserSummary(db, listSurvey.Count);
             }

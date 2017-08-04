@@ -113,7 +113,7 @@ namespace cleangap.api.Controllers
         {
             SurveysBO sBO = new SurveysBO();
 
-            return sBO.ListSummary();
+            return sBO.ListSummary(initialPage, offsetPages);
         }
     }
 
