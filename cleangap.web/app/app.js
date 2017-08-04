@@ -1,6 +1,6 @@
 
 'use strict';
-var app = angular.module('cleangap', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'vcRecaptcha', 'ui.bootstrap', 'ngBootbox', '720kb.datepicker']);
+var app = angular.module('cleangap', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'vcRecaptcha', 'ui.bootstrap', 'ngBootbox', '720kb.datepicker', 'infinite-scroll']);
 
 //var serviceBase = 'http://localhost:51563/';
 var serviceBase = 'http://cleangap.westcentralus.cloudapp.azure.com:8080/';

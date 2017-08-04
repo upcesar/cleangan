@@ -293,6 +293,7 @@
     <None Include="Properties\PublishProfiles\Virtual Machine.pubxml" />
     <Content Include="scripts\angular-bootbox.min.js" />
     <Content Include="scripts\angular-datepicker.min.js" />
+    <Content Include="scripts\angular-infinite-scroll.mis.js" />
     <Content Include="scripts\angular-recaptcha.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

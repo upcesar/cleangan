@@ -33,7 +33,7 @@
     <div class="container-fluid">
         <h1 class="title">Summary</h1>
         <div class="col-lg-10 col-lg-offset-1 col-md-12">
-            <div ng-repeat="summary in summaryData" repeat-done="showData()">
+            <div ng-repeat="summary in summaryData" repeat-done="showData()" infinite-scroll="loadMore()" infinite-scroll-distance="2">
                 <h2 class="question">Step {{summary.page}}: {{summary.section_name}}</h2>
                 
                 <div ng-repeat="ss in summary.subsection">

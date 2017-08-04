@@ -94,7 +94,17 @@ function summaryController($scope, $q, $http, $location, authService, $routePara
     $scope.logOut = function () {
         authService.logOut();
         $location.path('/');
-    }
+    };
+
+    $scope.loadMore = function () {
+        /*
+        var last = $scope.images[$scope.images.length - 1];
+        for (var i = 1; i <= 8; i++) {
+            $scope.images.push(last + i);
+        }
+        */
+        console.log("infinite-scroll");
+    };
 
     getSummaryData();
 
