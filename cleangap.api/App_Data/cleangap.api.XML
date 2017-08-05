@@ -641,6 +641,11 @@
             Question's list related with the section / subsection
             </summary>
         </member>
+        <member name="T:cleangap.api.Models.Domain.SummaryModel">
+            <summary>
+            Summary Model with all questions answered
+            </summary>
+        </member>
         <member name="T:cleangap.api.Models.Domain.SurveyModel">
             <summary>
             Survey's Model

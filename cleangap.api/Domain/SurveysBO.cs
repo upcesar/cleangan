@@ -24,7 +24,7 @@ namespace cleangap.api.Domain
 
         bool CheckClosedSurvey(string CustomerId);
 
-        List<SurveyModel> ListSummary(int initialPage = 1, int offsetPages = 5);
+        SummaryModel ListSummary(int initialPage = 1, int offsetPages = 5);
 
     }
     #endregion
@@ -32,7 +32,7 @@ namespace cleangap.api.Domain
     {
         private QuestionsBO _questionBO = new QuestionsBO();
         private int intQtySubSection;
-        
+
 
         public int LastSectionId
         {
@@ -301,12 +301,13 @@ namespace cleangap.api.Domain
             }
             throw new NullReferenceException("Page Num cannot be empty");
         }
-        public List<SurveyModel> ListSummary(int initialPage = 1, int offsetPages = 5)
+        public SummaryModel ListSummary(int Page = 1, int offsetPages = 5)
         {
-            List<SurveyModel> listSurvey = new List<SurveyModel>();
+            Page = Page < 1 ? 1 : Page; // InitialPage must not be less than the first page.
 
-            initialPage = initialPage < 1 ? 1 : ((initialPage - 1) * offsetPages) + 1;   // InitialPage must not be less than the first page.
-            
+            int initialPage = ((Page - 1) * offsetPages) + 1;   
+            SummaryModel objSummary = new SummaryModel() { PreviousPage = Page - 1, NextPage = Page + 1, SurverysItems = new List<SurveyModel>() };
+
             using (var db = new CleanGapDataContext())
             {
                 var maxPage = db.questions.Max(x => x.page);
@@ -316,14 +317,31 @@ namespace cleangap.api.Domain
                 {
                     var survey = ListQuestions(i);
                     if (survey.Page > 0)
-                        listSurvey.Add(survey);
+                    {
+                        if (objSummary.NumPages == 0)
+                        {
+                            double numPages = (double)survey.PageTotal / offsetPages;
+                            objSummary.NumPages = (int)Math.Ceiling(numPages);
+                        }
+
+                        objSummary.SurverysItems.Add(survey);
+                    }                        
                     else
                         break;
                 }
-                SetUserSummary(db, listSurvey.Count);
+                SetUserSummary(db, objSummary.SurverysItems.Count);
             }
 
-            return listSurvey.Count > 0 ? listSurvey : null;
+            if(objSummary.SurverysItems.Count == 0)
+            {
+                objSummary.PreviousPage = null;
+                objSummary.NextPage = null;
+            }
+
+            objSummary.PreviousPage = objSummary.PreviousPage < 1 ? null : objSummary.PreviousPage;
+            objSummary.NextPage = objSummary.NextPage >= objSummary.NumPages ? null : objSummary.NextPage;
+
+            return objSummary;
         }
         public bool HasAnswer(int pageNum)
         {

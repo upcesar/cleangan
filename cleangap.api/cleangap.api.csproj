@@ -332,6 +332,7 @@
     <Compile Include="Models\Domain\ResetPasswordModel.cs" />
     <Compile Include="Models\Domain\SectionModel.cs" />
     <Compile Include="Models\Domain\SignatureModel.cs" />
+    <Compile Include="Models\Domain\SummaryModel.cs" />
     <Compile Include="Models\Domain\SurveyModel.cs" />
     <Compile Include="Models\Tables\answers.cs" />
     <Compile Include="DAL\CleanGapDataContext.cs" />

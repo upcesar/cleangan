@@ -95,7 +95,7 @@ namespace cleangap.api.test
 
             var x = qsBO.ListSummary();
 
-            Assert.Greater(x.Count, 0);
+            Assert.Greater(x.SurverysItems.Count, 0);
 
         }
 
