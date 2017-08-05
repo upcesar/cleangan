@@ -15,11 +15,39 @@ function summaryController($scope, $q, $http, $location, authService, $routePara
 
     $scope.summaryData = [];
 
+    $scope.objSummary = {
+        previousPage : 1,
+        nextPage : 1,
+        numPages: 0,
+        isBusy : false,
+        surveysItems: []
+    };
+
     var getSummaryData = function () {
-        return questionService.GetSummary()
-                .then(function (surveySummary) {
-                    $scope.summaryData = surveySummary.data;
-                });
+
+        var page = $scope.objSummary.nextPage;
+        
+
+        if (page !== null && !$scope.objSummary.isBusy) {
+            $scope.objSummary.isBusy = true;
+            return questionService.GetSummary(page, $scope.objSummary.isBusy)
+                    .then(function (surveySummary) {
+                        var summaryData = surveySummary.data;
+
+                        if (summaryData.surverysItems !== null) {
+                            $scope.objSummary.previousPage = summaryData.previousPage;
+                            $scope.objSummary.nextPage = summaryData.nextPage;
+                            $scope.objSummary.numPages = summaryData.numPages;
+
+                            angular.forEach(summaryData.surveysItems, function (value, key) {
+                                $scope.objSummary.surveysItems.push(value);
+                            });
+
+                            $scope.objSummary.isBusy = false;
+                        }
+                    });
+        }
+            
     };
 
     $scope.initSignature = function () {
@@ -97,13 +125,7 @@ function summaryController($scope, $q, $http, $location, authService, $routePara
     };
 
     $scope.loadMore = function () {
-        /*
-        var last = $scope.images[$scope.images.length - 1];
-        for (var i = 1; i <= 8; i++) {
-            $scope.images.push(last + i);
-        }
-        */
-        console.log("infinite-scroll");
+        getSummaryData();
     };
 
     getSummaryData();

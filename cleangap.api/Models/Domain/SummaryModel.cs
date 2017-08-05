@@ -15,6 +15,6 @@ namespace cleangap.api.Models.Domain
 
         public int NumPages { get; set; }
 
-        public List<SurveyModel> SurverysItems { get; set; }
+        public List<SurveyModel> SurveysItems { get; set; }
     }
 }

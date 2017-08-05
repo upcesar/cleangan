@@ -6,6 +6,7 @@ angular.module("cleangap")
 function questionService($http) {
 
     return {
+
         Get: (function (questionID, boundToMax) {
             boundToMax = boundToMax ? '?boundToMax=true' : '';
             return $http.get(serviceBase + '/api/surveys/questions/' + questionID + boundToMax || '').then(function (response) {
@@ -37,8 +38,16 @@ function questionService($http) {
             });
         }),
 
-        GetSummary: (function () {
-            return $http.get(serviceBase + '/api/surveys/summary/').then(function (response) {
+        GetSummary: (function (page, isBusy) {
+
+            if (this.isBusy) return;
+            var paramPage = "";
+
+            if (page !== undefined && !isNaN(page) && angular.isNumber(+page)) {
+                paramPage = "?initialPage=" + page;
+            }
+
+            return $http.get(serviceBase + '/api/surveys/summary/' + paramPage).then(function (response) {
                 return response;
             });
         })

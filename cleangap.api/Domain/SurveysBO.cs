@@ -306,7 +306,7 @@ namespace cleangap.api.Domain
             Page = Page < 1 ? 1 : Page; // InitialPage must not be less than the first page.
 
             int initialPage = ((Page - 1) * offsetPages) + 1;   
-            SummaryModel objSummary = new SummaryModel() { PreviousPage = Page - 1, NextPage = Page + 1, SurverysItems = new List<SurveyModel>() };
+            SummaryModel objSummary = new SummaryModel() { PreviousPage = Page - 1, NextPage = Page + 1, SurveysItems = new List<SurveyModel>() };
 
             using (var db = new CleanGapDataContext())
             {
@@ -324,22 +324,22 @@ namespace cleangap.api.Domain
                             objSummary.NumPages = (int)Math.Ceiling(numPages);
                         }
 
-                        objSummary.SurverysItems.Add(survey);
+                        objSummary.SurveysItems.Add(survey);
                     }                        
                     else
                         break;
                 }
-                SetUserSummary(db, objSummary.SurverysItems.Count);
+                SetUserSummary(db, objSummary.SurveysItems.Count);
             }
 
-            if(objSummary.SurverysItems.Count == 0)
+            if(objSummary.SurveysItems.Count == 0)
             {
                 objSummary.PreviousPage = null;
                 objSummary.NextPage = null;
             }
 
             objSummary.PreviousPage = objSummary.PreviousPage < 1 ? null : objSummary.PreviousPage;
-            objSummary.NextPage = objSummary.NextPage >= objSummary.NumPages ? null : objSummary.NextPage;
+            objSummary.NextPage = objSummary.NextPage > objSummary.NumPages ? null : objSummary.NextPage;
 
             return objSummary;
         }

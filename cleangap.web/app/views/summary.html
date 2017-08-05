@@ -29,17 +29,17 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-<section class="main-content">
+<section class="main-content" infinite-scroll="loadMore()" infinite-scroll-disabled="objSummary.isBusy" infinite-scroll-distance="1">
     <div class="container-fluid">
         <h1 class="title">Summary</h1>
         <div class="col-lg-10 col-lg-offset-1 col-md-12">
-            <div ng-repeat="summary in summaryData" repeat-done="showData()" infinite-scroll="loadMore()" infinite-scroll-distance="2">
-                <h2 class="question">Step {{summary.page}}: {{summary.section_name}}</h2>
-                
-                <div ng-repeat="ss in summary.subsection">
-                    
+            <div ng-repeat="survey in objSummary.surveysItems" repeat-done="showData()">
+                <h2 class="question">Step {{survey.page}}: {{survey.section_name}}</h2>
+
+                <div ng-repeat="ss in survey.subsection">
+
                     <h3 class="sub-title" ng-hide="ss.id === 0">Sub-Section: {{ss.name}}</h3>
-                    
+
                     <div class="survey-card">
                         <div ng-repeat="q in ss.questions">
                             <ul>
@@ -48,7 +48,6 @@
                                     <div ng-if="q.questionOption.length === 1">
                                         <span>{{q.questionOption[0].uniqueAnswer}}</span>
                                     </div>
-
                                     <div ng-if="q.questionOption.length > 1">
                                         <div ng-repeat="qo in q.questionOption">
                                             <ul>
@@ -58,27 +57,22 @@
                                                     <span ng-show="(qo.optionType === 'radio' && qo.uniqueAnswer === qo.optionText) || ( qo.optionType === 'checkbox' && qo.uniqueAnswer ===  'true')"><i class="glyphicon glyphicon-ok-circle"></i></span>
                                                 </li>
                                             </ul>
-
                                         </div>
                                     </div>
-
                                 </li>
                             </ul>
                         </div>
                         <hr />
                         <a ng-href="/survey/edit/{{summary.page}}" class="btn btn-lg btn-goto pull-right"><i class="glyphicon glyphicon-edit"></i> Edit Answers</a>
-
                     </div>
                 </div>
             </div>
-
-            <h4 class="text-center mb1" ng-show="loadingData"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Loading summary list...</h4>
-
+            <h4 class="text-center mb1" ng-show="loadingData || objSummary.isBusy"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Loading data...</h4>
             <div class="mb8" ng-hide="loadingData">
                 <div class="text-right mb1" ng-show="finishingSurvey"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Closing GAP document...</div>
                 <a href="#" class="btn btn-lg btn-finish-summary btn-green pull-right"
                    ng-bootbox-custom-dialog
-                   ng-bootbox-options="confirmFinishOptions">Accept & Finish <i class="glyphicon glyphicon-ok"></i></a>
+                   ng-bootbox-options="confirmFinishOptions" ng-show="objSummary.nextPage === null">Accept & Finish<i class="glyphicon glyphicon-ok"></i></a>
             </div>
         </div>
     </div>
