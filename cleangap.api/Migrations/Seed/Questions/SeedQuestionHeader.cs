@@ -81,14 +81,13 @@
                         new questions() { id = 47, name = "header_terms", description = "Terms", page = 15, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
                         new questions() { id = 48, name = "header_terms_lock", description = "Terms Lock", page = 15, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
                         
-                        new questions() { id = 49, name = "header_terms_lock", description = "Terms Lock", page = 15, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 50, name = "header_terms_lock_b2b", description = "For B2B", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 51, name = "header_terms_lc_reps", description = "For Reps", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 52, name = "header_terms_lc_admin", description = "For Admins", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 53, name = "header_terms_lc_managers", description = "For Managers / CS", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 49, name = "header_terms_lock_b2b", description = "For B2B", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 50, name = "header_terms_lc_reps", description = "For Reps", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 51, name = "header_terms_lc_admin", description = "For Admins", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 52, name = "header_terms_lc_managers", description = "For Managers / CS", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
 
-                        new questions() { id = 54, name = "header_terms_default", description = "Do all customers have default terms?", page = 16, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 55, name = "header_terms_custom", description = "What term code should we default to?", page = 16, question_sections = qsHeader, parent_question_id = 54, parent_answer_value = "No", id_section = qsHeader.id, id_subsection = subSection.id }
+                        new questions() { id = 53, name = "header_terms_default", description = "Do all customers have default terms?", page = 16, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 54, name = "header_terms_custom", description = "What term code should we default to?", page = 16, question_sections = qsHeader, parent_question_id = 53, parent_answer_value = "No", id_section = qsHeader.id, id_subsection = subSection.id }
                         
             );
         }
@@ -100,12 +99,12 @@
             context.questions
                    .AddOrUpdate(
 
-                        new questions() { id = 56, name = "header_ship_via", description = "Ship Via", page = 17, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 57, name = "header_ship_via_en", description = "Ship Via", page = 17, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 58, name = "header_ship_via_b2b", description = "For B2B", page = 17, question_sections = qsHeader, parent_question_id = 57, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 59, name = "header_ship_via_reps", description = "For Reps", page = 17, question_sections = qsHeader, parent_question_id = 57, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 60, name = "header_ship_via_admin", description = "For Admins", page = 17, question_sections = qsHeader, parent_question_id = 57, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 61, name = "header_ship_via_managers", description = "For Managers / CS", page = 17, question_sections = qsHeader, parent_question_id = 57, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id }
+                        new questions() { id = 55, name = "header_ship_via_dh", description = "Ship Via", page = 17, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 56, name = "header_ship_via_en", description = "Ship Via", page = 17, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 57, name = "header_ship_via_b2b", description = "For B2B", page = 17, question_sections = qsHeader, parent_question_id = 56, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 58, name = "header_ship_via_reps", description = "For Reps", page = 17, question_sections = qsHeader, parent_question_id = 56, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 59, name = "header_ship_via_admin", description = "For Admins", page = 17, question_sections = qsHeader, parent_question_id = 56, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 60, name = "header_ship_via_mng", description = "For Managers / CS", page = 17, question_sections = qsHeader, parent_question_id = 56, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id }
 
             );
         }
@@ -117,12 +116,12 @@
             context.questions
                    .AddOrUpdate(
 
-                        new questions() { id = 62, name = "header_comments", description = "Comments", page = 18, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 63, name = "header_one_time_ship", description = "One time ship to option", page = 18, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 64, name = "header_in_hand_date", description = "In-Hand Date", page = 18, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 65, name = "header_value_added_srvc", description = "Is there any value added service (customer specific) information that you want displayed in a popup on this page?", page = 18, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 66, name = "header_value_added_field", description = "Fields:", page = 18, question_sections = qsHeader, parent_question_id = 65, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 67, name = "header_values_order", description = "Are there values that must be set on the header in order for the user to proceed in the order process?", page = 18, question_sections = qsHeader, parent_question_id = 62, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id }
+                        new questions() { id = 61, name = "header_comments", description = "Comments", page = 18, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 62, name = "header_one_time_ship", description = "One time ship to option", page = 18, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 63, name = "header_in_hand_date", description = "In-Hand Date", page = 18, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 64, name = "header_value_added_svc", description = "Is there any value added service (customer specific) information that you want displayed in a popup on this page?", page = 18, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 65, name = "header_value_added_field", description = "Fields:", page = 18, question_sections = qsHeader, parent_question_id = 64, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 66, name = "header_values_order", description = "Are there values that must be set on the header in order for the user to proceed in the order process?", page = 18, question_sections = qsHeader, parent_question_id = 62, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id }
 
             );
         }

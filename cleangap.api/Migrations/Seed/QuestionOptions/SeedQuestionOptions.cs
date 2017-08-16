@@ -12,16 +12,16 @@
         private void SeedQuestionOptions(DAL.CleanGapDataContext context)
         {            
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_options ON");
-            SeedQuestionOptionsERP(context);
-            SeedQuestionOptionsDomain(context);
-            SeedQuestionOptionsBrands(context);
-            SeedQuestionOptionsHeaders(context);
-            SeedQuestionOptionsSelections(context);
-            SeedQuestionOptionsLines(context);
-            SeedQuestionOptionsReviews(context);
-            SeedQuestionOptionsInsignia(context);
-            SeedQuestionOptionsValidation(context);
-            SeedQuestionOptionsPricingPlan(context);
+            //SeedQuestionOptionsERP(context);
+            //SeedQuestionOptionsDomain(context);
+            //SeedQuestionOptionsBrands(context);
+            //SeedQuestionOptionsHeaders(context);
+            //SeedQuestionOptionsSelections(context);
+            //SeedQuestionOptionsLines(context);
+            //SeedQuestionOptionsReviews(context);
+            //SeedQuestionOptionsInsignia(context);
+            //SeedQuestionOptionsValidation(context);
+            //SeedQuestionOptionsPricingPlan(context);
             context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT question_options OFF");            
         }
 
