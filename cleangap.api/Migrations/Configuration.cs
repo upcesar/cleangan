@@ -50,7 +50,8 @@ namespace cleangap.api.Migrations
 
             SeedSections(context);
             SeedQuestions(context);
-            SeedQuestionOptions(context);
+            SeedQuestionOptionsInitialID(context);
+            SeedQuestionOptions(context);   //Commernt line if there is no record in tables.
 
         }
 
