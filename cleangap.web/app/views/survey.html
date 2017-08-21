@@ -46,7 +46,7 @@
                             <div ng-repeat="option in question.questionOption track by $index">
                                 <div ng-if="option.optionType == 'radio'">
                                     <div ng-show="$index == 0 && !currentAnswer[question.id] && !saved" class="text-danger">Select an answer</div>
-                                    <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'">
+                                    <div ng-class="currentSubSection.questions.length === 1?'col-xs-12':'col-xs-6'">
                                         <input ng-model="currentAnswer[question.id]" ng-value="option" type="radio" name="{{question.id}}" ng-change="radioChanged(question, currentAnswer)"> {{option.optionText}} <br />
                                     </div>
                                 </div>
@@ -57,9 +57,9 @@
                                     </div>
                                 </div>
 
-                                <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'input-text'">
+                                <div ng-class="currentSubSection.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'input-text'">
                                     <div class="row">
-                                        <label class="col-xs-6" for="{{option.optionText}}:">
+                                        <label class="col-xs-6" for="{{option.optionText}}">
                                             {{option.optionText}}
                                         </label>
                                         <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">{{currentValidationMsg[option.optionId]}}</div>
@@ -77,7 +77,7 @@
                                     <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" class="" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" ng-change="checkForm()" type="file" />
                                 </div>
 
-                                <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'drop-down'">
+                                <div ng-class="currentSubSection.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'drop-down'">
                                     <div class="row">
                                         <label class="col-xs-6">{{option.optionText}}: </label>
                                         <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">
@@ -89,8 +89,8 @@
                                         <option value="">Select Option</option>
                                     </select>
                                 </div>
-
-                                <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'textarea'">
+                                
+                                <div ng-class="currentSubSection.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'textarea'">
                                     <div class="row">
                                         <label class="col-xs-6" for="{{option.optionText}}">
                                             {{option.optionText}}
@@ -102,7 +102,7 @@
                                     <textarea ng-model="currentAnswer[option.optionId]" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" class="form-control" cols="50" ng-change="checkForm()"> {{option.uniqueAnswer}} </textarea>
                                 </div>
 
-                                <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'input-date'">
+                                <div ng-class="currentSubSection.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'input-date'">
                                     <div class="row">
                                         <label class="col-xs-6" for="{{option.optionText}}:">
                                             {{option.optionText}}
