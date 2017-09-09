@@ -130,7 +130,7 @@
 
             <div class="mb8" ng-hide="loadingData">
                 <a href="/" class="btn btn-lg btn-green pull-right" ng-class="!finishingSurvey && isValidForm ? '' : 'disabled'" ng-hide="comingFromSummary()" ng-click="saveAndExit()" type="submit">Save & Exit</a>
-                <a href="#" class="btn btn-lg btn-goto pull-right" ng-hide="comingFromSummary()" ng-click="next()">
+                <a href="#" class="btn btn-lg btn-goto pull-right" ng-class="!finishingSurvey && isValidForm ? '' : 'disabled'" ng-hide="comingFromSummary()" ng-click="next()">
                     Next <i class="glyphicon glyphicon-chevron-right"></i>
                 </a>
 
