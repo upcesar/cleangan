@@ -53,8 +53,13 @@ namespace cleangap.api.Models.Tables
         /// </summary>
         public bool has_repeater { get; set; }
         /// <summary>
+        /// Hide question in UI
+        /// </summary>
+        public bool? hide_question { get; set; }
+        /// <summary>
         /// Question Page
         /// </summary>
+
         public int? page { get; set; }
         /// <summary>
         /// Question Options collection

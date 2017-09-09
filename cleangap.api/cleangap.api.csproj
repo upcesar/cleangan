@@ -300,6 +300,10 @@
     <Compile Include="Migrations\201707300455134_AddedSubSection.Designer.cs">
       <DependentUpon>201707300455134_AddedSubSection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709092108438_AddHiddenQuestion.cs" />
+    <Compile Include="Migrations\201709092108438_AddHiddenQuestion.Designer.cs">
+      <DependentUpon>201709092108438_AddHiddenQuestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsPricingPlan.cs" />
     <Compile Include="Migrations\Seed\QuestionOptions\SeedQuestionOptionsValidation.cs" />
@@ -477,6 +481,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707300455134_AddedSubSection.resx">
       <DependentUpon>201707300455134_AddedSubSection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709092108438_AddHiddenQuestion.resx">
+      <DependentUpon>201709092108438_AddHiddenQuestion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

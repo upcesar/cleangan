@@ -103,7 +103,11 @@ namespace cleangap.api.Domain
 
             using (var db = new CleanGapDataContext())
             {
-                var tblQuestion = db.questions.Where(x => x.id_subsection == pSubSectionId && x.page == pageNum).ToList();
+                var tblQuestion = db.questions
+                                    .Where(x => x.id_subsection == pSubSectionId 
+                                            && x.page == pageNum
+                                            && (!((bool)x.hide_question) || x.hide_question == null))
+                                    .ToList();
                 PopulateQuestions(qList, tblQuestion);
             }
 

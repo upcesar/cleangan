@@ -756,6 +756,11 @@
             Set repeated for mapped Question Option
             </summary>
         </member>
+        <member name="P:cleangap.api.Models.Tables.questions.hide_question">
+            <summary>
+            Hide question in UI
+            </summary>
+        </member>
         <member name="P:cleangap.api.Models.Tables.questions.page">
             <summary>
             Question Page

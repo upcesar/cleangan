@@ -79,12 +79,12 @@
             context.questions
                    .AddOrUpdate(
                         new questions() { id = 47, name = "header_terms", description = "Terms", page = 15, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 48, name = "header_terms_lock", description = "Terms Lock", page = 15, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 48, name = "header_terms_lock", description = "Terms Lock", page = 15, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id, hide_question = true },
                         
-                        new questions() { id = 49, name = "header_terms_lock_b2b", description = "For B2B", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 50, name = "header_terms_lc_reps", description = "For Reps", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 51, name = "header_terms_lc_admin", description = "For Admins", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 52, name = "header_terms_lc_managers", description = "For Managers / CS", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 49, name = "header_terms_lock_b2b", description = "Terms Lock For B2B", page = 15, question_sections = qsHeader, parent_question_id = null, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 50, name = "header_terms_lc_reps", description = "Terms Lock For Reps", page = 15, question_sections = qsHeader, parent_question_id = null, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 51, name = "header_terms_lc_admin", description = "Terms Lock For Admins", page = 15, question_sections = qsHeader, parent_question_id = null, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 52, name = "header_terms_lc_managers", description = "Terms Lock For Managers / CS", page = 15, question_sections = qsHeader, parent_question_id = 48, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id },
 
                         new questions() { id = 53, name = "header_terms_default", description = "Do all customers have default terms?", page = 16, id_section = qsHeader.id, id_subsection = subSection.id },
                         new questions() { id = 54, name = "header_terms_custom", description = "What term code should we default to?", page = 16, question_sections = qsHeader, parent_question_id = 53, parent_answer_value = "No", id_section = qsHeader.id, id_subsection = subSection.id }
