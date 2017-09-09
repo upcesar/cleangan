@@ -27,33 +27,9 @@ namespace cleangap.api.Domain
 
         private List<QuestionOptionModel> AddQuestionOptions(questions pQuestions)
         {
-            List<QuestionOptionModel> OptionList = new List<QuestionOptionModel>();
+            QuestionOptionsBO qoBO = new QuestionOptionsBO(pQuestions);
 
-            List<question_options> tblOptions = pQuestions.question_options
-                                                          .OrderBy(x => x.order)
-                                                          .ToList();
-
-            int? idCustomer = AccountIdentity.GetCurrentUserInt();
-
-            foreach (var item in tblOptions)
-            {
-                List<string> MultAnswers = item.answers.Where(x => x.id_customer == idCustomer)
-                                                       .Select(x => x.answers_value)
-                                                       .ToList<string>();
-
-                OptionList.Add(new QuestionOptionModel()
-                {
-                    OptionId = item.id,
-                    OptionText = item.option_text != null ? item.option_text.Trim() : null,
-                    OptionType = item.input_type != null ? item.input_type.Trim() : null,
-                    //QuestionChoices = ListChoices(item),
-                    HasMultipleAnswer = MultAnswers.Count > 1,
-                    UniqueAnswer = MultAnswers.FirstOrDefault(),
-                    MultipleAnswers = MultAnswers,
-                });
-            }
-
-            return OptionList;
+            return qoBO.Items;
         }
 
         private List<QuestionsModel> GetChilderQuestions(ICollection<questions> childrenQuestions)
