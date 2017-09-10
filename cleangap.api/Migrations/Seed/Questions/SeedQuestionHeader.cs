@@ -100,11 +100,11 @@
                    .AddOrUpdate(
 
                         new questions() { id = 55, name = "header_ship_via_dh", description = "Ship Via", page = 17, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 56, name = "header_ship_via_en", description = "Ship Via", page = 17, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 57, name = "header_ship_via_b2b", description = "For B2B", page = 17, question_sections = qsHeader, parent_question_id = 56, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 58, name = "header_ship_via_reps", description = "For Reps", page = 17, question_sections = qsHeader, parent_question_id = 56, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 59, name = "header_ship_via_admin", description = "For Admins", page = 17, question_sections = qsHeader, parent_question_id = 56, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 60, name = "header_ship_via_mng", description = "For Managers / CS", page = 17, question_sections = qsHeader, parent_question_id = 56, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id }
+                        new questions() { id = 56, name = "header_ship_via_en", description = "Ship Via", page = 17, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id, hide_question = true },
+                        new questions() { id = 57, name = "header_ship_via_b2b", description = "For B2B", page = 17, question_sections = qsHeader, parent_question_id = null, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 58, name = "header_ship_via_reps", description = "For Reps", page = 17, question_sections = qsHeader, parent_question_id = null, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 59, name = "header_ship_via_admin", description = "For Admins", page = 17, question_sections = qsHeader, parent_question_id = null, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 60, name = "header_ship_via_mng", description = "For Managers / CS", page = 17, question_sections = qsHeader, parent_question_id = null, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id }
 
             );
         }

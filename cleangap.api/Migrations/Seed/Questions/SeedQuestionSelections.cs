@@ -40,7 +40,7 @@
             context.questions
                    .AddOrUpdate(
                         new questions() { id = 69, name = "selection_unit_display", description = "Unit to display for Rep?", page = 20, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 70, name = "selection_view_cust", description = "Unit to display for for Customer/B2B?", page = 20, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id }
+                        new questions() { id = 70, name = "selection_view_cust", description = "Unit to display for Customer/B2B?", page = 20, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id }
             );
         }
 
@@ -51,13 +51,13 @@
             context.questions
                    .AddOrUpdate(
                         new questions() { id = 71, name = "sel_opt_field", description = "Do you want the optional fields displayed?", page = 21, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 72, name = "sel_show_rtl", description = "Show Retail Price?", page = 21, question_sections = qsHeader, parent_question_id = 71, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 73, name = "sel_show_gnd", description = "Show Gender?", page = 21, question_sections = qsHeader, parent_question_id = 71, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 74, name = "sel_show_season", description = "Show Season?", page = 21, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 75, name = "sel_show_dim", description = "Show Dimension?", page = 21, question_sections = qsHeader, parent_question_id = 71, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 76, name = "sel_show_prod_grp", description = "Show Product Group?", page = 21, question_sections = qsHeader, parent_question_id = 71, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 77, name = "sel_show_whs", description = "Show Warehouse?", page = 21, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 78, name = "sel_show_ptype", description = "Show Product Type?", page = 21, question_sections = qsHeader, parent_question_id = 71, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id }
+                        new questions() { id = 72, name = "sel_show_rtl", description = "Show Retail Price?", page = 21, question_sections = qsHeader, parent_question_id = null, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 73, name = "sel_show_gnd", description = "Show Gender?", page = 21, question_sections = qsHeader, parent_question_id = null, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 74, name = "sel_show_season", description = "Show Season?", page = 21, question_sections = qsHeader, parent_question_id = null, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 75, name = "sel_show_dim", description = "Show Dimension?", page = 21, question_sections = qsHeader, parent_question_id = null, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 76, name = "sel_show_prod_grp", description = "Show Product Group?", page = 21, question_sections = qsHeader, parent_question_id = null, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 77, name = "sel_show_whs", description = "Show Warehouse?", page = 21, question_sections = qsHeader, parent_question_id = null, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 78, name = "sel_show_ptype", description = "Show Product Type?", page = 21, question_sections = qsHeader, parent_question_id = null, parent_answer_value = null, id_section = qsHeader.id, id_subsection = subSection.id }
 
             );
         }
