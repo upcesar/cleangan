@@ -27,12 +27,12 @@
                     //Units to Display for Reps
                     new question_options() { id = 174, id_question = 69, input_type = "checkbox", option_text = "True inventory", order = 1 },
                     new question_options() { id = 175, id_question = 69, input_type = "checkbox", option_text = "Limited", order = 2 },
-                    new question_options() { id = 176, id_question = 69, input_type = "checkbox", option_text = "Number to Limit at", order = 3 },
+                    new question_options() { id = 176, id_question = 69, input_type = "input-text", option_text = "Number to Limit at", order = 3 },
 
                     //Units to Display for Customer/B2B?
                     new question_options() { id = 177, id_question = 70, input_type = "checkbox", option_text = "True inventory", order = 1 },
                     new question_options() { id = 178, id_question = 70, input_type = "checkbox", option_text = "Limited", order = 2 },
-                    new question_options() { id = 179, id_question = 70, input_type = "checkbox", option_text = "Number to Limit at", order = 3 },
+                    new question_options() { id = 179, id_question = 70, input_type = "input-text", option_text = "Number to Limit at", order = 3 },
 
                     //Do you want the optional fields displayed?
                     new question_options() { id = 180, id_question = 71, input_type = "radio", option_text = "Yes", order = 1 },
