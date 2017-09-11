@@ -176,6 +176,9 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
 
                         case 'input-date':
                             currentAnswers[option.optionId] = new Date(option.uniqueAnswer);
+                            if (option.uniqueAnswer === null || !angular.isDate(currentAnswers[option.optionId])) {
+                                currentAnswers[option.optionId] = null;
+                            }
                             $scope.currentValidationMsg[option.optionId] = "Invalid Date";
                             $scope.currentValidationType[option.optionId] = "date";
                             break;
