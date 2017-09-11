@@ -174,6 +174,12 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
                             });
                             break;
 
+                        case 'input-date':
+                            currentAnswers[option.optionId] = new Date(option.uniqueAnswer);
+                            $scope.currentValidationMsg[option.optionId] = "Invalid Date";
+                            $scope.currentValidationType[option.optionId] = "date";
+                            break;
+
                         default:
                             currentAnswers[option.optionId] = option.uniqueAnswer;
                             $scope.currentValidationMsg[option.optionId] = option.optionText === "E-Mail" ? "Invalid E-Mail" : "This answer cannot be empty";

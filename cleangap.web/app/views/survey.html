@@ -67,6 +67,16 @@
                                     <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" class="form-control" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" ng-change="checkForm()" type="{{currentValidationType[option.optionId]}}" />
                                 </div>
 
+                                <div ng-class="currentSubSection.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'input-date'">
+                                    <div class="row">
+                                        <label class="col-xs-9" for="{{option.optionText}}:">
+                                            {{option.optionText}}
+                                        </label>
+                                        <div class="col-xs-3 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">{{currentValidationMsg[option.optionId]}}</div>
+                                    </div>
+                                    <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" type="date" placeholder="MM/dd/yyyy" class="form-control" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" ng-change="checkForm()" />
+                                </div>
+
                                 <div class="col-xs-12" ng-if="option.optionType === 'input-file'">
                                     <div class="row">
                                         <label class="col-xs-6" for="{{option.optionText}}:">
@@ -101,19 +111,6 @@
                                     </div>
                                     <textarea ng-model="currentAnswer[option.optionId]" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" class="form-control" cols="50" ng-change="checkForm()"> {{option.uniqueAnswer}} </textarea>
                                 </div>
-
-                                <div ng-class="currentSubSection.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'input-date'">
-                                    <div class="row">
-                                        <label class="col-xs-6" for="{{option.optionText}}:">
-                                            {{option.optionText}}
-                                        </label>
-                                        <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">{{currentValidationMsg[option.optionId]}}</div>
-                                    </div>
-                                    <datepicker date-format="MM/dd/yyyy">
-                                        <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" type="text" placeholder="Choose a date" class="form-control" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" ng-change="checkForm()" />
-                                    </datepicker>
-                                </div>
-
 
                             </div>
 

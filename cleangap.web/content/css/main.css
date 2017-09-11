@@ -5,8 +5,8 @@ Grey: 818486
 Dark orange: d26f1b
 Orange: f7923d
 
-Tamaños tipografia:
-User name (esquina superior derecha): 13px
+Font sizes:
+User name (upper-right corner): 13px
 Buttons: 14px
 Titles: 20px
 Texts/sub-titles: 18px
@@ -19,11 +19,11 @@ Survey list boxes titles: 18px
 Survey list boxes info: 14px
 Staff lists: 18px
 
-Colores Fondos y objetos
-Naranja: f7923d
-Gris claro: fbfbfb
-Gris oscuro: 989898
-Verde: 106d1b */
+Colors, Backgrounds and objects
+Orange: f7923d
+Light Grey: fbfbfb
+Dark Grey: 989898
+Green: 106d1b */
 
 
 body, html {
@@ -46,6 +46,16 @@ label {
 	color: #818486;
 	margin-bottom: 2px;
 }
+
+/* Hide UI Date Picker in Google Chrome */
+input[type="date"]::-webkit-calendar-picker-indicator{
+    display: none;
+}
+
+input[type="date"]::-webkit-input-placeholder{ 
+    visibility: hidden !important;
+}
+
 .required {
 	color: #f7923d;
 }
