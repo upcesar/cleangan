@@ -46,8 +46,8 @@
                     new question_options() { id = 290, id_question = 126, input_type = "textarea", option_text = "", order = 1 },
 
                     // Note* Order splitting isxxxxx. This requires inventory validation
-                    new question_options() { id = 291, id_question = 127, input_type = "radio", option_text = "Yes", order = 1 },
-                    new question_options() { id = 292, id_question = 127, input_type = "radio", option_text = "No", order = 2 },
+                    new question_options() { id = 291, id_question = 127, input_type = "radio", option_text = "Yes", order = 1, hide_option = true },
+                    new question_options() { id = 292, id_question = 127, input_type = "radio", option_text = "No", order = 2, hide_option = true },
 
                     // Allowing Splitting
                     new question_options() { id = 293, id_question = 128, input_type = "radio", option_text = "Yes", order = 1 },

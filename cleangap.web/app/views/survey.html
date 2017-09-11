@@ -42,7 +42,7 @@
                 <div ng-repeat="question in currentSubSection.questions">
                     <div id="question{{question.id}}" ng-show="childrenQuestionUI[question.id] || childrenQuestionUI[question.id] == null">
                         <h2 class="question">{{question.description}}</h2>
-                        <div class="survey-card">
+                        <div class="survey-card" ng-hide="question.questionOption.length === 0">
                             <div ng-repeat="option in question.questionOption track by $index">
                                 <div ng-if="option.optionType == 'radio'">
                                     <div ng-show="$index == 0 && !currentAnswer[question.id] && !saved" class="text-danger">Select an answer</div>

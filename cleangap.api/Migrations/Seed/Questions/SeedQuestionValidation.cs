@@ -29,8 +29,8 @@
                         new questions() { id = 119, name = "validation_header_po", description = "Do you require a PO?", page = 30, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
                         new questions() { id = 120, name = "validation_header_def", description = "If any fields are not defaulted, do you require them to be filled out?", page = 30, question_sections = qsHeader, id_section = qsHeader.id, id_subsection = subSection.id },
                         new questions() { id = 121, name = "validation_header_cust", description = "Customer", page = 30, question_sections = qsHeader, parent_question_id = 120, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 122, name = "validation_header_cdate", description = "Cancel date", page = 30, question_sections = qsHeader, parent_question_id = 120, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
-                        new questions() { id = 123, name = "validation_header_sdate", description = "Start date", page = 30, question_sections = qsHeader, parent_question_id = 120, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id }
+                        new questions() { id = 122, name = "validation_header_sdate", description = "Start date", page = 30, question_sections = qsHeader, parent_question_id = 120, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id },
+                        new questions() { id = 123, name = "validation_header_cdate", description = "Cancel date", page = 30, question_sections = qsHeader, parent_question_id = 120, parent_answer_value = "Yes", id_section = qsHeader.id, id_subsection = subSection.id }                        
             );
 
         }

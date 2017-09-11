@@ -23,6 +23,7 @@ namespace cleangap.api.Domain
             List<QuestionOptionModel> OptionList = new List<QuestionOptionModel>();
 
             List<question_options> tblOptions = pQuestions.question_options
+                                                          .Where(x => x.hide_option == null || x.hide_option == false) 
                                                           .OrderBy(x => x.order)
                                                           .ToList();
 
@@ -30,9 +31,10 @@ namespace cleangap.api.Domain
 
             foreach (var item in tblOptions)
             {
-                List<string> MultAnswers = item.answers.Where(x => x.id_customer == idCustomer)
-                                                       .Select(x => x.answers_value)
-                                                       .ToList<string>();
+                List<string> MultAnswers = item.answers
+                                               .Where(x => x.id_customer == idCustomer)
+                                               .Select(x => x.answers_value)
+                                               .ToList<string>();
 
                 OptionList.Add(new QuestionOptionModel()
                 {
