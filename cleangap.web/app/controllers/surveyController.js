@@ -304,8 +304,8 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
         copyRepeater.forEach(function (item, index) {
             item.optionId += $scope.templateRepeaterList.length - 1;
             item.repeaterIndex++;
-            $scope.survey.questions[key].questionOption.push(item);
-            $scope.survey.questions[key].qtyRepeaters++;
+            $scope.survey.subsection[0].questions[key].questionOption.push(item);
+            $scope.survey.subsection[0].questions[key].qtyRepeaters++;
             $scope.templateRepeaterList[index] = item;
         });
 
