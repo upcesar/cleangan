@@ -52,8 +52,9 @@
                                 </div>
 
                                 <div ng-if="option.optionType == 'checkbox'">
+                                    <div ng-show="$index == 0 && !questionWithCheckBox[question.id] && !saved" class="text-danger">Check at least one option</div>
                                     <div ng-class="survey.questions.length === 1?'col-xs-12':'col-xs-6'">
-                                        <input type="{{option.optionType}}" ng-checked="currentAnswer[option.optionId] ==='true'" name="{{option.optionId}}" ng-model="currentAnswer[option.optionId]"> {{option.optionText}} <br />
+                                        <input type="{{option.optionType}}" ng-checked="currentAnswer[option.optionId] ==='true'" name="{{option.optionId}}" ng-change="checkBoxChanged(question, currentAnswer)" ng-model="currentAnswer[option.optionId]"> {{option.optionText}} <br />
                                     </div>
                                 </div>
 

@@ -112,10 +112,13 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
         $scope.currentAnswer[optionId] = $scope.dropDownElement[optionId] !== null ? $scope.dropDownElement[optionId].id : null;
         $scope.checkForm();
     };
+
+    $scope.questionWithCheckBox = [];
+    $scope.countCheckBox = 0;
+    $scope.checkBoxOptionId = [];
     
     $scope.templateRepeaterList = [];
 
-    
     $scope.setRepeaterValues = function (option) {
         var templateRepeater = {
             "optionIdBase"      : option.optionId,
@@ -160,6 +163,19 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
                             currentAnswers[question.id] = currentAnswers[question.id] === undefined ? null : currentAnswers[question.id];
                             break;
                         case 'checkbox':
+
+                            if ($scope.checkBoxOptionId[question.id] === undefined) {
+                                $scope.checkBoxOptionId[question.id] = [];
+                            }
+
+                            $scope.checkBoxOptionId[question.id].push(option.optionId);
+                            $scope.countCheckBox++;
+                            
+                            // Check if question has any checkbox value
+                            if ($scope.questionWithCheckBox[question.id] !== true) {
+                                $scope.questionWithCheckBox[question.id] = option.uniqueAnswer === "true";
+                            }
+
                             currentAnswers[option.optionId] = option.uniqueAnswer;
                             break;
                         case 'drop-down':
@@ -214,6 +230,18 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
         $scope.checkForm();
     };
 
+    $scope.checkBoxChanged = function (question, currentAnswer) {
+
+        $scope.questionWithCheckBox[question.id] = false;
+        $scope.checkBoxOptionId[question.id].forEach(function (optionId, index) {
+            if (currentAnswer[optionId] === true) {
+                $scope.questionWithCheckBox[question.id] = true;
+            }
+        });
+        
+        $scope.checkForm();
+    }
+
     /******************************
      *  Events - End
      ******************************/
@@ -232,15 +260,19 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
     $scope.sizeCurrentAnswer = 0;
     $scope.sizeAllAnswer = 0;
 
-
     $scope.checkForm = function () {
-        var sizeCurrentAnswer = $scope.currentAnswer.filter(function (value) {
-            return value !== undefined && value !== null && value !== "";
+        var sizeCheckBoxes = $scope.questionWithCheckBox.filter(function (value) {
+            return value !== undefined && value !== null;
         }).length;
 
         var sizeAllAnswer = $scope.currentAnswer.filter(function (value) {
             return value !== undefined;
-        }).length - $scope.qtyChildrenHidden;
+        }).length - $scope.qtyChildrenHidden - $scope.countCheckBox + sizeCheckBoxes;
+
+
+        var sizeCurrentAnswer = $scope.currentAnswer.filter(function (value) {
+            return value !== undefined && value !== null && value !== "" && value !== false;
+        }).length;
 
         $scope.sizeCurrentAnswer = sizeCurrentAnswer;
         $scope.sizeAllAnswer = sizeAllAnswer;
