@@ -118,6 +118,8 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
     $scope.checkBoxOptionId = [];
     
     $scope.templateRepeaterList = [];
+    $scope.countRepeatersCtrl = 0;      //Qtd Individual control within a repeater
+    $scope.countRepeatersGroup = 0;     //Qtd grouped / repeater control
 
     $scope.setRepeaterValues = function (option) {
         var templateRepeater = {
@@ -153,6 +155,7 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
 
                     if (question.hasRepeater) {
                         $scope.setRepeaterValues(option);
+                        $scope.countRepeatersCtrl++;
                     }
 
                     switch (option.optionType) {
@@ -301,13 +304,19 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
         var copyRepeater = [];
         angular.copy($scope.templateRepeaterList, copyRepeater);
 
+        $scope.countRepeatersGroup = $scope.countRepeatersCtrl / copyRepeater.length;
+
         copyRepeater.forEach(function (item, index) {
             item.optionId += $scope.templateRepeaterList.length - 1;
             item.repeaterIndex++;
             $scope.survey.subsection[0].questions[key].questionOption.push(item);
             $scope.survey.subsection[0].questions[key].qtyRepeaters++;
             $scope.templateRepeaterList[index] = item;
+            $scope.currentAnswer[item.optionId] = null;
         });
+
+        $scope.countRepeatersGroup++;
+        $scope.countRepeatersCtrl = $scope.countRepeatersGroup * copyRepeater.length;
 
     };
 
