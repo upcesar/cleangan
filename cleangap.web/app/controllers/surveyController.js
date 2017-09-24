@@ -203,6 +203,12 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
                             $scope.currentValidationType[option.optionId] = "date";
                             break;
 
+                        /*case 'input-file':
+                            currentAnswers[option.optionId] = option.uniqueAnswer.name;
+                            $scope.currentValidationMsg[option.optionId] = "File cannot be empty";
+                            $scope.currentValidationType[option.optionId] = "file";
+                            break;
+                            */
                         default:
                             currentAnswers[option.optionId] = option.uniqueAnswer;
                             $scope.currentValidationMsg[option.optionId] = option.optionText === "E-Mail" ? "Invalid E-Mail" : "This answer cannot be empty";
@@ -246,11 +252,12 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
         $scope.checkForm();
     }
 
-    $scope.fileChanged = function () {
+    $scope.fileChanged = function (question, currentAnswer) {
         /*
         var filename = event.target.files[0].name;
         alert('file was selected: ' + filename);
         */
+        debugger;
         $scope.checkForm();
     }
 
