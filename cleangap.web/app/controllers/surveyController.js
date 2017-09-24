@@ -246,6 +246,14 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
         $scope.checkForm();
     }
 
+    $scope.fileChanged = function () {
+        /*
+        var filename = event.target.files[0].name;
+        alert('file was selected: ' + filename);
+        */
+        $scope.checkForm();
+    }
+
     /******************************
      *  Events - End
      ******************************/

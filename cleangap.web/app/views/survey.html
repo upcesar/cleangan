@@ -95,7 +95,8 @@
                                         </label>
                                         <div class="col-xs-6 text-danger text-right" ng-show="!validateUniqueAnswer(option) && isValidated">{{currentValidationMsg[option.optionId]}}</div>
                                     </div>
-                                    <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" class="" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" ng-change="checkForm()" type="file" />
+                                    <input name="{{option.optionText}}" ng-model="currentAnswer[option.optionId]" class="" ng-class="{ error: !validateUniqueAnswer(option) && isValidated}" ng-change="checkForm()" data-bind-file="" type="file" />
+                                    {{currentAnswer[option.optionId].name}}
                                 </div>
 
                                 <div ng-class="currentSubSection.questions.length === 1?'col-xs-12':'col-xs-6'" ng-if="option.optionType === 'drop-down'">

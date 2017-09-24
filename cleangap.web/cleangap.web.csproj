@@ -139,6 +139,7 @@
     <Content Include="app\directives\linkPreventDefault.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="app\directives\bindFile.js" />
     <Content Include="app\directives\passwordVerify.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
