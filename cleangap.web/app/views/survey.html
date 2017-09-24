@@ -50,7 +50,13 @@
                                         <hr />
                                     </div>
                                     <div class="col-xs-12">
-                                        <a href="#" class="btn btn-sm btn-danger pull-right" ng-click="removeRepeater(question.id, option.repeaterIndex)"><i class="glyphicon glyphicon-minus-sign"></i> Remove</a>
+                                        <a href="#" class="btn btn-sm btn-danger pull-right" 
+                                           ng-bootbox-title="Delete section"
+                                           ng-bootbox-confirm="Are you sure you want to delete this section?"
+                                           ng-bootbox-confirm-action="removeRepeater(question.id, option.repeaterIndex)">
+                                                <i class="glyphicon glyphicon-minus-sign"></i> Remove
+                                        </a>
+                                        <!--<a href="#" class="btn btn-sm btn-danger pull-right" ng-bootbox-confirm="Are you sure you want to delete theis section?" ng-click="removeRepeater(question.id, option.repeaterIndex)"><i class="glyphicon glyphicon-minus-sign"></i> Remove</a>-->
                                     </div>
                                 </div>
 
