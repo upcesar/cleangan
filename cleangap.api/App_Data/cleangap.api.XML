@@ -481,6 +481,11 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:cleangap.api.Controllers.AccountController">
+            <summary>
+            Resource for Customer Register, Login and Password Recovery.
+            </summary>
+        </member>
         <member name="M:cleangap.api.Controllers.AccountController.Register(cleangap.api.Models.Domain.CustomerModel)">
             <summary>
             Customer Register / Signup

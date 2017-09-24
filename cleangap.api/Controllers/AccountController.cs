@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace cleangap.api.Controllers
 {
+    /// <summary>
+    /// Resource for Customer Register, Login and Password Recovery.
+    /// </summary>
     [RoutePrefix("api/account")]
     public class AccountController : ApiController
     {
