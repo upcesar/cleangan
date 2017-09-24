@@ -45,15 +45,14 @@
                         <div class="survey-card" ng-hide="question.questionOption.length === 0">
                             <div ng-repeat="option in question.questionOption track by $index">
 
-                                <div class="clearfix" ng-if="question.hasRepeater && $index % templateRepeaterList.length === 0 && countRepeatersGroup > 1">
+                                <div class="clearfix" ng-if="question.hasRepeater && $index % templateRepeaterList.length === 0 && countRepeatersGroup > 0">
                                     <div class="col-xs-12">
                                         <hr />
                                     </div>
                                     <div class="col-xs-12">
-                                        <a href="#" class="btn btn-sm btn-danger pull-right" ng-click="removeRepeater($parent.$index)"><i class="glyphicon glyphicon-minus-sign"></i> Remove</a>
+                                        <a href="#" class="btn btn-sm btn-danger pull-right" ng-click="removeRepeater(question.id, option.repeaterIndex)"><i class="glyphicon glyphicon-minus-sign"></i> Remove</a>
                                     </div>
                                 </div>
-
 
                                 <div ng-if="option.optionType == 'radio'">
                                     <div ng-show="$index == 0 && !currentAnswer[question.id] && !saved" class="text-danger">Select an answer</div>
@@ -135,8 +134,6 @@
                     </div>
                 </div>
             </div>
-
-            <pre>{{sizeAllAnswer}} - {{sizeCurrentAnswer}} = {{sizeAllAnswer - sizeCurrentAnswer}} | {{countRepeatersCtrl}}</pre>
 
             <h4 class="text-center mb1" ng-show="loadingData"><i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i> Loading data...</h4>
 

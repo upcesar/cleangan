@@ -134,6 +134,7 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
             "repeaterIndex"     : 0 
         };
 
+        option.repeaterIndex = 0;
         $scope.templateRepeaterList.push(templateRepeater);
     };
 
@@ -299,17 +300,18 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
      * @param {key} key Index.
      */
 
+    $scope.listAllRepeaters = [];
+
     $scope.addRepeater = function (key) {
 
         var copyRepeater = [];
         angular.copy($scope.templateRepeaterList, copyRepeater);
 
-        $scope.countRepeatersGroup = $scope.countRepeatersCtrl / copyRepeater.length;
-
         copyRepeater.forEach(function (item, index) {
             item.optionId += $scope.templateRepeaterList.length - 1;
             item.repeaterIndex++;
             $scope.survey.subsection[0].questions[key].questionOption.push(item);
+
             $scope.survey.subsection[0].questions[key].qtyRepeaters++;
             $scope.templateRepeaterList[index] = item;
             $scope.currentAnswer[item.optionId] = null;
@@ -318,6 +320,39 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
         $scope.countRepeatersGroup++;
         $scope.countRepeatersCtrl = $scope.countRepeatersGroup * copyRepeater.length;
 
+        $scope.listAllRepeaters = $scope.survey.subsection[0].questions[key].questionOption.filter(function (value) {
+            return value.repeaterIndex !== undefined;
+        });
+
+    };
+
+    $scope.removeRepeater = function (pQuestionId, indexOptionRepeater) {
+
+        //Find Question ID
+        var objQuestion = $scope.survey.subsection[0].questions.find(function (obj) {
+            return obj.id === pQuestionId;
+        });
+
+        //Remove the element
+        var questionOptionAfterRemoving = objQuestion.questionOption.filter(function (obj) {
+            //Delete answer value before removing the option
+            if (obj.repeaterIndex === indexOptionRepeater) {
+                delete $scope.currentAnswer[obj.optionId];
+            }
+
+            return obj.repeaterIndex !== indexOptionRepeater;
+        });
+
+        for (var i = 0; i < $scope.survey.subsection[0].questions.length; i++) {
+            if ($scope.survey.subsection[0].questions[i] === objQuestion) {
+                $scope.survey.subsection[0].questions[i].questionOption = questionOptionAfterRemoving;
+                
+                break;
+            }
+        }
+        
+        $scope.countRepeatersGroup--;
+        
     };
 
 
