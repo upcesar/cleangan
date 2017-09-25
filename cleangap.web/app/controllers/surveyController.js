@@ -385,7 +385,7 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
                 hasMultipleAnswer: false
             };
 
-            if (answer !== null) {
+            if (answer !== undefined && answer !== null) {
                 currentAnswerReturn.hasMultipleAnswer = !!answer['pop'];
                 var prop = currentAnswerReturn.hasMultipleAnswer ? 'multipleValues' : 'uniqueValue';
                 // For input radio, set {optionId, optionText}. Otherwise, {index, answer}

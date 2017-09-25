@@ -541,6 +541,40 @@
             </summary>
             <returns>List of questions answered</returns>
         </member>
+        <member name="T:cleangap.api.Domain.IAnswersBO">
+            <summary>
+            AnswersBO interface
+            </summary>
+        </member>
+        <member name="M:cleangap.api.Domain.IAnswersBO.SaveSingleAnswer">
+            <summary>
+            Save Unique Answer from the Model
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:cleangap.api.Domain.IAnswersBO.SaveMultipleAnswer">
+            <summary>
+            Save Multiple Answers
+            </summary>
+            <returns>True if it was saved successfully. Otherwise, false.</returns>
+        </member>
+        <member name="T:cleangap.api.Domain.AnswersBO">
+            <summary>
+            AnswersBO interface
+            </summary>
+        </member>
+        <member name="M:cleangap.api.Domain.AnswersBO.SaveMultipleAnswer">
+            <summary>
+            Save the multiple answer in the list
+            </summary>
+            <returns>Boolean: True if it was saved successfully. Otherwise, false.</returns>
+        </member>
+        <member name="M:cleangap.api.Domain.AnswersBO.SaveSingleAnswer">
+            <summary>
+            Save Multiple Answers
+            </summary>
+            <returns>True if it was saved successfully. Otherwise, false.</returns>
+        </member>
         <member name="T:cleangap.api.Domain.IQuestionsBO">
             <summary>
             Business rule's interface for Questions
@@ -574,6 +608,41 @@
         <member name="M:cleangap.api.Domain.SectionBO.GetChildren">
             <summary>
             Get childer section (subsetions)
+            </summary>
+        </member>
+        <member name="T:cleangap.api.Models.Domain.AnswersModel">
+            <summary>
+            Answer input parameters 
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.AnswersModel.QuestionOptionId">
+            <summary>
+            Question Options ID
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.AnswersModel.UniqueValue">
+            <summary>
+            Answer's Unique value.
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.AnswersModel.MultipleValues">
+            <summary>
+            Answer's multiple value list
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.AnswersModel.HasMultipleValue">
+            <summary>
+            Choose whether use Unique or Multiple values. These are mutually exclusive (XOR).
+            </summary>
+        </member>
+        <member name="P:cleangap.api.Models.Domain.AnswersModel.IndexRepeater">
+            <summary>
+            For repeater option, index should be stored. In case of NULL value, the answers doesn't map to any repeater option
+            </summary>
+        </member>
+        <member name="M:cleangap.api.Models.Domain.AnswersModel.#ctor">
+            <summary>
+            Answer's model Inicialization
             </summary>
         </member>
         <member name="T:cleangap.api.Models.Domain.QuestionsModel">

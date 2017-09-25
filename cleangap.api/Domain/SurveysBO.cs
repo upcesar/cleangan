@@ -99,79 +99,6 @@ namespace cleangap.api.Domain
             s.subsection = section.GetChildren();
 
         }
-        private void ExcludeAnswerRadio(AnswersModel pAnswer, string currentCustomerId)
-        {
-
-            using (var db = new CleanGapDataContext())
-            {
-                // Get Question ID
-                var intQuestionID = db.question_options
-                                      .Where(x => x.id == pAnswer.QuestionOptionId)
-                                      .Select(x => x.id_question)
-                                      .FirstOrDefault();
-
-                if (intQuestionID != null)
-                {
-                    var query = from qo in db.question_options
-                                join a in db.answers on qo.id equals a.id_question_option
-                                where qo.id_question == intQuestionID && qo.id != pAnswer.QuestionOptionId && qo.input_type.ToLower().Trim() == "radio"
-                                select a.id_question_option;
-
-                    var listAnswerId = query.ToList();
-
-                    if (listAnswerId.Count > 0)
-                    {
-                        var queryAnswer = db.answers.Where(x => listAnswerId.Contains(x.id_question_option));
-
-                        db.answers.RemoveRange(queryAnswer);
-                        db.SaveChanges();
-                    }
-                }
-            }
-        }
-        private bool SaveSingleAnswer(AnswersModel pAnswer, string currentCustomerId)
-        {
-            int intCustomerId = 0;
-            bool saved = false;
-
-            if (int.TryParse(currentCustomerId, out intCustomerId))
-            {
-                using (var db = new CleanGapDataContext())
-                {
-
-                    answers tblanswer = db.answers.Where
-                                            (x => x.id_question_option == pAnswer.QuestionOptionId
-                                            && x.id_customer == intCustomerId
-                                                ).FirstOrDefault();
-
-                    if (tblanswer != null)
-                    {
-                        //Edit current answer
-                        tblanswer.answers_value = pAnswer.UniqueValue;
-                        tblanswer.id_customer = intCustomerId;
-                        tblanswer.id_question_option = pAnswer.QuestionOptionId;
-
-                        db.Entry(tblanswer).State = EntityState.Modified;
-                    }
-                    else
-                    {
-                        //Add new answer
-                        tblanswer = new answers()
-                        {
-                            answers_value = pAnswer.UniqueValue,
-                            id_customer = intCustomerId,
-                            id_question_option = pAnswer.QuestionOptionId
-                        };
-
-                        db.answers.Add(tblanswer);
-                    }
-
-                    saved = db.SaveChanges() > 0;
-                }
-            }
-
-            return saved;
-        }
         private bool SaveMultipleAnswer(AnswersModel pAnswer, string currentCustomerId)
         {
             int intCustomerId = 0;
@@ -351,20 +278,15 @@ namespace cleangap.api.Domain
         }
         public bool SaveAnswer(AnswersModel pAnswer, string currentUserId)
         {
-            bool saved = false;
+            AnswersBO answerBO = new AnswersBO(pAnswer, currentUserId);
 
             if (pAnswer.HasMultipleValue)
             {
-                saved = SaveMultipleAnswer(pAnswer, currentUserId);
-            }
-            else
-            {
-                saved = SaveSingleAnswer(pAnswer, currentUserId);
-                ExcludeAnswerRadio(pAnswer, currentUserId);
-
+                return answerBO.SaveMultipleAnswer();
             }
 
-            return saved;
+            return answerBO.SaveSingleAnswer();
+            
         }
         public bool CheckClosedSurvey(string CustomerId)
         {

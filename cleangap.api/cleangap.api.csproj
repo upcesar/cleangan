@@ -244,6 +244,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
+    <Compile Include="Domain\AnswersBO.cs" />
     <Compile Include="Domain\CustomersBO.cs" />
     <Compile Include="Domain\QuestionOptionsBO.cs" />
     <Compile Include="Domain\QuestionsBO.cs" />
