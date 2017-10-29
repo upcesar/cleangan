@@ -382,7 +382,8 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
         var response = $scope.currentAnswer.map(function (answer, index) {
             var currentAnswerReturn = {
                 questionOptionId: index,
-                hasMultipleAnswer: false
+                hasMultipleAnswer: false,
+                indexRepeater : null
             };
 
             if (answer !== undefined && answer !== null) {
@@ -396,6 +397,7 @@ function surveyController($scope, $q, $http, $filter, $location, authService, $r
                 var filteredRepeater = $filter("filter")($scope.templateRepeaterList, { optionId: currentAnswerReturn.questionOptionId });
                 if (filteredRepeater.length > 0) {
                     currentAnswerReturn.questionOptionId = filteredRepeater[0].optionIdBase;
+                    currentAnswerReturn.indexRepeater = filteredRepeater[0].repeaterIndex;
                 }
 
             } else {
